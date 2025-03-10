@@ -47,13 +47,7 @@ Close all the menus, reload your terminal window/Visual Studio Code & you can co
 
 To Run The Project:
 
-Open 2 terminals, side by side in VsCode:
-
-Every time you make a change, run:
-
-`mvn package`
-
-In the other terminal, just run the following & leave it open for as long as you are developing:
+In a terminal, run the following & leave it open for as long as you are developing:
 `mvn jetty:run`
 
 Then, open a web browser & visit: `http://localhost:8080`
