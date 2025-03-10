@@ -7,7 +7,6 @@ import uts.isd.model.Calculator;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CalculatorTest {
-
     private Calculator calculator;
 
     public CalculatorTest() {
@@ -15,7 +14,7 @@ public class CalculatorTest {
     }
 
     @Test
-    public void evaluatesExpression() {
+    public void evaluateStringExpression() {
         int sum = calculator.evaluate("1+2+3");
         assertEquals(6, sum);
     }
@@ -27,19 +26,19 @@ public class CalculatorTest {
     }
 
     @Test
-    public void testSub() {
+    public void testSubtract() {
         int res = calculator.subtract(5, 3);
         assertEquals(2, res);
     }
 
     @Test
-    public void testMul() {
-        int res = calculator.mul(2, 4);
+    public void testMultiply() {
+        int res = calculator.multiply(2, 4);
         assertEquals(8, res);
     }
 
     @Test
-    public void testPow() {
+    public void testPower() {
         double res = calculator.power(2, 3);
         assertEquals(8.00, res, 0.001);
     }
