@@ -20,7 +20,7 @@ Macos Users will need to edit their bash_profile file in ~/.bash_profile
 Please add the following (Update the path to be wherever you downloaded the maven folder):
 
 ```
-export M2_HOME="/Users/jack/Downloads/apache-maven-3.6.3"
+export M2_HOME="/Users/YOURUSERNAMEHERE/Downloads/apache-maven-3.9.9"
 PATH="${M2_HOME}/bin:${PATH}"
 export PATH
 ```
