@@ -5,22 +5,11 @@ This repo provides a Maven version of the ISD labs for VS Code users.
 Make sure you first install:
 
 - Java JDK (https://www.oracle.com/au/java/technologies/downloads/)
-- Maven (https://maven.apache.org/download.cgi) Select the **binary version** not Source
-
-To Run The Project:
-
-Open 2 terminals, side by side in VsCode:
-
-Every time you make a change, run:
-
-`mvn package`
-
-In the other terminal, just run the following & leave it open for as long as you are developing:
-`mvn jetty:run`
-
-Then, open a web browser & visit: `http://localhost:8080`
-
-To run unit tests: `mvn test`
+    - Choose the JDK 23
+    - For Windows, choose x64 Installer
+    - For Mac, choose DMG installer (ARM64 or x64 depending on your laptop)
+- Maven (https://maven.apache.org/download.cgi) Select the **Binary zip archive** under **Link**
+    - Choose version 3.9.9 (latest)
 
 ## Install Maven
 
@@ -31,7 +20,7 @@ Macos Users will need to edit their bash_profile file in ~/.bash_profile
 Please add the following (Update the path to be wherever you downloaded the maven folder):
 
 ```
-export M2_HOME="/Users/jack/Downloads/apache-maven-3.6.3"
+export M2_HOME="/Users/YOURUSERNAMEHERE/Downloads/apache-maven-3.9.9"
 PATH="${M2_HOME}/bin:${PATH}"
 export PATH
 ```
@@ -52,7 +41,28 @@ Find the PATH Variable under user variables & click edit. On the next screen, ad
 
 ![Alt text](images/uservar.PNG?raw=true 'User Variables')
 
-Close all the menus, reload a terminal window & you can confirm maven was succesfully installed by running `mvn` in your terminal.
+Close all the menus, reload your terminal window/Visual Studio Code & you can confirm Maven was successfully installed by running `mvn` in your terminal.
+
+## Running the project locally
+
+To Run The Project:
+
+In a terminal, run the following & leave it open for as long as you are developing:
+`mvn jetty:run`
+
+Then, open a web browser & visit: `http://localhost:8080`
+
+To run unit tests: `mvn test`
+
+## Building project to a WAR file
+
+To build the project to a .war file, open a terminal in VsCode and run:
+
+`mvn clean package`
+
+The .war file can be found under `IoTBay-Project/target/theNameOfThisProject.war`
+
+# ***Everything below here is from the template. It can be ignored for now***
 
 ## Connect with a database
 You need to set up a local database. In this project, we are using the MariaDB, a popular open source relational databases. MariaDB is included as a dependency on pom.xml. The driver name is ```org.mariadb.jdbc.Driver```, and the default url is ```jdbc:mariadb://<host>:<port>/<database>```
