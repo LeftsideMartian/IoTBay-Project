@@ -24,6 +24,19 @@ To build the project to a .war file, open a terminal in VsCode and run:
 
 The .war file can be found under `IoTBay-Project/target/theNameOfThisProject.war`
 
+### Project structure
+
+A Servlet-based web application requires a specific directory structure (e.g., src/main/webapp for web resources like HTML, JSP, and WEB-INF).
+
+```
+src/
+  main/
+    java/       # Java source files (e.g., Servlets) - these will be where our Java classes go, such as controllers and models
+    resources/  # Configuration files (e.g., properties, XML)
+    webapp/     # Web resources (e.g., HTML, JSP, CSS, JS)
+      WEB-INF/  # Configuration files (e.g., web.xml)
+```
+
 # ***Everything below here is from the template. It can be ignored for now***
 
 ## Connect with a database
@@ -42,19 +55,6 @@ Servlets rely on the Java Servlet API, which is not part of the standard Java SE
     <version>4.0.1</version>
     <scope>provided</scope>
 </dependency>
-```
-
-### Configure the project structure
-
-A Servlet-based web application requires a specific directory structure (e.g., src/main/webapp for web resources like HTML, JSP, and WEB-INF).
-
-```
-src/
-  main/
-    java/       # Java source files (e.g., Servlets)
-    resources/  # Configuration files (e.g., properties, XML)
-    webapp/     # Web resources (e.g., HTML, JSP, CSS, JS)
-      WEB-INF/  # Configuration files (e.g., web.xml)
 ```
 
 ### Set up a Servlet container
