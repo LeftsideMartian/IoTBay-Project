@@ -1,0 +1,74 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+html {
+    background-color: #f2f8fc;
+}
+
+header {
+    height: 10%;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.innerHeader {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menuItems {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.menuItems > a {
+    background-color: white;
+    filter: drop-shadow(
+      1px 2px 2px rgb(197, 197, 197)
+    );
+    width: fit-content;
+    height: fit-content;
+
+    /* Fix static values here */
+    border-radius: 36px;
+    margin-left: 15px;
+    padding: 15px 20px;
+
+    text-align: center;
+    align-content: center;
+    text-decoration: none;
+    color: #040f11;
+}
+
+.menuItems> a:last-child {
+    background-color: #70cbff;
+}
+
+.centerContent {
+    width: 100%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.centerContent > h1 {
+    margin-bottom: 20px;
+}
+
+.image {
+    width: 800px;
+    height: 450px;
+    background-color: #fff;
+    text-align: center;
+    align-content: center;
+}
