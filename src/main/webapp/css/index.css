@@ -14,6 +14,9 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
+    filter: drop-shadow(
+      1px 2px 2px rgb(197, 197, 197)
+    );
 }
 
 .innerHeader {
@@ -29,7 +32,7 @@ header {
     align-items: center;
 }
 
-.menuItems > a {
+.button {
     background-color: white;
     filter: drop-shadow(
       1px 2px 2px rgb(197, 197, 197)
@@ -48,7 +51,7 @@ header {
     color: #040f11;
 }
 
-.menuItems> a:last-child {
+.menuItems> .button:last-child {
     background-color: #70cbff;
 }
 
@@ -64,6 +67,16 @@ header {
 .centerContent > h1 {
     margin-bottom: 20px;
 }
+
+.centerContent > div {
+    margin-bottom: 20px;
+}
+
+.centerContent > a {
+    font-size: 20px;
+    background-color: #70cbff;
+}
+
 
 .image {
     width: 800px;
