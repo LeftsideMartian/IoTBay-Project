@@ -10,7 +10,7 @@
 
         if (wasSubmittedString != null && wasSubmittedString.equals("yes")) {
         %>
-            <h1>Welcome! <%= request.getParameter("firstName") %> <%= request.getParameter("lastName") %>!</h1>
+            <h1>Welcome <%= request.getParameter("firstName") %> <%= request.getParameter("lastName") %>!</h1>
         <% } %>
 
         <div>
