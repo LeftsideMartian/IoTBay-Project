@@ -11,8 +11,9 @@
         if (wasSubmittedString != null && wasSubmittedString.equals("yes")) {
         %>
             <h1>Welcome! <%= request.getParameter("firstName") %>!</h1>
-        <% } %>
-
+        
+        <h1> Your Password is <%= request.getParameter("password") %>!</h1>
+<% } %>
         <div>
             <a class="button" href="register.jsp">Register</a>
             <a class="button" href="login.jsp">Login</a>
