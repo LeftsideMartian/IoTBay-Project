@@ -11,6 +11,8 @@
         if (wasSubmittedString != null && wasSubmittedString.equals("yes")) {
         %>
             <h1>Welcome! <%= request.getParameter("firstName") %>!</h1>
+
+            <h1> Your email is <%= request.getParameter("email") %>!</h1>
         <% } %>
 
         <div>
