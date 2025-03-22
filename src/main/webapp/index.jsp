@@ -24,20 +24,22 @@
 
             <div class="contentWrapper">
                 <div class="centerContent">
-                    <h1 class="mainHeading" >Your leading IoT distributor</h1>
-
                     <% 
                       String wasSubmittedString = request.getParameter("wasSubmitted");
 
                       if (wasSubmittedString != null && wasSubmittedString.equals("yes")) {
                     %>
-                      <h1>Welcome <%= request.getParameter("firstName") %> <%= request.getParameter("lastName") %>!</h1>
-                      <h1> Your email is <%= request.getParameter("email") %>!</h1>
-                      <h1> Your Password is <%= request.getParameter("password") %>!</h1>
+                        <h1 class="welcomeText">
+                            Welcome <%= request.getParameter("firstName") %> <%= request.getParameter("lastName") %>! <br>
+                            Your email is <%= request.getParameter("email") %>! <br>
+                            Your Password is <%= request.getParameter("password") %>!
+                        </h1>
+                    <% } else { %>
+                        <h1 class="mainHeading" >Your leading IoT distributor</h1>
+                        <a class="button" href="register.jsp">Get started</a>
                     <% } %>
 
                     <img class="mainImage" src="css/tempImage.jpg" alt="">
-                    <a class="button" href="register.jsp">Get started</a>
                 </div>
             </div>
         </div>
