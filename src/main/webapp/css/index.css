@@ -43,9 +43,10 @@ header {
     /* Fix static values here */
     border-radius: 36px;
     margin-left: 15px;
-    padding: 15px 20px;
+    padding: min(0.8em, 15px) min(1em, 20px);
 
     text-align: center;
+    font-size: 0.85rem;
     align-content: center;
     text-decoration: none;
     color: #040f11;
@@ -66,6 +67,7 @@ header {
 
 .centerContent > h1 {
     margin-bottom: 20px;
+    font-size: clamp(1.4rem, 3vw, 3.8rem);
 }
 
 .centerContent > div {
