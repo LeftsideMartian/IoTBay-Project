@@ -1,22 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap');
+
 * {
     margin: 0;
     padding: 0;
     border: none;
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
 }
 
 html {
     background-color: #f2f8fc;
 }
 
+.gridContainer {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 12vh auto;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    grid-template-areas:
+    "header"
+    "body";
+}
+
 header {
-    height: 10%;
     background-color: white;
+    min-height: 5rem;
     display: flex;
     justify-content: center;
     align-items: center;
     filter: drop-shadow(
       1px 2px 2px rgb(197, 197, 197)
     );
+    grid-area: "header";
 }
 
 .innerHeader {
@@ -24,6 +41,15 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.logoContainer {
+    height: 100%;
+    width: auto;
+}
+
+.logoContainer > a > img {
+    height: 10vh;
 }
 
 .menuItems {
@@ -40,13 +66,13 @@ header {
     width: fit-content;
     height: fit-content;
 
-    /* Fix static values here */
     border-radius: 36px;
-    margin-left: 15px;
-    padding: min(0.8em, 15px) min(1em, 20px);
+    margin-left: 1.2rem;
+    padding: 1em 1.3em;
+    font-size: 1rem;
+    font-weight: 400;
 
     text-align: center;
-    font-size: 0.85rem;
     align-content: center;
     text-decoration: none;
     color: #040f11;
@@ -56,34 +82,36 @@ header {
     background-color: #70cbff;
 }
 
+.contentWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .centerContent {
-    width: 100%;
-    height: 90%;
+    width: 75%;
+    height: 100%;
+    grid-area: "body";
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.centerContent > h1 {
-    margin-bottom: 20px;
+.centerContent > .mainHeading {
+    margin-bottom: 2rem;
     font-size: clamp(1.4rem, 3vw, 3.8rem);
+    font-weight: 700;
 }
 
-.centerContent > div {
-    margin-bottom: 20px;
-}
-
-.centerContent > a {
-    font-size: 20px;
+.centerContent > .button {
+    font-size: 1.3rem;
     background-color: #70cbff;
 }
 
 
-.image {
-    width: 800px;
-    height: 450px;
-    background-color: #fff;
-    text-align: center;
-    align-content: center;
+.centerContent > .mainImage {
+    margin-bottom: 2rem;
+    width: auto;
+    max-height: 45%;
 }
