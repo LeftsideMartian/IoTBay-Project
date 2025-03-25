@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    border: none;
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+}
+
+html {
+    background-color: #f2f8fc;
+}
+
+.gridContainer {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 12vh auto;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    grid-template-areas:
+    "header"
+    "body";
+}
+
+header {
+    background-color: white;
+    min-height: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    filter: drop-shadow(
+      1px 2px 2px rgb(197, 197, 197)
+    );
+    grid-area: "header";
+}
+
+.innerHeader {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logoContainer {
+    height: 100%;
+    width: auto;
+}
+
+.logoContainer > a > img {
+    height: 10vh;
+}
+
+.menuItems {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.button {
+    background-color: white;
+    filter: drop-shadow(
+      1px 2px 2px rgb(197, 197, 197)
+    );
+    width: fit-content;
+    height: fit-content;
+
+    border-radius: 36px;
+    margin-left: 1.2rem;
+    padding: 1em 1.3em;
+    font-size: 1rem;
+    font-weight: 400;
+
+    text-align: center;
+    align-content: center;
+    text-decoration: none;
+    color: #040f11;
+}
+
+.menuItems> .button:last-child {
+    background-color: #70cbff;
+}
+
+.contentWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.centerContent {
+    width: 75%;
+    height: 100%;
+    grid-area: "body";
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.centerContent > .mainHeading {
+    margin-bottom: 2rem;
+    font-size: clamp(1.4rem, 3vw, 3.8rem);
+    font-weight: 700;
+}
+
+.centerContent > .button {
+    font-size: 1.3rem;
+    background-color: #70cbff;
+}
+
+
+.centerContent > .mainImage {
+    margin-bottom: 2rem;
+    width: auto;
+    max-height: 45%;
+}
