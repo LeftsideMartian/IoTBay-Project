@@ -1,3 +1,4 @@
+<%@page import="iotbay.model.User"%>
 <html>
     <head>
         <title>Home Page</title>
@@ -9,7 +10,7 @@
             <header>
                 <div class="innerHeader">
                     <div class="logoContainer">
-                        <a href="index.html">
+                        <a href="index.jsp">
                             <img src="css/iotbayLogo.png" alt="">
                         </a>
                     </div>
@@ -25,21 +26,20 @@
             <div class="contentWrapper">
                 <div class="centerContent">
                     <% 
-                      String wasSubmittedString = request.getParameter("wasSubmitted");
+                      User user = (User)session.getAttribute("user");
 
-                      if (wasSubmittedString != null && wasSubmittedString.equals("yes")) {
+                      if (user != null) {
                     %>
                         <h1 class="welcomeText">
-                            Welcome <%= request.getParameter("firstName") %> <%= request.getParameter("lastName") %>! <br>
-                            Your email is <%= request.getParameter("email") %>! <br>
-                            Your Password is <%= request.getParameter("password") %>!
+                            You are logged in as <%= user.getName() %> <<%= user.getEmail() %>> <br>
                         </h1>
+                        <a href="logout.jsp">Logout</a>
                     <% } else { %>
                         <h1 class="mainHeading" >Your leading IoT distributor</h1>
+                        <img class="mainImage" src="css/tempImage.jpg" alt="">
                         <a class="button" href="register.jsp">Get started</a>
                     <% } %>
 
-                    <img class="mainImage" src="css/tempImage.jpg" alt="">
                 </div>
             </div>
         </div>

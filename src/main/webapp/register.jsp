@@ -5,7 +5,7 @@
     <body>
         <h1>Create new account</h1>
 
-        <form action="index.jsp" method="POST">
+        <form action="welcome.jsp" method="POST">
             <ul>
                 <li><input type="text" name="firstName" id="firstName" placeholder="First Name"></li>
                 <li><input type="text" name="lastName" id="lastName" placeholder="Last Name"></li>
