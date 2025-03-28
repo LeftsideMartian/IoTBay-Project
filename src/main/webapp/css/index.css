@@ -67,7 +67,6 @@ header {
     height: fit-content;
 
     border-radius: 36px;
-    margin-left: 1.2rem;
     padding: 1em 1.3em;
     font-size: 1rem;
     font-weight: 400;
@@ -76,13 +75,19 @@ header {
     align-content: center;
     text-decoration: none;
     color: #040f11;
+    cursor: pointer;
 }
 
-.menuItems> .button:last-child {
+.menuItems > .button {
+    margin-left: 1.2rem;
+}
+
+.button-blue {
     background-color: #70cbff;
 }
 
 .contentWrapper {
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -114,4 +119,68 @@ header {
     margin-bottom: 2rem;
     width: auto;
     max-height: 45%;
+}
+
+.formWrapper {
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    padding: 1.7em;
+    border-radius: 25px;
+    filter: drop-shadow(
+      1px 2px 2px rgb(197, 197, 197)
+    );
+}
+
+h1 {
+    font-size: clamp(1rem, 3vw, 1.7rem);
+    font-weight: 700;
+}
+
+hr {
+    border: none;
+    height: 1px;
+    background: #ddd;
+    margin: 0.7rem 0px;
+}
+
+.formHeading {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.formSection {
+    display: flex;
+    flex-direction: row;
+}
+
+.buttonSection {
+    justify-content: space-evenly;
+}
+
+.inputHeading {
+    font-size: 0.9rem;
+}
+
+.inputSection {
+    display: flex;
+    flex-direction: column;
+}
+
+.inputField {
+    border: 1px solid #040f11;
+    padding: 0.3rem;
+    margin-bottom: 0.7rem;
+    font-size: 0.7rem;
+}
+
+.formSection > .inputSection:first-child > input {
+    margin-right: 0.6rem;
+}
+
+.signInFooter {
+    margin-top: 0.7rem;
+    display: flex;
+    justify-content: center;
 }
