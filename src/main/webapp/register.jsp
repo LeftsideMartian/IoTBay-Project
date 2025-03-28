@@ -23,7 +23,7 @@
 
             <div class="contentWrapper">
                 <div class="centerContent">
-                    <form>
+                    <form action="index.jsp" method="POST">
                         <div class="formWrapper">
                             <h1>Create an account</h1>
                             <hr>
@@ -31,17 +31,17 @@
                             <label class="formHeading">Name</label>
                             <div class="formSection">
                                 <div class="inputSection">
-                                    <label class="inputHeading" for="FirstName">First Name</label>
-                                    <input class="inputField" type="text" placeholder="John" name="First Name" id="firstName" required>
+                                    <label class="inputHeading" for="firstName">First Name</label>
+                                    <input class="inputField" type="text" placeholder="John" name="firstName" id="firstName" required>
                                 </div>
                                 <div class="inputSection">
-                                    <label class="inputHeading" for="LastName">Last Name</label>
-                                    <input class="inputField" type="text" placeholder="Smith" name="Last Name" id="lastName" required>
+                                    <label class="inputHeading" for="lastName">Last Name</label>
+                                    <input class="inputField" type="text" placeholder="Smith" name="lastName" id="lastName" required>
                                 </div>
                             </div>
 
                             <label class="formHeading" for="email">Email</label>
-                            <input class="inputField" type="text" placeholder="ex: myname@example.com" name="email" id="email" required>
+                            <input class="inputField" type="email" placeholder="ex: myname@example.com" name="email" id="email" required>
                             
                             <label class="formHeading">Password</label>
                             <div class="formSection">
