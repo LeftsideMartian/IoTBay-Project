@@ -70,5 +70,22 @@
                 </div>
             </div>
         </div>
+
+        <script>
+            const passwordInput = document.getElementById("password");
+            const confirmPasswordInput = document.getElementById("confirmPassword");
+
+            const validatePassword = () => {
+                if (passwordInput.value !== confirmPasswordInput.value) {
+                    confirmPasswordInput.setCustomValidity("Passwords do not match.");
+                } else {
+                    confirmPasswordInput.setCustomValidity("");
+                }
+            }
+    
+            passwordInput.onchange = validatePassword;
+            confirmPasswordInput.onkeyup = validatePassword;
+        </script>
+
     </body>
 </html>
