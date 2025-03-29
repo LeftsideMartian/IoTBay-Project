@@ -23,7 +23,7 @@
 
             <div class="contentWrapper">
                 <div class="centerContent">
-                    <form action="index.jsp" method="POST">
+                    <form action="welcome.jsp" method="POST">
                         <div class="formWrapper">
                             <h1>Create an account</h1>
                             <hr>
