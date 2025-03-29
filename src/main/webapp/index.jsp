@@ -18,7 +18,7 @@
                     <div class="menuItems">
                         <a class="button" href="">Browse products</a> <!-- HREF NEEDS UPDATING HERE -->
                         <a class="button" href="login.jsp">Log in</a>
-                        <a class="button" href="register.jsp">Create account</a>
+                        <a class="button button-blue" href="register.jsp">Create account</a>
                     </div>
                 </div>
             </header>
