@@ -16,7 +16,7 @@ html {
     height: 100%;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 12vh auto;
+    grid-template-rows: 12vh minmax(12vh, 100%);
     grid-column-gap: 0px;
     grid-row-gap: 0px;
     grid-template-areas:
@@ -87,7 +87,7 @@ header {
 }
 
 .contentWrapper {
-    height: 100%;
+    grid-area: "body";
     display: flex;
     justify-content: center;
     align-items: center;
@@ -96,7 +96,6 @@ header {
 .centerContent {
     width: 75%;
     height: 100%;
-    grid-area: "body";
     display: flex;
     flex-direction: column;
     justify-content: center;
