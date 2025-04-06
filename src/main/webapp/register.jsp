@@ -14,9 +14,9 @@
                     </div>
         
                     <div class="menuItems">
-                        <a class="button" href="">Browse products</a> <!-- HREF NEEDS UPDATING HERE -->
-                        <a class="button" href="login.jsp">Log in</a>
-                        <a class="button button-blue" href="register.jsp">Create account</a>
+                        <a class="button lrgBtn" href="">Browse products</a> <!-- HREF NEEDS UPDATING HERE -->
+                        <a class="button lrgBtn" href="login.jsp">Log in</a>
+                        <a class="button lrgBtn button-blue" href="register.jsp">Create account</a>
                     </div>
                 </div>
             </header>
@@ -47,7 +47,7 @@
                             <div class="formSection">
                                 <div class="inputSection">
                                     <label class="inputHeading" for="password">Enter password</label>
-                                    <input class="inputField" type="password" name="password" id="password" required>
+                                    <input class="inputField" type="password" name="password" id="password" pattern="^[A-Z](?=.*\d)(?=.*\W).{11,}" title="Password must meet the requirements listed below" required>
                                 </div>
                                 
                                 <div class="inputSection">
@@ -55,11 +55,17 @@
                                     <input class="inputField" type="password" name="confirmPassword" id="confirmPassword" required>
                                 </div>
                             </div>
+                            <ul class="requirementsList">
+                                <li id="lengthReq" class="passwordRequirement invalidRequirement">Minimum 12 characters long</li>
+                                <li id="numberReq" class="passwordRequirement invalidRequirement">Must include a number</li>
+                                <li id="specialCharReq" class="passwordRequirement invalidRequirement">Must include a special character, e.g. # or $</li>
+                                <li id="capitalReq" class="passwordRequirement invalidRequirement">Must start with a capital letter</li>
+                            </ul>
                             <hr>
 
                             <div class="formSection buttonSection">
-                                <a href="index.jsp" class="button">Cancel</a>
-                                <button type="submit" class="button button-blue">Create account</button>
+                                <a href="index.jsp" class="button medBtn">Cancel</a>
+                                <button type="submit" class="button medBtn button-blue">Create account</button>
                             </div>
                         </div>
 
@@ -71,21 +77,6 @@
             </div>
         </div>
 
-        <script>
-            const passwordInput = document.getElementById("password");
-            const confirmPasswordInput = document.getElementById("confirmPassword");
-
-            const validatePassword = () => {
-                if (passwordInput.value !== confirmPasswordInput.value) {
-                    confirmPasswordInput.setCustomValidity("Passwords do not match.");
-                } else {
-                    confirmPasswordInput.setCustomValidity("");
-                }
-            }
-    
-            passwordInput.onchange = validatePassword;
-            confirmPasswordInput.onkeyup = validatePassword;
-        </script>
-
+        <script src="./js/validatePassword.js"></script>
     </body>
 </html>
