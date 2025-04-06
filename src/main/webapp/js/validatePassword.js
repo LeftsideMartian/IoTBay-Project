@@ -1,32 +1,52 @@
 const passwordInput = document.getElementById("password");
 const confirmPasswordInput = document.getElementById("confirmPassword");
 
+const lengthReqLi = document.getElementById("lengthReq");
+const capitalReqLi = document.getElementById("capitalReq");
+const numberReqLi = document.getElementById("numberReq");
+const specialCharReqLi = document.getElementById("specialCharReq");
+
 const minPasswordLength = 12
 
 const doesPasswordStartWithACapital = password => /^[A-Z].*/.test(password)
-const doesPasswordContainALetter = password => /.*[a-zA-Z]{2,}.*/.test(password)
 const doesPasswordContainANumber = password => /.*\d.*/.test(password)
 const doesPasswordContainASpecialChar = password => /.*\W.*/.test(password)
 
 const validatePassword = () => {
     password = passwordInput.value
 
-    // Check length is at least 12 characters long
+    if (!doesPasswordStartWithACapital(password)) {
+        capitalReqLi.classList.remove("validRequirement");
+        capitalReqLi.classList.add("invalidRequirement");
+    } else {
+        capitalReqLi.classList.remove("invalidRequirement");
+        capitalReqLi.classList.add("validRequirement");
+    }
+    if (!doesPasswordContainANumber(password)) {
+        numberReqLi.classList.remove("validRequirement");
+        numberReqLi.classList.add("invalidRequirement");
+    } else {
+        numberReqLi.classList.remove("invalidRequirement");
+        numberReqLi.classList.add("validRequirement");
+    }
+    if (!doesPasswordContainASpecialChar(password)) {
+        specialCharReqLi.classList.remove("validRequirement");
+        specialCharReqLi.classList.add("invalidRequirement");
+    } else {
+        specialCharReqLi.classList.remove("invalidRequirement");
+        specialCharReqLi.classList.add("validRequirement");
+    }
     if (password.length < minPasswordLength) {
-        passwordInput.setCustomValidity(`Passwords must be at least ${minPasswordLength} characters long.`);
+        lengthReqLi.classList.remove("validRequirement");
+        lengthReqLi.classList.add("invalidRequirement");
+    } else {
+        lengthReqLi.classList.remove("invalidRequirement");
+        lengthReqLi.classList.add("validRequirement");
     }
-    else if (!doesPasswordStartWithACapital(password)) {
-        passwordInput.setCustomValidity(`Password must begin with a capital. Click the ⓘ for password requirements`);
-    } else if (!doesPasswordContainALetter(password)) {
-        passwordInput.setCustomValidity(`Password must contain another letter. Click the ⓘ for password requirements`);
-    } else if (!doesPasswordContainANumber(password)) {
-        passwordInput.setCustomValidity(`Password must contain a number. Click the ⓘ for password requirements`);
-    } else if (!doesPasswordContainASpecialChar(password)) {
-        passwordInput.setCustomValidity(`Password must contain a special character. Click the ⓘ for password requirements`);
-    }
-    // Confirm password
-    else if (passwordInput.value !== confirmPasswordInput.value) {
-        passwordInput.setCustomValidity("")
+}
+
+const confirmPassword = () => {
+    if (passwordInput.value !== confirmPasswordInput.value) {
         confirmPasswordInput.setCustomValidity("Passwords do not match.");
     } else {
         confirmPasswordInput.setCustomValidity("");
@@ -34,4 +54,4 @@ const validatePassword = () => {
 }
 
 passwordInput.onkeyup = validatePassword;
-confirmPasswordInput.onkeyup = validatePassword;
+confirmPasswordInput.onkeyup = confirmPassword;
