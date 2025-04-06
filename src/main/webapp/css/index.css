@@ -68,15 +68,26 @@ header {
     height: fit-content;
 
     border-radius: 36px;
-    padding: 1em 1.3em;
-    font-size: 1rem;
     font-weight: 400;
+    padding: 1em 1.3em;
 
     text-align: center;
     align-content: center;
     text-decoration: none;
     color: #040f11;
     cursor: pointer;
+}
+
+.lrgBtn {
+    font-size: 0.9rem;
+}
+
+.medBtn {
+    font-size: 0.8rem;
+}
+
+.menuItems > .button {
+    margin-left: 1.2rem;
 }
 
 .button-blue {
@@ -159,15 +170,15 @@ header {
     background-color: #fff;
     display: flex;
     flex-direction: column;
-    padding: 1.7em;
+    padding: 1em 1.5em;
     border-radius: 25px;
     filter: drop-shadow(
       1px 2px 2px rgb(197, 197, 197)
     );
 }
 
-.registerHeading {
-    font-size: clamp(1rem, 3vw, 1.7rem);
+h1 {
+    font-size: clamp(1rem, 3vw, 1.5rem);
     font-weight: 700;
 }
 
@@ -179,9 +190,9 @@ hr {
 }
 
 .formHeading {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     font-weight: 700;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.2rem;
 }
 
 .formSection {
@@ -194,7 +205,7 @@ hr {
 }
 
 .inputHeading {
-    font-size: 0.9rem;
+    font-size: 0.8em;
 }
 
 .inputSection {
@@ -205,7 +216,7 @@ hr {
 .inputField {
     border: 1px solid #040f11;
     padding: 0.3rem;
-    margin-bottom: 0.7rem;
+    margin-bottom: 0.5rem;
     font-size: 0.7rem;
     gap: 0.6rem;
 }
@@ -214,4 +225,25 @@ hr {
     margin-top: 0.7rem;
     display: flex;
     justify-content: center;
+}
+
+.passwordRequirement {
+    font-size: 0.65rem;
+    list-style: none;
+    vertical-align: middle;
+}
+
+.validRequirement::before {
+    color: #70cbff;
+    content: "✔";
+    margin-right: 0.2rem;
+}
+
+.invalidRequirement {
+    color: #bfbfbf;
+}
+
+.invalidRequirement::before {
+    content: "✖";
+    margin-right: 0.2rem;
 }
