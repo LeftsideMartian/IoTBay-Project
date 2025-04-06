@@ -2,17 +2,17 @@
     <head>
         <link rel="stylesheet" href="css/index.css">
         <title>Create new account</title>
-        <script src="./js/header.js"></script>
+        <script src="js/headerComponents.js"></script>
     </head>
     <body>
         <div class="gridContainer">
-            <iotbay-header></iotbay-header>
+            <logged-out-header>
 
             <div class="contentWrapper">
                 <div class="centerContent">
                     <form action="welcome.jsp" method="POST">
                         <div class="formWrapper">
-                            <h1>Create an account</h1>
+                            <h1 class="registerHeading">Create an account</h1>
                             <hr>
 
                             <label class="formHeading">Name</label>

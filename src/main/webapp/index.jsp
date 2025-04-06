@@ -3,24 +3,27 @@
     <head>
         <title>Home Page</title>
         <link rel="stylesheet" href="css/index.css">
-        <script src="./js/header.js"></script>
+        <script src="js/headerComponents.js"></script>
     </head>
 
     <body>
+        <%
+            User user = (User)session.getAttribute("user");
+        %>
+
         <div class="gridContainer">
-            <iotbay-header></iotbay-header>
+            <% if (user != null) { %>
+                <logged-in-header>
+            <% } else { %>
+                <logged-out-header>
+            <% } %>
 
             <div class="contentWrapper">
                 <div class="centerContent">
-                    <% 
-                      User user = (User)session.getAttribute("user");
-
-                      if (user != null) {
-                    %>
+                    <% if (user != null) { %>
                         <h1 class="welcomeText">
                             You are logged in as <%= user.getName() %> <<%= user.getEmail() %>> <br>
                         </h1>
-                        <a href="logout.jsp">Logout</a>
                     <% } else { %>
                         <h1 class="mainHeading" >Your leading IoT distributor</h1>
                         <img class="mainImage" src="css/tempImage.jpg" alt="">
@@ -29,5 +32,6 @@
                 </div>
             </div>
         </div>
+        <script src="js/profileMenu.js"></script>
     </body>
 </html>

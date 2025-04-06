@@ -56,6 +56,7 @@ header {
     display: flex;
     justify-content: space-around;
     align-items: center;
+    gap: 1.2rem;
 }
 
 .button {
@@ -78,19 +79,55 @@ header {
     cursor: pointer;
 }
 
-.menuItems > .button {
-    margin-left: 1.2rem;
-}
-
 .button-blue {
     background-color: #70cbff;
 }
+
+.profileIcon {
+    width: 2.5rem;
+    cursor: pointer;
+}
+
+.profileMenuWrapper {
+    position: absolute;
+    top: 100%;
+    right: 10%;
+    width: 13rem;
+    overflow: hidden;
+    max-height: 0rem;
+    transition: all 0.5s ease;
+}
+
+.profileMenuWrapperOpen {
+    max-height: 400rem;
+}
+
+.profileMenu {
+    background-color: #fff;
+    margin-top: 0.5rem;
+    padding: 1.2em 1.5em;
+    border-radius: 10px;
+}
+
+.profileMenuUserName {
+    font-size: 0.9rem;
+}
+
+.profileMenu > a {
+    text-decoration: none;
+    color: #040f11;
+    font-size: 0.85rem;
+}
+
+
+
 
 .contentWrapper {
     grid-area: "body";
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 2rem;
 }
 
 .centerContent {
@@ -103,7 +140,6 @@ header {
 }
 
 .centerContent > .mainHeading {
-    margin-bottom: 2rem;
     font-size: clamp(1.4rem, 3vw, 3.8rem);
     font-weight: 700;
 }
@@ -115,7 +151,6 @@ header {
 
 
 .centerContent > .mainImage {
-    margin-bottom: 2rem;
     width: auto;
     max-height: 45%;
 }
@@ -131,7 +166,7 @@ header {
     );
 }
 
-h1 {
+.registerHeading {
     font-size: clamp(1rem, 3vw, 1.7rem);
     font-weight: 700;
 }
@@ -172,10 +207,7 @@ hr {
     padding: 0.3rem;
     margin-bottom: 0.7rem;
     font-size: 0.7rem;
-}
-
-.formSection > .inputSection:first-child > input {
-    margin-right: 0.6rem;
+    gap: 0.6rem;
 }
 
 .signInFooter {
