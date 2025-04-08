@@ -3,45 +3,35 @@
     <head>
         <title>Home Page</title>
         <link rel="stylesheet" href="css/index.css">
+        <script src="js/headerComponents.js"></script>
     </head>
 
     <body>
+        <%
+            User user = (User)session.getAttribute("user");
+        %>
+
         <div class="gridContainer">
-            <header>
-                <div class="innerHeader">
-                    <div class="logoContainer">
-                        <a href="index.jsp">
-                            <img src="css/iotbayLogo.png" alt="">
-                        </a>
-                    </div>
-        
-                    <div class="menuItems">
-                        <a class="button" href="">Browse products</a> <!-- HREF NEEDS UPDATING HERE -->
-                        <a class="button" href="login.jsp">Log in</a>
-                        <a class="button button-blue" href="register.jsp">Create account</a>
-                    </div>
-                </div>
-            </header>
+            <% if (user != null) { %>
+                <logged-in-header></logged-in-header>
+            <% } else { %>
+                <logged-out-header></logged-out-header>
+            <% } %>
 
             <div class="contentWrapper">
                 <div class="centerContent">
-                    <% 
-                      User user = (User)session.getAttribute("user");
-
-                      if (user != null) {
-                    %>
+                    <% if (user != null) { %>
                         <h1 class="welcomeText">
                             You are logged in as <%= user.getName() %> <<%= user.getEmail() %>> <br>
                         </h1>
-                        <a href="logout.jsp">Logout</a>
                     <% } else { %>
                         <h1 class="mainHeading" >Your leading IoT distributor</h1>
                         <img class="mainImage" src="css/tempImage.jpg" alt="">
                         <a class="button" href="register.jsp">Get started</a>
                     <% } %>
-
                 </div>
             </div>
         </div>
+        <script src="js/profileMenu.js"></script>
     </body>
 </html>

@@ -2,30 +2,17 @@
     <head>
         <link rel="stylesheet" href="css/index.css">
         <title>Create new account</title>
+        <script src="js/headerComponents.js"></script>
     </head>
     <body>
         <div class="gridContainer">
-            <header>
-                <div class="innerHeader">
-                    <div class="logoContainer">
-                        <a href="index.jsp">
-                            <img src="css/iotbayLogo.png" alt="">
-                        </a>
-                    </div>
-        
-                    <div class="menuItems">
-                        <a class="button lrgBtn" href="">Browse products</a> <!-- HREF NEEDS UPDATING HERE -->
-                        <a class="button lrgBtn" href="login.jsp">Log in</a>
-                        <a class="button lrgBtn button-blue" href="register.jsp">Create account</a>
-                    </div>
-                </div>
-            </header>
+            <logged-out-header></logged-out-header>
 
             <div class="contentWrapper">
                 <div class="centerContent">
                     <form action="welcome.jsp" method="POST">
                         <div class="formWrapper">
-                            <h1>Create an account</h1>
+                            <h1 class="registerHeading">Create an account</h1>
                             <hr>
 
                             <label class="formHeading">Name</label>
