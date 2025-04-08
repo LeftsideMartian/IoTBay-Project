@@ -13,9 +13,9 @@
 
         <div class="gridContainer">
             <% if (user != null) { %>
-                <logged-in-header>
+                <logged-in-header></logged-in-header>
             <% } else { %>
-                <logged-out-header>
+                <logged-out-header></logged-out-header>
             <% } %>
 
             <div class="contentWrapper">

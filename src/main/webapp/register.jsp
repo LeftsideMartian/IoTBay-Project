@@ -6,7 +6,7 @@
     </head>
     <body>
         <div class="gridContainer">
-            <logged-out-header>
+            <logged-out-header></logged-out-header>
 
             <div class="contentWrapper">
                 <div class="centerContent">
