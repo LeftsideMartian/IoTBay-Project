@@ -1,23 +1,40 @@
 <html>
     <head>
-        <title>Login</title>
+        <link rel="stylesheet" href="css/index.css">
+        <title>Log in</title>
+        <script src="js/headerComponents.js"></script>
     </head>
     <body>
-        <h1>Login</h1>
+        <div class="gridContainer">
+            <logged-out-header></logged-out-header>
 
-        <form action="index.jsp" method="POST">
-            <ul>
-                <li><input type="text" name="email" id="email" placeholder="Email"></li>
-                <li><input type="text" name="password" id="password" placeholder="Password"></li>
-                <i><input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm password"></li>
-            </ul>
+            <div class="contentWrapper">
+                <div class="centerContent">
+                    <form action="welcome.jsp" method="POST">
+                        <div class="formWrapper">
+                            <h1 class="registerHeading">Log in</h1>
+                            <hr>
 
-            <input name="wasSubmitted" type="hidden" value="yes"/>
+                            <label class="formHeading" for="email">Email</label>
+                            <input class="inputField" type="email" placeholder="ex: myname@example.com" name="email" id="email" required>
+                            
+                            <label class="formHeading">Password</label>
+                            <input class="inputField" type="password" name="password" id="password" required>
 
-            <div>
-                <a class="button" href="index.jsp">Cancel</a>
-                <input class="button" type="submit" value="Login">
+                            <hr>
+
+                            <div class="formSection buttonSection">
+                                <a href="index.jsp" class="button medBtn">Cancel</a>
+                                <button type="submit" class="button medBtn button-blue">Log in</button>
+                            </div>
+                        </div>
+
+                        <div class="signInFooter">
+                            <p>Don't have an account? <a href="register.jsp">Create one here</a>.</p>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </form>
+        </div>
     </body>
 </html>
