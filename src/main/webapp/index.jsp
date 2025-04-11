@@ -23,6 +23,7 @@
                     <% if (user != null) { %>
                         <h1 class="welcomeText">
                             You are logged in as <%= user.getName() %> <<%= user.getEmail() %>> <br>
+                            Click the profile icon to log out.
                         </h1>
                     <% } else { %>
                         <h1 class="mainHeading" >Your leading IoT distributor</h1>
