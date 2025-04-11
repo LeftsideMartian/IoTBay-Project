@@ -57,7 +57,7 @@
                         </div>
 
                         <div class="signInFooter">
-                            <p>Already have an account? <a href="#">Sign in</a>.</p>
+                            <p>Already have an account? <a href="login.jsp">Log in here</a>.</p>
                         </div>
                     </form>
                 </div>
