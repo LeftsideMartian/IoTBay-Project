@@ -3,7 +3,10 @@ package iotbay.service;
 import iotbay.model.User;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.naming.spi.DirStateFactory.Result;
 
 /**
 * A service for dealing with the User table
@@ -67,10 +70,26 @@ public class UserService extends DBService {
     * @return A list of all users
     * */
     public List<User> getAllUsers() {
-        // 1. Get query
-        // 2. Execute query on statement
-        // 3. Format data into a list of users
-        // 4. Return
+        try {
+            String queryString = getQueryFromFile("GetAllUsers.sql");
+            ResultSet results = this.statement.executeQuery(queryString);
+
+            List<User> allUsers = new ArrayList<>();
+
+            while (results.next()) {
+                allUsers.add(new User(
+                        results.getInt("User_ID"),
+                        results.getString("First_Name"),
+                        results.getString("Last_Name"),
+                        results.getString("Email"),
+                        results.getString("Password")
+                ));
+            }
+
+            return allUsers;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
