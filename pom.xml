@@ -5,10 +5,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.uts.isd</groupId>
-    <artifactId>isdlabs</artifactId>
+    <artifactId>IotBay</artifactId>
     <packaging>war</packaging>
 
-    <version>0.1</version>
+    <version>1.0</version>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
