@@ -8,18 +8,17 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
 
-/*
+/**
 * An abstract class for services to extend from
-* The DBService class provides:
-* - Constructor to create connection to the database using the DBConnector class
-* - Implementation of the getQueryFromFile method, which takes a filename and returns the .sql file as a string
 * */
-
-public abstract class DBService {
+abstract class DBService {
     protected DBConnector dbConnector;
     protected Connection connection;
     protected Statement statement;
 
+    /**
+    * Constructor to establish a database connection using the DBConnector class
+    * */
     protected DBService() {
         try {
             this.dbConnector = new DBConnector();
@@ -30,6 +29,11 @@ public abstract class DBService {
         }
     }
 
+    /**
+    * Retrieve an SQL query from a .sql file
+    * @param filename The filename of the .sql file to retrieve
+    * @return The query from the .sql file as a <i>newline</i> separated string
+    * */
     protected String getQueryFromFile(String filename) {
         String query = "";
 
