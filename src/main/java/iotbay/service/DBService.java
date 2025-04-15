@@ -43,9 +43,12 @@ abstract class DBService {
 
         try {
             Scanner queryScanner = new Scanner(new File(queryFile));
+
             while (queryScanner.hasNextLine()) {
                 query += queryScanner.nextLine() + "\n";
             }
+
+            queryScanner.close();
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
