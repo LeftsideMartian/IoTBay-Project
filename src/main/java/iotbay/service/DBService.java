@@ -33,8 +33,9 @@ public abstract class DBService {
     protected String getQueryFromFile(String filename) {
         String query = "";
 
-        String projectFolder = Paths.get("").toAbsolutePath().toString();
-        String queryFile = projectFolder + "\\src\\main\\db\\queries\\" + filename;
+        String projectFolder = Paths.get("").toAbsolutePath().toString() + "\\";
+        String queriesFolder = "src\\main\\db\\queries\\";
+        String queryFile = projectFolder + queriesFolder + filename;
 
         try {
             Scanner queryScanner = new Scanner(new File(queryFile));
