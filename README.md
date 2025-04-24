@@ -1,7 +1,7 @@
 # Introduction to Software Development (ISD)
 
 This repo contains source code for the IoTBay case study website solution. The solution uses the following stack:
-- HTML, CSS, JSS frontend
+- JSP, CSS, JS frontend
 - Java Jetty server backend
 - SQLite database
 
