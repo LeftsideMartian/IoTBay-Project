@@ -8,12 +8,22 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class UserServiceTest {
     @Test
-    @DisplayName("User Service - Test FindUser function")
-    public void testFindUser() {
+    @DisplayName("User Service - Find existing user")
+    public void testExistingUser() {
         UserService userService = new UserService();
         User testUser = new User(1, "Matthew", "Adler", "matt@a", "12345");
 
-        User user = userService.findUser(testUser.email, testUser.password);
+        User user = userService.findUser(testUser.getEmail(), testUser.getPassword());
         assertEquals(user.toString(), testUser.toString());
+    }
+
+    @Test
+    @DisplayName("User Service - Find non existent user")
+    public void testNonExistentUser() {
+        UserService userService = new UserService();
+        User testUser = new User(-1, "asonfaosingoasn", "asginapsgnoansg", "asoginoasgbo", "aosginoasing");
+
+        User user = userService.findUser(testUser.getEmail(), testUser.getPassword());
+        assertEquals(user, null);
     }
 }

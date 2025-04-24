@@ -6,8 +6,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.naming.spi.DirStateFactory.Result;
-
 /**
 * A service for dealing with the User table
 * */
@@ -27,10 +25,10 @@ public class UserService extends DBService {
         try {
             String queryString = getQueryFromFile("CreateUser.sql");
 
-            queryString = queryString.replaceAll("FIRSTNAME", user.firstName);
-            queryString = queryString.replaceAll("LASTNAME", user.lastName);
-            queryString = queryString.replaceAll("EMAIL", user.email);
-            queryString = queryString.replaceAll("PASSWORD", user.password);
+            queryString = queryString.replaceAll("FIRSTNAME", user.getFirstName());
+            queryString = queryString.replaceAll("LASTNAME", user.getLastName());
+            queryString = queryString.replaceAll("EMAIL", user.getEmail());
+            queryString = queryString.replaceAll("PASSWORD", user.getPassword());
 
             this.statement.executeUpdate(queryString);
         } catch (SQLException e) {
@@ -53,13 +51,18 @@ public class UserService extends DBService {
 
             ResultSet results = this.statement.executeQuery(queryString);
 
-            return new User(
-                results.getInt("User_ID"),
-                results.getString("First_Name"),
-                results.getString("Last_Name"),
-                results.getString("Email"),
-                results.getString("Password")
-            );
+            if (results.next()) {
+                return new User(
+                    results.getInt("User_ID"),
+                    results.getString("First_Name"),
+                    results.getString("Last_Name"),
+                    results.getString("Email"),
+                    results.getString("Password")
+                );
+            } else {
+                return null;
+            }
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -101,10 +104,10 @@ public class UserService extends DBService {
         try {
             String queryString = getQueryFromFile("UpdateUser.sql");
 
-            queryString = queryString.replaceAll("FIRSTNAME", newUser.firstName);
-            queryString = queryString.replaceAll("LASTNAME", newUser.lastName);
-            queryString = queryString.replaceAll("EMAIL", newUser.email);
-            queryString = queryString.replaceAll("PASSWORD", newUser.password);
+            queryString = queryString.replaceAll("FIRSTNAME", newUser.getFirstName());
+            queryString = queryString.replaceAll("LASTNAME", newUser.getLastName());
+            queryString = queryString.replaceAll("EMAIL", newUser.getEmail());
+            queryString = queryString.replaceAll("PASSWORD", newUser.getPassword());
             queryString = queryString.replaceAll("USERID", String.valueOf(userId));
 
             this.statement.executeUpdate(queryString);
