@@ -11,10 +11,11 @@ CREATE TABLE User (
 );
 
 -- Insert default values into table
-INSERT INTO User (User_Id, First_Name, Last_Name, Email, Password) VALUES
-(1, 'Matthew', 'Adler', 'matt@a', '12345'),
-(2, 'Jahnavi', 'Nimboli', 'jahnavi@n', '12345'),
-(3, 'Erin', 'Blanchard', 'erin@b', '12345'),
-(4, 'Ambar', 'Sembhi', 'ambar@s', '12345'),
-(5, 'Alysha', 'Desai', 'alysha@d', '12345'),
-(6, 'Annabelle', 'Mansour', 'annabelle@m', '12345');
+INSERT INTO User (First_Name, Last_Name, Email, Password) VALUES
+('Matthew', 'Adler', 'matt@a.com', 'A12345#abcde'),
+('Jahnavi', 'Nimboli', 'jahnavi@n.com', 'A12345#abcde'),
+('Erin', 'Blanchard', 'erin@b.com', 'A12345#abcde'),
+('Ambar', 'Sembhi', 'ambar@s.com', 'A12345#abcde'),
+('Alysha', 'Desai', 'alysha@d.com', 'A12345#abcde'),
+('Annabelle', 'Mansour', 'annabelle@m.com', 'A12345#abcde'),
+('Test', 'User', '1@2', '1');
