@@ -8,7 +8,7 @@
 
     <body>
         <%
-            User user = (User)session.getAttribute("user");
+            User user = (User) session.getAttribute("user");
         %>
 
         <div class="gridContainer">
@@ -34,5 +34,6 @@
             </div>
         </div>
         <script src="js/profileMenu.js"></script>
+        <jsp:include page="/dbConnection" flush="true" />
     </body>
 </html>

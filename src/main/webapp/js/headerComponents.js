@@ -36,12 +36,12 @@ class LoggedInHeader extends HTMLElement {
                     <img class="profileIcon" id="profileIcon" src="css/profileIcon.svg">
 
                     <div class="profileMenuWrapper" id="profileMenu">
-                        <div class="profileMenu">
+                        <form action="login" method="POST" class="profileMenu">
                             <h2 class="profileMenuUserName">User name here</h2>
                             <hr>
                             <a href="">Edit account details</a>
-                            <a href="logout.jsp">Logout</a>
-                        </div>
+                            <button type="submit">Logout</button>
+                        </form>
                     </div>
                 </div>
             </div>

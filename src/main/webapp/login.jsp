@@ -5,12 +5,19 @@
         <script src="js/headerComponents.js"></script>
     </head>
     <body>
+        <%
+            String errorMessage = (String) session.getAttribute("loginError");
+            if (errorMessage != null) { 
+        %>
+            <%= errorMessage %>
+        <% } %>
+
         <div class="gridContainer">
             <logged-out-header></logged-out-header>
 
             <div class="contentWrapper">
                 <div class="centerContent">
-                    <form action="welcome.jsp" method="POST">
+                    <form action="login" method="GET">
                         <div class="formWrapper">
                             <h1 class="registerHeading">Log in</h1>
                             <hr>

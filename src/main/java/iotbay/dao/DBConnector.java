@@ -1,4 +1,4 @@
-package iotbay.service;
+package iotbay.dao;
 
 import java.nio.file.Paths;
 import java.sql.Connection;
@@ -9,7 +9,7 @@ import java.sql.SQLException;
 * For making a direct connection with the database
 * */
 public class DBConnector {
-    private Connection connection;
+    private final Connection connection;
 
     /**
     * Constructor to create a connection object with the SQLite database
@@ -21,8 +21,9 @@ public class DBConnector {
             // Connect to db, and store connection
             this.connection = DriverManager.getConnection(dbUrl);
             System.out.println("Connection to SQLite has been established.");
-        } catch (SQLException sqlException) {
-            System.out.println("There was a problem when connected to the database:\n" + sqlException.getMessage());
+        } catch (SQLException e) {
+            System.out.println("There was a problem when connecting to the database");
+            throw new RuntimeException(e);
         }
     }
 
@@ -31,7 +32,7 @@ public class DBConnector {
     * @return The file path for the project's SQLite .db file
     * */
     private String getDbUrl() {
-        String projectFolder = Paths.get("").toAbsolutePath().toString() + "\\";
+        String projectFolder = Paths.get("").toAbsolutePath() + "\\";
         String dbFile = "src\\main\\db\\iotbay.db";
         return projectFolder + dbFile;
     }
@@ -43,7 +44,11 @@ public class DBConnector {
         return this.connection;
     }
 
-    public void closeConnection() throws SQLException {
-        this.connection.close();
+    public void closeConnection() {
+        try {
+            this.connection.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
