@@ -1,0 +1,3 @@
+SELECT * FROM User
+WHERE Email = 'EMAIL'
+AND Password = 'PASSWORD';
