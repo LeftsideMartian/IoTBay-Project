@@ -132,9 +132,6 @@ header {
     background-color: #fff;
 }
 
-
-
-
 .contentWrapper {
     grid-area: "body";
     display: flex;
@@ -149,23 +146,46 @@ header {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.mainContentWrapper {
     gap: 2rem;
 }
 
-.centerContent > .mainHeading {
+.mainContentWrapper > .mainHeading {
     font-size: clamp(1.4rem, 3vw, 3.8rem);
     font-weight: 700;
 }
 
-.centerContent > .button {
+.mainContentWrapper > .button {
     font-size: 1.3rem;
     background-color: #70cbff;
 }
 
 
-.centerContent > .mainImage {
+.mainContentWrapper > .mainImage {
     width: auto;
     max-height: 45%;
+}
+
+.errorMessage {
+    position: relative;
+    top: -1rem;
+    background-color: rgb(241, 69, 69);
+    filter: drop-shadow(
+      1px 2px 2px rgb(197, 197, 197)
+    );
+    width: fit-content;
+    height: fit-content;
+
+    border-radius: 36px;
+    font-weight: 400;
+    padding: 1em 1.3em;
+
+    text-align: center;
+    align-content: center;
+    text-decoration: none;
+    color: #fff;
 }
 
 .formWrapper {

@@ -1,6 +1,5 @@
 package iotbay.helper;
 
-import javax.management.Query;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.nio.file.Paths;

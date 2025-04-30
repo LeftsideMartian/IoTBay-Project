@@ -1,16 +1,23 @@
+<%@page import="java.sql.Connection"%>
 <html>
     <head>
         <link rel="stylesheet" href="css/index.css">
         <title>Create new account</title>
-        <script src="js/headerComponents.js"></script>
     </head>
     <body>
         <div class="gridContainer">
-            <logged-out-header></logged-out-header>
+            <jsp:include page="header.jsp"/>
 
             <div class="contentWrapper">
                 <div class="centerContent">
-                    <form action="welcome.jsp" method="POST">
+                    <%
+                        String errorMessage = (String) session.getAttribute("registerError");
+                        if (errorMessage != null) { 
+                    %>
+                        <div class="errorMessage"><%= errorMessage %></div>
+                    <% } %>
+
+                    <form action="/servlet/register" method="POST">
                         <div class="formWrapper">
                             <h1 class="registerHeading">Create an account</h1>
                             <hr>
@@ -63,6 +70,13 @@
                 </div>
             </div>
         </div>
+
+        <%
+            Connection connection = (Connection) session.getAttribute("dbConnection");
+            if (connection == null) { 
+        %>
+            <jsp:include page="/servlet/dbConnection" flush="true" />
+        <% } %>
 
         <script src="./js/validatePassword.js"></script>
     </body>

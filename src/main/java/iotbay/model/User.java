@@ -11,24 +11,19 @@ public class User implements Serializable {
     private String lastName;
     private String email;
     private String password;
+    private boolean hasAdminPermissions;
 
-    /**
-    * Empty constructor
-    * */
     public User() {}
 
-    /**
-    * Constructor with details
-    * */
-    public User(int userId, String firstName, String lastName, String email, String password) {
+    public User(int userId, String firstName, String lastName, String email, String password, boolean hasAdminPermissions) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
+        this.hasAdminPermissions = hasAdminPermissions;
     }
 
-    public int getUserId() { return userId; }
     public void setUserId(int userId) { this.userId = userId; }
     public String getName() {return firstName + " " + lastName; }
     public String getFirstName() { return firstName; }
@@ -39,16 +34,6 @@ public class User implements Serializable {
     public void setEmail(String email) { this.email = email; }
     public String getPassword() { return password; }
     public void setPassword(String password) { this.password = password; }
-
-    @Override
-    public String toString() {
-        return
-            "User {" +
-            "userId=" + userId +
-            ", firstName='" + firstName + '\'' +
-            ", lastName='" + lastName + '\'' +
-            ", email='" + email + '\'' +
-            ", password='" + password + '\'' +
-            '}';
-    }
+    public void setAdminPermissions(boolean hasAdminPermissions) { this.hasAdminPermissions = hasAdminPermissions; }
+    public boolean doesHaveAdminPermissions() { return this.hasAdminPermissions; }
 }

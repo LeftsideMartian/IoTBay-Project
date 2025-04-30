@@ -13,7 +13,7 @@ public class UserServiceTest {
     public void testExistingUser() {
         DBConnector dbConnector = new DBConnector();
         UserService userService = new UserService(dbConnector.connect());
-        User testUser = new User(1, "Matthew", "Adler", "matt@a.com", "12345");
+        User testUser = new User(1, "Matthew", "Adler", "matt@a.com", "12345", false);
 
         User user = userService.findUser(testUser.getEmail(), testUser.getPassword());
         assertEquals(user.toString(), testUser.toString());
@@ -24,9 +24,9 @@ public class UserServiceTest {
     public void testNonExistentUser() {
         DBConnector dbConnector = new DBConnector();
         UserService userService = new UserService(dbConnector.connect());
-        User testUser = new User(-1, "asonfaosingoasn", "asginapsgnoansg", "asoginoasgbo", "aosginoasing");
+        User testUser = new User(1, "asonfaosingoasn", "asginapsgnoansg", "asoginoasgbo", "aosginoasing", true);
 
         User user = userService.findUser(testUser.getEmail(), testUser.getPassword());
-        assertEquals(user, null);
+        assertNull(user);
     }
 }

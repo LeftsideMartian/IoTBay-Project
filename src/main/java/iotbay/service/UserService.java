@@ -31,6 +31,7 @@ public class UserService extends DBService {
         queryBuilder.setQueryParam("LASTNAME", user.getLastName());
         queryBuilder.setQueryParam("EMAIL", user.getEmail());
         queryBuilder.setQueryParam("PASSWORD", user.getPassword());
+        queryBuilder.setQueryParam("HASADMINPERMISSIONS", user.doesHaveAdminPermissions() ? "1" : "0");
 
         try {
             statement.executeUpdate(queryBuilder.getQuery());
@@ -61,7 +62,8 @@ public class UserService extends DBService {
                     results.getString("First_Name"),
                     results.getString("Last_Name"),
                     results.getString("Email"),
-                    results.getString("Password")
+                    results.getString("Password"),
+                    results.getBoolean("Has_Admin_Permissions")
                 );
             } else {
                 return null;
@@ -77,20 +79,20 @@ public class UserService extends DBService {
     * */
     public List<User> getAllUsers() {
         queryBuilder.clear();
-        queryBuilder.getQueryFromFile("GetAllUsers.sql");
 
         try {
-            ResultSet results = statement.executeQuery(queryBuilder.getQuery());
+            ResultSet results = statement.executeQuery(queryBuilder.getQueryFromFile("GetAllUsers.sql"));
 
             List<User> allUsers = new ArrayList<>();
 
             while (results.next()) {
                 allUsers.add(new User(
-                        results.getInt("User_ID"),
-                        results.getString("First_Name"),
-                        results.getString("Last_Name"),
-                        results.getString("Email"),
-                        results.getString("Password")
+                    results.getInt("User_ID"),
+                    results.getString("First_Name"),
+                    results.getString("Last_Name"),
+                    results.getString("Email"),
+                    results.getString("Password"),
+                    results.getBoolean("Has_Admin_Permissions")
                 ));
             }
 
@@ -107,12 +109,14 @@ public class UserService extends DBService {
     * */
     public void updateUser(int userId, User newUser) {
         queryBuilder.clear();
+
         queryBuilder.getQueryFromFile("UpdateUser.sql");
 
         queryBuilder.setQueryParam("FIRSTNAME", newUser.getFirstName());
         queryBuilder.setQueryParam("LASTNAME", newUser.getLastName());
         queryBuilder.setQueryParam("EMAIL", newUser.getEmail());
         queryBuilder.setQueryParam("PASSWORD", newUser.getPassword());
+        queryBuilder.setQueryParam("HASADMINPERMISSIONS", Boolean.toString(newUser.doesHaveAdminPermissions()));
         queryBuilder.setQueryParam("USERID", String.valueOf(userId));
 
         try {
@@ -137,5 +141,15 @@ public class UserService extends DBService {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public boolean isEmailInDatabase(String email) {
+        List<User> userList = getAllUsers();
+
+        for (User user : userList) {
+            if (user.getEmail().equals(email)) return true;
+        }
+
+        return false;
     }
 }
