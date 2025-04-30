@@ -1,8 +1,9 @@
 <%@page import="iotbay.model.User"%>
 <html>
     <head>
-        <title>Home Page</title>
         <link rel="stylesheet" href="css/index.css">
+        <link rel="shortcut icon" href="css/iotbayIcon.ico">
+        <title>Home Page</title>
     </head>
 
     <body>

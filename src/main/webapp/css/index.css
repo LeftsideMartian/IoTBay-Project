@@ -64,6 +64,9 @@ header {
     filter: drop-shadow(
       1px 2px 2px rgb(197, 197, 197)
     );
+    position: relative;
+    top: 0;
+    transition: top ease 0.3s;
     width: fit-content;
     height: fit-content;
 
@@ -76,6 +79,10 @@ header {
     text-decoration: none;
     color: #040f11;
     cursor: pointer;
+}
+
+.button:hover {
+    top: -2px;
 }
 
 .lrgBtn {
@@ -169,8 +176,9 @@ header {
 }
 
 .errorMessage {
-    position: relative;
-    top: -1rem;
+    position: absolute;
+    bottom: 0.6rem;
+    right: 1rem;
     background-color: rgb(241, 69, 69);
     filter: drop-shadow(
       1px 2px 2px rgb(197, 197, 197)
@@ -186,6 +194,20 @@ header {
     align-content: center;
     text-decoration: none;
     color: #fff;
+
+    -webkit-animation: cssAnimation 6s forwards; 
+    animation: cssAnimation 6s forwards;
+}
+
+@keyframes cssAnimation {
+    0%   {opacity: 1;}
+    90%  {opacity: 1; right: 1rem;}
+    100% {opacity: 0; right: 0;}
+}
+@-webkit-keyframes cssAnimation {
+    0%   {opacity: 1;}
+    90%  {opacity: 1; right: 1rem;}
+    100% {opacity: 0; right: 0;}
 }
 
 .formWrapper {

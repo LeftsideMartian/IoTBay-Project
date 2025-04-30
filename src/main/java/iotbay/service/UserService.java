@@ -26,12 +26,7 @@ public class UserService extends DBService {
     public void createUser(User user) {
         queryBuilder.clear();
         queryBuilder.getQueryFromFile("CreateUser.sql");
-
-        queryBuilder.setQueryParam("FIRSTNAME", user.getFirstName());
-        queryBuilder.setQueryParam("LASTNAME", user.getLastName());
-        queryBuilder.setQueryParam("EMAIL", user.getEmail());
-        queryBuilder.setQueryParam("PASSWORD", user.getPassword());
-        queryBuilder.setQueryParam("HASADMINPERMISSIONS", user.doesHaveAdminPermissions() ? "1" : "0");
+        queryBuilder.setAllUserParams(user);
 
         try {
             statement.executeUpdate(queryBuilder.getQuery());
@@ -109,15 +104,8 @@ public class UserService extends DBService {
     * */
     public void updateUser(int userId, User newUser) {
         queryBuilder.clear();
-
         queryBuilder.getQueryFromFile("UpdateUser.sql");
-
-        queryBuilder.setQueryParam("FIRSTNAME", newUser.getFirstName());
-        queryBuilder.setQueryParam("LASTNAME", newUser.getLastName());
-        queryBuilder.setQueryParam("EMAIL", newUser.getEmail());
-        queryBuilder.setQueryParam("PASSWORD", newUser.getPassword());
-        queryBuilder.setQueryParam("HASADMINPERMISSIONS", Boolean.toString(newUser.doesHaveAdminPermissions()));
-        queryBuilder.setQueryParam("USERID", String.valueOf(userId));
+        queryBuilder.setAllUserParams(newUser);
 
         try {
             statement.executeUpdate(queryBuilder.getQuery());

@@ -2,6 +2,7 @@
 <html>
     <head>
         <link rel="stylesheet" href="css/index.css">
+        <link rel="shortcut icon" href="css/iotbayIcon.ico">
         <title>Log in</title>
     </head>
     <body>
@@ -12,7 +13,8 @@
                 <div class="centerContent">
                     <%
                         String errorMessage = (String) session.getAttribute("loginError");
-                        if (errorMessage != null) { 
+                        if (errorMessage != null) {
+                            session.removeAttribute("loginError");
                     %>
                         <div class="errorMessage"><%= errorMessage %></div>
                     <% } %>

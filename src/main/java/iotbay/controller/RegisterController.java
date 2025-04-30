@@ -2,8 +2,6 @@ package iotbay.controller;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.util.List;
-import java.util.Objects;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,6 +15,8 @@ public class RegisterController extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession();
+        Connection connection = (Connection) session.getAttribute("dbConnection");
+        UserService userService = new UserService(connection);
 
         // Get form data
         String firstName = request.getParameter("firstName");
@@ -27,9 +27,7 @@ public class RegisterController extends HttpServlet {
 
         User newUser = new User(-1, firstName, lastName, email, password, hasAdminPermissions);
 
-        if (Objects.equals(email, "1@2")) {
-            handleRegistration(newUser, request, response);
-        } else if (isEmailInDatabase(email, request)) {
+        if (userService.isEmailInDatabase(email)) {
             // Send error message
             session.setAttribute("registerError", "Email is already registered.");
             response.sendRedirect("/register.jsp");
@@ -46,22 +44,11 @@ public class RegisterController extends HttpServlet {
             session.setAttribute("registerError", "Invalid password.");
             response.sendRedirect("/register.jsp");
         } else {
-            handleRegistration(newUser, request, response);
+            handleRegistration(newUser, userService, session, response);
         }
     }
 
-    private boolean isEmailInDatabase(String email, HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        Connection connection = (Connection) session.getAttribute("dbConnection");
-
-        return new UserService(connection).isEmailInDatabase(email);
-    }
-
-    private void handleRegistration(User newUser, HttpServletRequest request, HttpServletResponse response) throws IOException {
-        HttpSession session = request.getSession();
-        Connection connection = (Connection) session.getAttribute("dbConnection");
-        UserService userService = new UserService(connection);
-
+    private void handleRegistration(User newUser, UserService userService, HttpSession session, HttpServletResponse response) throws IOException {
         userService.createUser(newUser);
         session.setAttribute("user", newUser);
         response.sendRedirect("/");

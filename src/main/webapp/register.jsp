@@ -2,6 +2,7 @@
 <html>
     <head>
         <link rel="stylesheet" href="css/index.css">
+        <link rel="shortcut icon" href="css/iotbayIcon.ico">
         <title>Create new account</title>
     </head>
     <body>
@@ -12,7 +13,8 @@
                 <div class="centerContent">
                     <%
                         String errorMessage = (String) session.getAttribute("registerError");
-                        if (errorMessage != null) { 
+                        if (errorMessage != null) {
+                            session.removeAttribute("registerError"); 
                     %>
                         <div class="errorMessage"><%= errorMessage %></div>
                     <% } %>

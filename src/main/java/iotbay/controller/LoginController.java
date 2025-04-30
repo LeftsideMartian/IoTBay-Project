@@ -28,10 +28,6 @@ public class LoginController extends HttpServlet {
             // Send error message
             session.setAttribute("loginError", "Invalid email.");
             response.sendRedirect("/login.jsp");
-        } else if (!Validator.validatePassword(password)) {
-            // Send error message
-            session.setAttribute("loginError", "Invalid password.");
-            response.sendRedirect("/login.jsp");
         } else {
             handleLogin(session, email, password, response);
         }

@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
+import iotbay.model.User;
+
 public class QueryBuilder {
     private String query;
 
@@ -52,6 +54,14 @@ public class QueryBuilder {
         } catch (QueryParameterException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void setAllUserParams(User user) {
+        setQueryParam("FIRSTNAME", user.getFirstName());
+        setQueryParam("LASTNAME", user.getLastName());
+        setQueryParam("EMAIL", user.getEmail());
+        setQueryParam("PASSWORD", user.getPassword());
+        setQueryParam("HASADMINPERMISSIONS", user.doesHaveAdminPermissions() ? "1" : "0");
     }
 
     public String getQuery() {
