@@ -99,12 +99,12 @@ public class UserService extends DBService {
 
     /**
     * Updates user at 'userId'
-    * @param userId The UserID to update in the database
     * @param newUser A user object containing the new data
     * */
-    public void updateUser(int userId, User newUser) {
+    public void updateUser(User newUser) {
         queryBuilder.clear();
         queryBuilder.getQueryFromFile("UpdateUser.sql");
+        queryBuilder.setQueryParam("USERID", String.valueOf(newUser.getUserId()));
         queryBuilder.setAllUserParams(newUser);
 
         try {
@@ -116,13 +116,12 @@ public class UserService extends DBService {
 
     /**
     * Delete the user at 'userid'
-    * @param userId The UserID to delete in the database
     * */
-    public void deleteUser(int userId) {
+    public void deleteUser(User user) {
         queryBuilder.clear();
         queryBuilder.getQueryFromFile("DeleteUser.sql");
 
-        queryBuilder.setQueryParam("USERID", String.valueOf(userId));
+        queryBuilder.setQueryParam("USERID", String.valueOf(user.getUserId()));
 
         try {
             statement.executeUpdate(queryBuilder.getQuery());

@@ -25,6 +25,7 @@ public class User implements Serializable {
     }
 
     public void setUserId(int userId) { this.userId = userId; }
+    public int getUserId() { return this.userId; }
     public String getName() {return firstName + " " + lastName; }
     public String getFirstName() { return firstName; }
     public void setFirstName(String firstName) { this.firstName = firstName; }
