@@ -1,25 +1,19 @@
 <%@page import="iotbay.model.User"%>
 <html>
     <head>
-        <title>Home Page</title>
         <link rel="stylesheet" href="css/index.css">
-        <script src="js/headerComponents.js"></script>
+        <link rel="shortcut icon" href="css/iotbayIcon.ico">
+        <title>Home Page</title>
     </head>
 
     <body>
-        <%
-            User user = (User)session.getAttribute("user");
-        %>
+        <% User user = (User) session.getAttribute("user"); %>
 
         <div class="gridContainer">
-            <% if (user != null) { %>
-                <logged-in-header></logged-in-header>
-            <% } else { %>
-                <logged-out-header></logged-out-header>
-            <% } %>
+            <jsp:include page="header.jsp"/>
 
             <div class="contentWrapper">
-                <div class="centerContent">
+                <div class="centerContent mainContentWrapper">
                     <% if (user != null) { %>
                         <h1 class="welcomeText">
                             You are logged in as <%= user.getName() %> <<%= user.getEmail() %>> <br>
@@ -34,5 +28,6 @@
             </div>
         </div>
         <script src="js/profileMenu.js"></script>
+        <jsp:include page="/servlet/dbConnection" flush="true" />
     </body>
 </html>

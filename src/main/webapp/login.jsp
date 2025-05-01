@@ -1,16 +1,25 @@
+<%@page import="java.sql.Connection"%>
 <html>
     <head>
         <link rel="stylesheet" href="css/index.css">
+        <link rel="shortcut icon" href="css/iotbayIcon.ico">
         <title>Log in</title>
-        <script src="js/headerComponents.js"></script>
     </head>
     <body>
         <div class="gridContainer">
-            <logged-out-header></logged-out-header>
+            <jsp:include page="header.jsp"/>
 
             <div class="contentWrapper">
                 <div class="centerContent">
-                    <form action="welcome.jsp" method="POST">
+                    <%
+                        String errorMessage = (String) session.getAttribute("loginError");
+                        if (errorMessage != null) {
+                            session.removeAttribute("loginError");
+                    %>
+                        <div class="errorMessage"><%= errorMessage %></div>
+                    <% } %>
+
+                    <form action="/servlet/login" method="GET">
                         <div class="formWrapper">
                             <h1 class="registerHeading">Log in</h1>
                             <hr>
@@ -36,5 +45,11 @@
                 </div>
             </div>
         </div>
+        <%
+            Connection connection = (Connection) session.getAttribute("dbConnection");
+            if (connection == null) { 
+        %>
+            <jsp:include page="/servlet/dbConnection" flush="true" />
+        <% } %>
     </body>
 </html>
