@@ -1,6 +1,6 @@
 UPDATE User
-SET First_Name = 'FIRSTNAME',
-Last_Name = 'LASTNAME',
-Email = 'EMAIL',
-Password = 'PASSWORD'
-WHERE User_Id = USERID;
+SET First_Name = ?,
+Last_Name = ?,
+Email = ?,
+Password = ?
+WHERE User_Id = ?;

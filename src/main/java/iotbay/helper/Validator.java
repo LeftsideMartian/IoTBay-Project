@@ -15,14 +15,14 @@ public class Validator {
     }
 
     public static boolean validateEmail(String email) {
-        String emailPattern = ".*@.*";
+        String emailPattern = ProjectConstants.VALIDATOR_EMAIL_PATTERN;
         // Check if email is not empty AND email is valid
         return !isEmpty(email) && validate(emailPattern, email);
     }
 
     public static boolean validatePassword(String password) {
         // Password must start with a capital, contain a digit and a special char, and be at least 12 characters long
-        String passwordPattern = "(^[A-Z])(?=.*\\d)(?=.*\\W).{11,}";
+        String passwordPattern = ProjectConstants.VALIDATOR_PASSWORD_PATTERN;
         // Check if password is not empty AND password is valid
         return !isEmpty(password) && validate(passwordPattern, password);
     }
