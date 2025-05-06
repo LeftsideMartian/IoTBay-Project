@@ -21,7 +21,7 @@
 
                     <form action="/servlet/login" method="GET">
                         <div class="formWrapper">
-                            <h1 class="registerHeading">Log in</h1>
+                            <h1>Log in</h1>
                             <hr>
 
                             <label class="formHeading" for="email">Email</label>

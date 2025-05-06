@@ -347,3 +347,16 @@ hr {
 .manageStockTable tbody tr:nth-child(even) {
     background-color: #f2f8fc;
 }
+
+.manageProductForm {
+    width: 17rem;
+}
+
+textarea {
+    resize: none;
+}
+
+.priceInput {
+    text-align: right;
+    width: 30%;
+}

@@ -30,3 +30,4 @@
         </div>
     </div>
 </header>
+<script src="js/profileMenu.js"></script>
