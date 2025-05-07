@@ -36,7 +36,7 @@ public class UserService extends DBService {
             preparedStatement.setString(4, user.getPassword());
             preparedStatement.setBoolean(5, user.doesHaveAdminPermissions());
 
-            preparedStatement.executeQuery();
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
