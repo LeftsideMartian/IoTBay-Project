@@ -8,15 +8,19 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class UserServiceTest {
+    User testUser = new User(-1, "Test", "User", "testuser@test.com", "543210", false);
+
     @Test
     @DisplayName("User Service - Find existing user")
     public void testExistingUser() {
         DBConnector dbConnector = new DBConnector();
         UserService userService = new UserService(dbConnector.connect());
-        User testUser = new User(1, "Matthew", "Adler", "matt@a.com", "12345", false);
+
+        userService.createUser(testUser);
 
         User user = userService.getUser(testUser.getEmail(), testUser.getPassword());
         assertEquals(user.toString(), testUser.toString());
+        userService.closeConnection();
     }
 
     @Test
@@ -24,7 +28,8 @@ public class UserServiceTest {
     public void testNonExistentUser() {
         DBConnector dbConnector = new DBConnector();
         UserService userService = new UserService(dbConnector.connect());
-        User testUser = new User(1, "asonfaosingoasn", "asginapsgnoansg", "asoginoasgbo", "aosginoasing", true);
+
+        userService.deleteUser(userService.getUser(testUser.getEmail(), testUser.getPassword()));
 
         User user = userService.getUser(testUser.getEmail(), testUser.getPassword());
         assertNull(user);

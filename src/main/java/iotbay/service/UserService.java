@@ -59,14 +59,7 @@ public class UserService extends DBService {
             ResultSet results = preparedStatement.executeQuery();
 
             if (results.next()) {
-                return new User(
-                    results.getInt(ProjectConstants.USER_COLUMN_USER_ID),
-                    results.getString(ProjectConstants.USER_COLUMN_FIRST_NAME),
-                    results.getString(ProjectConstants.USER_COLUMN_LAST_NAME),
-                    results.getString(ProjectConstants.USER_COLUMN_EMAIL),
-                    results.getString(ProjectConstants.USER_COLUMN_PASSWORD),
-                    results.getBoolean(ProjectConstants.USER_COLUMN_HAS_ADMIN_PERMISSIONS)
-                );
+                return getUserFromResultSet(results);
             } else {
                 return null;
             }
@@ -86,14 +79,7 @@ public class UserService extends DBService {
             List<User> allUsers = new ArrayList<>();
 
             while (results.next()) {
-                allUsers.add(new User(
-                    results.getInt(ProjectConstants.USER_COLUMN_USER_ID),
-                    results.getString(ProjectConstants.USER_COLUMN_FIRST_NAME),
-                    results.getString(ProjectConstants.USER_COLUMN_LAST_NAME),
-                    results.getString(ProjectConstants.USER_COLUMN_EMAIL),
-                    results.getString(ProjectConstants.USER_COLUMN_PASSWORD),
-                    results.getBoolean(ProjectConstants.USER_COLUMN_HAS_ADMIN_PERMISSIONS)
-                ));
+                allUsers.add(getUserFromResultSet(results));
             }
 
             return allUsers;
@@ -128,16 +114,31 @@ public class UserService extends DBService {
     * Delete the user at 'userid'
     * */
     public void deleteUser(User user) {
-        String query = getQueryFromFile(ProjectConstants.USER_QUERY_DELETE);
+        if (user != null) {
+            try {
+                String query = getQueryFromFile(ProjectConstants.USER_QUERY_DELETE);
+                PreparedStatement preparedStatement = connection.prepareStatement(query);
+                preparedStatement.setInt(1, user.getUserId());
 
-        try {
-            connection.prepareStatement(query).executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+                preparedStatement.executeUpdate();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
-    public boolean isEmailInDatabase(String email) {
+    private User getUserFromResultSet(ResultSet resultSet) throws SQLException {
+        return new User(
+            resultSet.getInt(ProjectConstants.USER_COLUMN_USER_ID),
+            resultSet.getString(ProjectConstants.USER_COLUMN_FIRST_NAME),
+            resultSet.getString(ProjectConstants.USER_COLUMN_LAST_NAME),
+            resultSet.getString(ProjectConstants.USER_COLUMN_EMAIL),
+            resultSet.getString(ProjectConstants.USER_COLUMN_PASSWORD),
+            resultSet.getBoolean(ProjectConstants.USER_COLUMN_HAS_ADMIN_PERMISSIONS)
+        );
+    }
+
+    public boolean isEmailRegistered(String email) {
         List<User> userList = getAllUsers();
 
         for (User user : userList) {
