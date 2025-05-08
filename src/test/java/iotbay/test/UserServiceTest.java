@@ -15,7 +15,7 @@ public class UserServiceTest {
         UserService userService = new UserService(dbConnector.connect());
         User testUser = new User(1, "Matthew", "Adler", "matt@a.com", "12345", false);
 
-        User user = userService.findUser(testUser.getEmail(), testUser.getPassword());
+        User user = userService.getUser(testUser.getEmail(), testUser.getPassword());
         assertEquals(user.toString(), testUser.toString());
     }
 
@@ -26,7 +26,7 @@ public class UserServiceTest {
         UserService userService = new UserService(dbConnector.connect());
         User testUser = new User(1, "asonfaosingoasn", "asginapsgnoansg", "asoginoasgbo", "aosginoasing", true);
 
-        User user = userService.findUser(testUser.getEmail(), testUser.getPassword());
+        User user = userService.getUser(testUser.getEmail(), testUser.getPassword());
         assertNull(user);
     }
 }
