@@ -31,7 +31,7 @@ public class RegisterController extends HttpServlet {
         User newUser = new User(-1, firstName, lastName, email, password, hasAdminPermissions);
 
         try {
-            if (userService.isEmailInDatabase(email)) {
+            if (userService.isEmailRegistered(email)) {
                 // Send error message
                 session.setAttribute(ProjectConstants.SESSION_ATTRIBUTE_REGISTER_ERROR, "Email is already registered.");
                 response.sendRedirect(ProjectConstants.REGISTER_PAGE);

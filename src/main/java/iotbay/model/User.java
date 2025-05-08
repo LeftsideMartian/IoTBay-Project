@@ -37,4 +37,16 @@ public class User implements Serializable {
     public void setPassword(String password) { this.password = password; }
     public void setAdminPermissions(boolean hasAdminPermissions) { this.hasAdminPermissions = hasAdminPermissions; }
     public boolean doesHaveAdminPermissions() { return this.hasAdminPermissions; }
+
+    @Override
+    public String toString() {
+        return
+            "User{" +
+            "firstName='" + firstName + '\'' +
+            ", lastName='" + lastName + '\'' +
+            ", email='" + email + '\'' +
+            ", password='" + password + '\'' +
+            ", hasAdminPermissions=" + hasAdminPermissions +
+            '}';
+    }
 }

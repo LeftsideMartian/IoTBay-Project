@@ -17,6 +17,17 @@ public class ProjectConstants {
     public static final String USER_QUERY_GET_ALL = "GetAllUsers.sql";
     public static final String USER_QUERY_UPDATE = "UpdateUser.sql";
     public static final String USER_QUERY_DELETE = "DeleteUser.sql";
+    // Product table constants
+    public static final String PRODUCT_COLUMN_PRODUCT_ID = "Product_Id";
+    public static final String PRODUCT_COLUMN_PRODUCT_NAME = "Product_Name";
+    public static final String PRODUCT_COLUMN_DESCRIPTION = "Description";
+    public static final String PRODUCT_COLUMN_PRICE = "Price";
+    public static final String PRODUCT_COLUMN_STOCK_QUANTITY = "Stock_Quantity";
+    public static final String PRODUCT_COLUMN_CATEGORY = "Category";
+    public static final String PRODUCT_QUERY_GET = "GetProduct.sql";
+    public static final String PRODUCT_QUERY_GET_ALL = "GetAllProducts.sql";
+    public static final String PRODUCT_QUERY_UPDATE = "UpdateProduct.sql";
+    public static final String PRODUCT_QUERY_DELETE = "DeleteProduct.sql";
 
 // Session attribute names
     public static final String SESSION_ATTRIBUTE_USER = "user";
