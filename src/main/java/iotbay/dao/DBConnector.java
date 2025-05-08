@@ -1,5 +1,7 @@
 package iotbay.dao;
 
+import iotbay.helper.ProjectConstants;
+
 import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -17,7 +19,7 @@ public class DBConnector {
     public DBConnector() {
         try {
             // Get URL for the db
-            String dbUrl = "jdbc:sqlite:" + getDbUrl();
+            String dbUrl = ProjectConstants.JDBC_SQLITE_PREFIX + getDbUrl();
             // Connect to db, and store connection
             this.connection = DriverManager.getConnection(dbUrl);
             System.out.println("Connection to SQLite has been established.");
@@ -33,7 +35,7 @@ public class DBConnector {
     * */
     private String getDbUrl() {
         String projectFolder = Paths.get("").toAbsolutePath() + "\\";
-        String dbFile = "src\\main\\db\\iotbay.db";
+        String dbFile = ProjectConstants.DB_FILE_LOCATION;
         return projectFolder + dbFile;
     }
 

@@ -26,7 +26,7 @@ html {
 
 header {
     background-color: white;
-    min-height: 5rem;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -93,6 +93,11 @@ header {
     font-size: 0.8rem;
 }
 
+.smlBtn {
+    padding: 0.8em 1em;
+    font-size: 0.8rem;
+}
+
 .menuItems > .button {
     margin-left: 1.2rem;
 }
@@ -147,32 +152,33 @@ header {
 }
 
 .centerContent {
-    width: 75%;
-    height: 100%;
+    max-height: 100%;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.mainContentWrapper {
+.indexContentWrapper {
+    display: flex;
+    max-height: clamp(50%, 60%, 70%);
+    flex-direction: column;
+    align-items: center;
     gap: 2rem;
 }
 
-.mainContentWrapper > .mainHeading {
-    font-size: clamp(1.4rem, 3vw, 3.8rem);
+.indexContentWrapper > .mainHeading {
+    font-size: clamp(1rem, 2.5vw, 3rem);
     font-weight: 700;
 }
 
-.mainContentWrapper > .button {
-    font-size: 1.3rem;
+.indexContentWrapper > .button {
+    font-size: 1rem;
     background-color: #70cbff;
 }
 
-
-.mainContentWrapper > .mainImage {
-    width: auto;
-    max-height: 45%;
+.indexContentWrapper > .mainImage {
+    width: clamp(10rem, 20rem, 30rem);
+    max-height: 20%;
 }
 
 .errorMessage {
@@ -290,4 +296,67 @@ hr {
 .invalidRequirement::before {
     content: "✖";
     margin-right: 0.2rem;
+}
+
+.manageStockTableWrapper {
+    padding: 1em 2em;
+    border-radius: 25px;
+    background-color: #fff;
+    width: 63rem;
+}
+
+.scrollableTable {
+    max-height: 25rem;
+    overflow-y: auto;
+}
+
+.manageStockTable {
+    border-spacing: 0rem 0rem;
+    text-align: left;
+    overflow-y: auto;
+}
+
+.manageStockTable th,
+.manageStockTable td {
+    padding: 1rem 1rem;
+}
+
+.manageStockTable thead tr th {
+    background-color: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.manageStockTable thead th:nth-child(1) {
+    width: 30%;
+}
+
+.manageStockTable thead th:nth-child(2) {
+    width: 20%;
+}
+
+.manageStockTable thead th:nth-child(3) {
+    width: 15%;
+}
+
+.manageStockTable thead th:nth-child(4) {
+    width: 35%;
+}
+
+.manageStockTable tbody tr:nth-child(even) {
+    background-color: #f2f8fc;
+}
+
+.manageProductForm {
+    width: 17rem;
+}
+
+textarea {
+    resize: none;
+}
+
+.priceInput {
+    text-align: right;
+    width: 30%;
 }

@@ -21,7 +21,7 @@
 
                     <form action="/servlet/register" method="POST">
                         <div class="formWrapper">
-                            <h1 class="registerHeading">Create an account</h1>
+                            <h1>Create an account</h1>
                             <hr>
 
                             <label class="formHeading">Name</label>

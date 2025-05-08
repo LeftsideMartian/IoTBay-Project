@@ -23,7 +23,7 @@ public class DBConnection extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
-        session.setAttribute("dbConnection", connection);
+        session.setAttribute(ProjectConstants.SESSION_ATTRIBUTE_DBCONNECTION, connection);
     }
 
     @Override

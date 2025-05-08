@@ -1,2 +1,2 @@
 DELETE FROM User
-WHERE User_Id = USERID;
+WHERE User_Id = ?;
