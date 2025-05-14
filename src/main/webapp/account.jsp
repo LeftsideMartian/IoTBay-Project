@@ -170,8 +170,8 @@
             <hr>
             <div class="accountContent">
                 <div class="sidebar">
-                    <button class="side-btn active">Account</button>
-                    <button class="side-btn">Orders</button>
+                    <button class="button medBtn active">Account</button>
+                    <button class="button medBtn">Orders</button>
                 </div>
                 <div class="account-section">
                     <div class="section-box">
