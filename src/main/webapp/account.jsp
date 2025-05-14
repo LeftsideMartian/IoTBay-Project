@@ -183,7 +183,7 @@
                         <input type="text" name= "lastName" id="lastName" class = "inputField" requried><br><br>
                 		<label for = "email" class = "formHeading"><strong>Email </strong></label><br>
                 		<input type="email" name= "email" id="email" class = "inputField" requried><br><br>
-                        <a href="updateAccount.jsp" class="edit-btn">Update</a>
+                        <button type="submit" class="button med-btn button-blue">Update</a>
                     </div>
                     <hr>
                     <div class="section-box">
