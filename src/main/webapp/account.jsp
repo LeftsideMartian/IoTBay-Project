@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>Manage Your Account - IoBay</title>
+    <title>Manage Your Account - IoTBay</title>
     <link rel="stylesheet" href="css/index.css">
     <link rel="shortcut icon" href="css/iotbayIcon.ico">
     <style>
