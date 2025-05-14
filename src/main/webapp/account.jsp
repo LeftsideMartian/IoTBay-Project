@@ -186,7 +186,7 @@
                         <button type="submit" class="button med-btn button-blue">Update</a>
                     </div>
                     <hr>
-                    <div class="section-box">
+                    <form action="updateAccount.jsp" method="POST" class="section-box">
                         <h2>Change Password</h2>
                         <label for = "currentPassword" class = "formHeading"><strong>Current Password</strong></label><br>
                 <input type="password" name= "currentPassword" id="currentPassword" class = "inputField"><br><br>
