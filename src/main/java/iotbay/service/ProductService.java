@@ -60,7 +60,7 @@ public class ProductService extends DBService {
             preparedStatement.setString(1, product.getProductName());
             preparedStatement.setString(2, product.getDescription());
             preparedStatement.setDouble(3, product.getPrice());
-            preparedStatement.setInt(4, product.getStockQuantity());
+            preparedStatement.setInt(4, product.getQuantity());
             preparedStatement.setString(5, product.getCategory());
             preparedStatement.setInt(6, product.getProductId());
 

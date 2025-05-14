@@ -28,6 +28,17 @@ public class ProjectConstants {
     public static final String PRODUCT_QUERY_GET_ALL = "GetAllProducts.sql";
     public static final String PRODUCT_QUERY_UPDATE = "UpdateProduct.sql";
     public static final String PRODUCT_QUERY_DELETE = "DeleteProduct.sql";
+    // Orders table constants
+    public static final String ORDERS_COLUMN_ORDER_ID = "Order_Id";
+    public static final String ORDERS_COLUMN_ESTIMATED_DELIVERY_DATE = "Estimated_Delivery_Date";
+    public static final String ORDERS_COLUMN_DELIVERY_STATUS = "Delivery_Status";
+    public static final String ORDERS_COLUMN_LOG_DATA = "Log_Data";
+    public static final String ORDERS_QUERY_CREATE_ORDER = "CreateOrder.sql";
+    public static final String ORDERS_QUERY_GET_ALL_ORDERS = "GetAllOrders.sql";
+    // OrderProduct table constants
+    public static final String ORDERPRODUCT_COLUMN_QUANTITY = "Quantity";
+    public static final String ORDERPRODUCT_QUERY_CREATE_ORDER_PRODUCT = "CreateOrderProduct.sql";
+    public static final String ORDERPRODUCT_QUERY_GET_ALL_ORDER_PRODUCTS = "GetAllOrderProducts.sql";
 
 // Session attribute names
     public static final String SESSION_ATTRIBUTE_USER = "user";

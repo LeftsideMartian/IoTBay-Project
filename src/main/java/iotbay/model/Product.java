@@ -7,15 +7,15 @@ public class Product implements Serializable {
     private String productName;
     private String description;
     private double price;
-    private int stockQuantity;
+    private int quantity;
     private Category category;
 
-    public Product(int productId, String productName, String description, double price, int stockQuantity, Category category) {
+    public Product(int productId, String productName, String description, double price, int quantity, Category category) {
         this.productId = productId;
         this.productName = productName;
         this.description = description;
         this.price = price;
-        this.stockQuantity = stockQuantity;
+        this.quantity = quantity;
         this.category = category;
     }
 
@@ -26,8 +26,8 @@ public class Product implements Serializable {
     public void setDescription(String description) { this.description = description; }
     public double getPrice() { return price; }
     public void setPrice(double price) { this.price = price; }
-    public int getStockQuantity() { return stockQuantity; }
-    public void setStockQuantity(int stockQuantity) { this.stockQuantity = stockQuantity; }
+    public int getQuantity() { return quantity; }
+    public void setQuantity(int quantity) { this.quantity = quantity; }
     public String getCategory() { return category.toString(); }
     public void setCategory(Category category) { this.category = category; }
 
@@ -38,7 +38,7 @@ public class Product implements Serializable {
             "productName='" + productName + '\'' +
             ", description='" + description + '\'' +
             ", price=" + price +
-            ", stockQuantity=" + stockQuantity +
+            ", quantity=" + quantity +
             ", category=" + category +
             '}';
     }
