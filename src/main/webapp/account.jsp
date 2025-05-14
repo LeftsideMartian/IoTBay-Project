@@ -174,7 +174,7 @@
                     <button class="button medBtn">Orders</button>
                 </div>
                 <div class="account-section">
-                    <div class="section-box">
+                    <form action="updateAccount.jsp" method="POST" class="section-box">
                         <h2>Personal Information</h2>
 						<label for = "firstName" class = "formHeading"><strong> First Name </strong></label> <br>
                 		<input type="text" name= "firstName" id="firstName" class = "inputField"requried><br><br>
