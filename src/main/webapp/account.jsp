@@ -163,15 +163,7 @@
     </style>
 </head>
 <body>
-    <div class="gridContainer">
-        <div class="headerBar">
-            <img class="logo" src="css/iotbayIcon.ico" alt="IoTBay Logo">
-            <div class="topLinks">
-                <a href="index.jsp" class="browseBtn">Browse Products</a>
-                <img src="css/accountIcon.png" alt="Account" />
-                <img src="css/searchIcon.png" alt="Search" />
-            </div>
-        </div>
+    <jsp:include page="header.jsp"/>
 
         <div class="contentWrapper">
             <h1>Manage Your Account</h1>
