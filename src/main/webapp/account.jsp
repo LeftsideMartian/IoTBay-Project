@@ -194,8 +194,8 @@
                 <label for = "newPassword" class = "formHeading"><strong>New Password</strong></label><br>
                 <input type="password" name= "newPassword" id="newPassword" class = "inputField"><br><br>
 
-                        <a href="updateAccount.jsp" class="edit-btn">Update Password</a>
-                        <a href="account.jsp" class="edit-btn">Cancel</a>
+                        <button type="submit" class="button medBtn button-blue">Update Password</a>
+                        <a href="account.jsp" class="button medBtn">Cancel</a>
                     </div>
                 </div>
             </div>
