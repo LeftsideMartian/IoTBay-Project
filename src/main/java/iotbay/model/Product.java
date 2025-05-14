@@ -38,7 +38,7 @@ public class Product implements Serializable {
             "productName='" + productName + '\'' +
             ", description='" + description + '\'' +
             ", price=" + price +
-            ", stockQuantity=" + quantity +
+            ", quantity=" + quantity +
             ", category=" + category +
             '}';
     }

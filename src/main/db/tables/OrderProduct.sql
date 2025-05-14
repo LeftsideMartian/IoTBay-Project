@@ -1,7 +1,7 @@
 -- Delete table if it already exists
 DROP TABLE IF EXISTS OrderProduct;
 
--- Create User table
+-- Create OrderProduct table
 CREATE TABLE OrderProduct (
     Order_Id INTEGER NOT NULL,
     Product_Id INTEGER NOT NULL,

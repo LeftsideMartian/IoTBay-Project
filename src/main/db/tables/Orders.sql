@@ -1,7 +1,7 @@
 -- Delete table if it already exists
 DROP TABLE IF EXISTS Orders;
 
--- Create User table
+-- Create Orders table
 CREATE TABLE Orders (
     Order_Id INTEGER PRIMARY KEY AUTOINCREMENT,
     User_Id INTEGER NOT NULL,
