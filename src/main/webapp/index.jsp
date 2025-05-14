@@ -3,7 +3,7 @@
     <head>
         <link rel="stylesheet" href="css/index.css">
         <link rel="shortcut icon" href="css/iotbayIcon.ico">
-        <title>Home Page</title>
+        <title>Home - IoTBay</title>
     </head>
 
     <body>
