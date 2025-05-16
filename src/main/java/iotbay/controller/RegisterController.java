@@ -33,19 +33,19 @@ public class RegisterController extends HttpServlet {
         try {
             if (userService.isEmailRegistered(email)) {
                 // Send error message
-                session.setAttribute(ProjectConstants.SESSION_ATTRIBUTE_REGISTER_ERROR, "Email is already registered.");
+                session.setAttribute(ProjectConstants.SESSION_ATTRIBUTE_ERROR, "Email is already registered.");
                 response.sendRedirect(ProjectConstants.REGISTER_PAGE);
             } else if (Validator.isEmpty(firstName) || Validator.isEmpty(lastName)) {
                 // Send error message
-                session.setAttribute(ProjectConstants.SESSION_ATTRIBUTE_REGISTER_ERROR, "First or last name is missing.");
+                session.setAttribute(ProjectConstants.SESSION_ATTRIBUTE_ERROR, "First or last name is missing.");
                 response.sendRedirect(ProjectConstants.REGISTER_PAGE);
             } else if (!Validator.validateEmail(email)) {
                 // Send error message
-                session.setAttribute(ProjectConstants.SESSION_ATTRIBUTE_REGISTER_ERROR, "Invalid email.");
+                session.setAttribute(ProjectConstants.SESSION_ATTRIBUTE_ERROR, "Invalid email.");
                 response.sendRedirect(ProjectConstants.REGISTER_PAGE);
             } else if (!Validator.validatePassword(password)) {
                 // Send error message
-                session.setAttribute(ProjectConstants.SESSION_ATTRIBUTE_REGISTER_ERROR, "Invalid password.");
+                session.setAttribute(ProjectConstants.SESSION_ATTRIBUTE_ERROR, "Invalid password.");
                 response.sendRedirect(ProjectConstants.REGISTER_PAGE);
             } else {
                 handleRegistration(newUser, userService, session, response);

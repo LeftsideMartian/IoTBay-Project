@@ -44,7 +44,7 @@ public class ProjectConstants {
     public static final String SESSION_ATTRIBUTE_USER = "user";
     public static final String SESSION_ATTRIBUTE_DBCONNECTION = "dbConnection";
     public static final String SESSION_ATTRIBUTE_LOGIN_ERROR = "loginError";
-    public static final String SESSION_ATTRIBUTE_REGISTER_ERROR = "registerError";
+    public static final String SESSION_ATTRIBUTE_SUCCESS_MESSAGE = "registerError";
 
 // Pages
     public static final String HOME_PAGE = "/";

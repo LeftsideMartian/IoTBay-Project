@@ -12,11 +12,11 @@
             <div class="contentWrapper">
                 <div class="centerContent">
                     <%
-                        String errorMessage = (String) session.getAttribute("registerError");
+                        String errorMessage = (String) session.getAttribute(ProjectConstants.SESSION_ATTRIBUTE_ERROR);
                         if (errorMessage != null) {
-                            session.removeAttribute("registerError"); 
+                            session.removeAttribute(ProjectConstants.SESSION_ATTRIBUTE_ERROR); 
                     %>
-                        <div class="errorMessage"><%= errorMessage %></div>
+                        <div class="popup errorMessage"><%= errorMessage %></div>
                     <% } %>
 
                     <form action="/servlet/register" method="POST">
