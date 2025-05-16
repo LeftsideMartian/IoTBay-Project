@@ -1,0 +1,362 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    border: none;
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+}
+
+html {
+    background-color: #f2f8fc;
+}
+
+.gridContainer {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 12vh minmax(12vh, 100%);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    grid-template-areas:
+    "header"
+    "body";
+}
+
+header {
+    background-color: white;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    filter: drop-shadow(
+      1px 2px 2px rgb(197, 197, 197)
+    );
+    grid-area: "header";
+}
+
+.innerHeader {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logoContainer {
+    height: 100%;
+    width: auto;
+}
+
+.logoContainer > a > img {
+    height: 10vh;
+}
+
+.menuItems {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 0.7rem;
+}
+
+.button {
+    background-color: white;
+    filter: drop-shadow(
+      1px 2px 2px rgb(197, 197, 197)
+    );
+    position: relative;
+    top: 0;
+    transition: top ease 0.3s;
+    width: fit-content;
+    height: fit-content;
+
+    border-radius: 36px;
+    font-weight: 400;
+    padding: 1em 1.3em;
+
+    text-align: center;
+    align-content: center;
+    text-decoration: none;
+    color: #040f11;
+    cursor: pointer;
+}
+
+.button:hover {
+    top: -2px;
+}
+
+.lrgBtn {
+    font-size: 0.9rem;
+}
+
+.medBtn {
+    font-size: 0.8rem;
+}
+
+.smlBtn {
+    padding: 0.8em 1em;
+    font-size: 0.8rem;
+}
+
+.menuItems > .button {
+    margin-left: 1.2rem;
+}
+
+.button-blue {
+    background-color: #70cbff;
+}
+
+.profileIcon {
+    width: 2.5rem;
+    cursor: pointer;
+}
+
+.profileMenuWrapper {
+    position: absolute;
+    top: 100%;
+    right: 10%;
+    width: 13rem;
+    overflow: hidden;
+    max-height: 0rem;
+    transition: all 0.5s ease;
+}
+
+.profileMenuWrapperOpen {
+    max-height: 400rem;
+}
+
+.profileMenu {
+    background-color: #fff;
+    margin-top: 0.5rem;
+    padding: 1.2em 1.5em;
+    border-radius: 10px;
+}
+
+.profileMenuUserName {
+    font-size: 0.9rem;
+}
+
+.profileMenu :is(a, button) {
+    text-decoration: none;
+    color: #040f11;
+    font-size: 0.85rem;
+    cursor: pointer;
+    background-color: #fff;
+}
+
+.contentWrapper {
+    grid-area: "body";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.centerContent {
+    max-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.indexContentWrapper {
+    display: flex;
+    max-height: clamp(50%, 60%, 70%);
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.indexContentWrapper > .mainHeading {
+    font-size: clamp(1rem, 2.5vw, 3rem);
+    font-weight: 700;
+}
+
+.indexContentWrapper > .button {
+    font-size: 1rem;
+    background-color: #70cbff;
+}
+
+.indexContentWrapper > .mainImage {
+    width: clamp(10rem, 20rem, 30rem);
+    max-height: 20%;
+}
+
+.errorMessage {
+    position: absolute;
+    bottom: 0.6rem;
+    right: 1rem;
+    background-color: rgb(241, 69, 69);
+    filter: drop-shadow(
+      1px 2px 2px rgb(197, 197, 197)
+    );
+    width: fit-content;
+    height: fit-content;
+
+    border-radius: 36px;
+    font-weight: 400;
+    padding: 1em 1.3em;
+
+    text-align: center;
+    align-content: center;
+    text-decoration: none;
+    color: #fff;
+
+    -webkit-animation: cssAnimation 6s forwards; 
+    animation: cssAnimation 6s forwards;
+}
+
+@keyframes cssAnimation {
+    0%   {opacity: 1;}
+    90%  {opacity: 1; right: 1rem;}
+    100% {opacity: 0; right: 0;}
+}
+@-webkit-keyframes cssAnimation {
+    0%   {opacity: 1;}
+    90%  {opacity: 1; right: 1rem;}
+    100% {opacity: 0; right: 0;}
+}
+
+.formWrapper {
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    padding: 1em 1.5em;
+    border-radius: 25px;
+    filter: drop-shadow(
+      1px 2px 2px rgb(197, 197, 197)
+    );
+}
+
+h1 {
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    font-weight: 700;
+}
+
+hr {
+    border: none;
+    height: 1px;
+    background: #ddd;
+    margin: 0.7rem 0px;
+}
+
+.formHeading {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+}
+
+.formSection {
+    display: flex;
+    flex-direction: row;
+    gap: 0.6rem;
+}
+
+.buttonSection {
+    justify-content: space-evenly;
+}
+
+.inputHeading {
+    font-size: 0.8em;
+}
+
+.inputSection {
+    display: flex;
+    flex-direction: column;
+}
+
+.inputField {
+    border: 1px solid #040f11;
+    padding: 0.3rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.7rem;
+}
+
+.signInFooter {
+    margin-top: 0.7rem;
+    display: flex;
+    justify-content: center;
+}
+
+.passwordRequirement {
+    font-size: 0.65rem;
+    list-style: none;
+    vertical-align: middle;
+}
+
+.validRequirement::before {
+    color: #70cbff;
+    content: "✔";
+    margin-right: 0.2rem;
+}
+
+.invalidRequirement {
+    color: #bfbfbf;
+}
+
+.invalidRequirement::before {
+    content: "✖";
+    margin-right: 0.2rem;
+}
+
+.manageStockTableWrapper {
+    padding: 1em 2em;
+    border-radius: 25px;
+    background-color: #fff;
+    width: 63rem;
+}
+
+.scrollableTable {
+    max-height: 25rem;
+    overflow-y: auto;
+}
+
+.manageStockTable {
+    border-spacing: 0rem 0rem;
+    text-align: left;
+    overflow-y: auto;
+}
+
+.manageStockTable th,
+.manageStockTable td {
+    padding: 1rem 1rem;
+}
+
+.manageStockTable thead tr th {
+    background-color: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.manageStockTable thead th:nth-child(1) {
+    width: 30%;
+}
+
+.manageStockTable thead th:nth-child(2) {
+    width: 20%;
+}
+
+.manageStockTable thead th:nth-child(3) {
+    width: 15%;
+}
+
+.manageStockTable thead th:nth-child(4) {
+    width: 35%;
+}
+
+.manageStockTable tbody tr:nth-child(even) {
+    background-color: #f2f8fc;
+}
+
+.manageProductForm {
+    width: 17rem;
+}
+
+textarea {
+    resize: none;
+}
+
+.priceInput {
+    text-align: right;
+    width: 30%;
+}

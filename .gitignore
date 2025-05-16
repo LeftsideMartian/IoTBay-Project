@@ -4,3 +4,5 @@ build/*
 target/*
 lib/*
 .vscode/
+.idea/*
+**/*.db
