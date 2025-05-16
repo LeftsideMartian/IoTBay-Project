@@ -6,6 +6,7 @@
         <title>Create new account</title>
     </head>
     <body>
+        <jsp:include page="/servlet/dbConnection" flush="true" />
         <div class="gridContainer">
             <jsp:include page="header.jsp"/>
 
@@ -72,14 +73,6 @@
                 </div>
             </div>
         </div>
-
-        <%
-            Connection connection = (Connection) session.getAttribute("dbConnection");
-            if (connection == null) { 
-        %>
-            <jsp:include page="/servlet/dbConnection" flush="true" />
-        <% } %>
-
         <script src="./js/validatePassword.js"></script>
     </body>
 </html>

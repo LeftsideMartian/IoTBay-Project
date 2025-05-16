@@ -6,6 +6,7 @@
         <title>Log in</title>
     </head>
     <body>
+        <jsp:include page="/servlet/dbConnection" flush="true" />
         <div class="gridContainer">
             <jsp:include page="header.jsp"/>
 

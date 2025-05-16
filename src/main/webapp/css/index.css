@@ -252,6 +252,7 @@ hr {
 .formSection {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     gap: 0.6rem;
 }
 
@@ -266,6 +267,7 @@ hr {
 .inputSection {
     display: flex;
     flex-direction: column;
+    max-width: 45%;
 }
 
 .inputField {
@@ -358,9 +360,4 @@ hr {
 
 textarea {
     resize: none;
-}
-
-.priceInput {
-    text-align: right;
-    width: 30%;
 }

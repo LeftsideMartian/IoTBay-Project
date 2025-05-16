@@ -1,37 +1,42 @@
-package iotbay.test;
+ package iotbay.test;
 
-import iotbay.dao.DBConnector;
-import iotbay.model.User;
-import iotbay.service.UserService;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+ import iotbay.dao.DBConnector;
+ import iotbay.model.User;
+ import iotbay.service.UserService;
+ import org.junit.jupiter.api.DisplayName;
+ import org.junit.jupiter.api.Test;
+ import static org.junit.jupiter.api.Assertions.*;
 
-public class UserServiceTest {
-    User testUser = new User(-1, "Test", "User", "testuser@test.com", "543210", false);
+ import java.sql.Connection;
 
-    @Test
-    @DisplayName("User Service - Find existing user")
-    public void testExistingUser() {
-        DBConnector dbConnector = new DBConnector();
-        UserService userService = new UserService(dbConnector.connect());
+ public class UserServiceTest {
+     User testUser = new User(-1, "Test", "User", "testuser@test.com", "543210", false);
+     DBConnector dbConnector = new DBConnector();
+     Connection connection = dbConnector.connect();
 
-        userService.createUser(testUser);
+     @Test
+     @DisplayName("User Service - Get existing user")
+     public void testExistingUser() {
+         UserService userService = new UserService(connection);
 
-        User user = userService.getUser(testUser.getEmail(), testUser.getPassword());
-        assertEquals(user.toString(), testUser.toString());
-        userService.closeConnection();
-    }
+         userService.createUser(testUser);
 
-    @Test
-    @DisplayName("User Service - Find non existent user")
-    public void testNonExistentUser() {
-        DBConnector dbConnector = new DBConnector();
-        UserService userService = new UserService(dbConnector.connect());
+         User user = userService.getUser(testUser.getEmail(), testUser.getPassword());
+         assertEquals(user.toString(), testUser.toString());
+         userService.deleteUser(userService.getUser(testUser.getEmail(), testUser.getPassword()));
+         userService.closeConnection();
+     }
 
-        userService.deleteUser(userService.getUser(testUser.getEmail(), testUser.getPassword()));
+     @Test
+     @DisplayName("User Service - Get non existent user")
+     public void testNonExistentUser() {
+         UserService userService = new UserService(connection);
 
-        User user = userService.getUser(testUser.getEmail(), testUser.getPassword());
-        assertNull(user);
-    }
-}
+         userService.deleteUser(userService.getUser(testUser.getEmail(), testUser.getPassword()));
+
+         User user = userService.getUser(testUser.getEmail(), testUser.getPassword());
+         assertNull(user);
+         userService.deleteUser(userService.getUser(testUser.getEmail(), testUser.getPassword()));
+         userService.closeConnection();
+     }
+ }
