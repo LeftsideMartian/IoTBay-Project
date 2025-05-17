@@ -28,7 +28,7 @@ public class Product implements Serializable {
     public void setPrice(double price) { this.price = price; }
     public int getQuantity() { return quantity; }
     public void setQuantity(int quantity) { this.quantity = quantity; }
-    public String getCategory() { return category.toString(); }
+    public Category getCategory() { return category; }
     public void setCategory(Category category) { this.category = category; }
 
     @Override

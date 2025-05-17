@@ -181,11 +181,11 @@ header {
     max-height: 20%;
 }
 
-.errorMessage {
+.popup {
     position: absolute;
     bottom: 0.6rem;
     right: 1rem;
-    background-color: rgb(241, 69, 69);
+    background-color: #70cbff;
     filter: drop-shadow(
       1px 2px 2px rgb(197, 197, 197)
     );
@@ -206,14 +206,20 @@ header {
 }
 
 @keyframes cssAnimation {
-    0%   {opacity: 1;}
+    0%   {opacity: 0; right: 0;}
+    10%  {opacity: 1; right: 1rem;}
     90%  {opacity: 1; right: 1rem;}
     100% {opacity: 0; right: 0;}
 }
 @-webkit-keyframes cssAnimation {
-    0%   {opacity: 1;}
+    0%   {opacity: 0; right: 0;}
+    10%  {opacity: 1; right: 1rem;}
     90%  {opacity: 1; right: 1rem;}
     100% {opacity: 0; right: 0;}
+}
+
+.errorMessage {
+    background-color: rgb(241, 69, 69);
 }
 
 .formWrapper {
@@ -248,6 +254,7 @@ hr {
 .formSection {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     gap: 0.6rem;
 }
 
@@ -262,6 +269,7 @@ hr {
 .inputSection {
     display: flex;
     flex-direction: column;
+    max-width: 45%;
 }
 
 .inputField {
@@ -354,9 +362,4 @@ hr {
 
 textarea {
     resize: none;
-}
-
-.priceInput {
-    text-align: right;
-    width: 30%;
 }

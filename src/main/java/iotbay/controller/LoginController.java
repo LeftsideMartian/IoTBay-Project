@@ -29,7 +29,7 @@ public class LoginController extends HttpServlet {
                 handleLogin(session, email, password, response);
             } else if (!Validator.validateEmail(email)) {
                 // Send error message
-                session.setAttribute(ProjectConstants.SESSION_ATTRIBUTE_LOGIN_ERROR, "Invalid email.");
+                session.setAttribute(ProjectConstants.SESSION_ATTRIBUTE_ERROR, "Invalid email.");
                 response.sendRedirect(ProjectConstants.LOGIN_PAGE);
             } else {
                 handleLogin(session, email, password, response);
@@ -55,7 +55,7 @@ public class LoginController extends HttpServlet {
             response.sendRedirect(ProjectConstants.HOME_PAGE);
         } else {
             // Send error message
-            session.setAttribute(ProjectConstants.SESSION_ATTRIBUTE_LOGIN_ERROR, "User does not exist in the database.");
+            session.setAttribute(ProjectConstants.SESSION_ATTRIBUTE_ERROR, "User does not exist in the database.");
             response.sendRedirect(ProjectConstants.LOGIN_PAGE);
         }
     }

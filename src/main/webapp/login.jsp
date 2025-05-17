@@ -1,4 +1,5 @@
 <%@page import="java.sql.Connection"%>
+<%@page import="iotbay.helper.ProjectConstants"%>
 <html>
     <head>
         <link rel="stylesheet" href="css/index.css">
@@ -6,17 +7,18 @@
         <title>Log in</title>
     </head>
     <body>
+        <jsp:include page="/servlet/dbConnection" flush="true" />
         <div class="gridContainer">
             <jsp:include page="header.jsp"/>
 
             <div class="contentWrapper">
                 <div class="centerContent">
                     <%
-                        String errorMessage = (String) session.getAttribute("loginError");
+                        String errorMessage = (String) session.getAttribute(ProjectConstants.SESSION_ATTRIBUTE_ERROR);
                         if (errorMessage != null) {
-                            session.removeAttribute("loginError");
+                            session.removeAttribute(ProjectConstants.SESSION_ATTRIBUTE_ERROR);
                     %>
-                        <div class="errorMessage"><%= errorMessage %></div>
+                        <div class="popup errorMessage"><%= errorMessage %></div>
                     <% } %>
 
                     <form action="/servlet/login" method="GET">

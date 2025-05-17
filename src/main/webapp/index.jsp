@@ -7,6 +7,8 @@
     </head>
 
     <body>
+        <jsp:include page="/servlet/dbConnection" flush="true" />
+        <jsp:include page="/servlet/productsListInitialiser" flush="true" />
         <% User user = (User) session.getAttribute("user"); %>
 
         <div class="gridContainer">
@@ -29,6 +31,5 @@
                 </div>
             </div>
         </div>
-        <jsp:include page="/servlet/dbConnection" flush="true" />
     </body>
 </html>

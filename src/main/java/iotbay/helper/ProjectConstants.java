@@ -24,6 +24,7 @@ public class ProjectConstants {
     public static final String PRODUCT_COLUMN_PRICE = "Price";
     public static final String PRODUCT_COLUMN_STOCK_QUANTITY = "Stock_Quantity";
     public static final String PRODUCT_COLUMN_CATEGORY = "Category";
+    public static final String PRODUCT_QUERY_CREATE = "CreateProduct.sql";
     public static final String PRODUCT_QUERY_GET = "GetProduct.sql";
     public static final String PRODUCT_QUERY_GET_ALL = "GetAllProducts.sql";
     public static final String PRODUCT_QUERY_UPDATE = "UpdateProduct.sql";
@@ -43,13 +44,17 @@ public class ProjectConstants {
 // Session attribute names
     public static final String SESSION_ATTRIBUTE_USER = "user";
     public static final String SESSION_ATTRIBUTE_DBCONNECTION = "dbConnection";
-    public static final String SESSION_ATTRIBUTE_LOGIN_ERROR = "loginError";
-    public static final String SESSION_ATTRIBUTE_REGISTER_ERROR = "registerError";
+    public static final String SESSION_ATTRIBUTE_ERROR = "error";
+    public static final String SESSION_ATTRIBUTE_SUCCESS_MESSAGE = "successMessage";
+    public static final String SESSION_ATTRIBUTE_CURRENTLY_SELECTED_PRODUCT = "currentlySelectedProduct";
+    public static final String SESSION_ATTRIBUTE_PRODUCT_LIST = "productList";
 
 // Pages
     public static final String HOME_PAGE = "/";
     public static final String LOGIN_PAGE = "/login.jsp";
     public static final String REGISTER_PAGE = "/register.jsp";
+    public static final String MANAGE_PRODUCTS_PAGE = "/manageProducts.jsp";
+    public static final String PRODUCT_DETAILS_PAGE = "/productDetails.jsp";
 
 // Request attribute names
     public static final String REQUEST_ATTRIBUTE_USER_FIRST_NAME = "firstName";
@@ -57,6 +62,11 @@ public class ProjectConstants {
     public static final String REQUEST_ATTRIBUTE_USER_EMAIL = "email";
     public static final String REQUEST_ATTRIBUTE_USER_PASSWORD = "password";
     public static final String REQUEST_ATTRIBUTE_USER_HAS_ADMIN_PERMISSIONS = "hasAdminPermissions";
+    public static final String REQUEST_ATTRIBUTE_DESCRIPTION = "description";
+    public static final String REQUEST_ATTRIBUTE_PRICE = "price";
+    public static final String REQUEST_ATTRIBUTE_STOCK = "stock";
+    public static final String REQUEST_ATTRIBUTE_CATEGORY = "category";
+    public static final String REQUEST_ATTRIBUTE_PRODUCT_ID = "productId";
 
 // Validator regex patterns
     public static final String VALIDATOR_EMAIL_PATTERN = ".*@.*";
