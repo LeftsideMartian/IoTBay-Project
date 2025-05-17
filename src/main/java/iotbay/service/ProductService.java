@@ -16,6 +16,23 @@ public class ProductService extends DBService {
         super(connection);
     }
 
+    public void createProduct(Product product) {
+        String query = getQueryFromFile(ProjectConstants.PRODUCT_QUERY_CREATE);
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, product.getProductName());
+            preparedStatement.setString(2, product.getDescription());
+            preparedStatement.setDouble(3, product.getPrice());
+            preparedStatement.setInt(4, product.getQuantity());
+            preparedStatement.setString(5, product.getCategory().toString());
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public Product getProduct(int productId) {
         String query = getQueryFromFile(ProjectConstants.PRODUCT_QUERY_GET);
 
@@ -61,7 +78,7 @@ public class ProductService extends DBService {
             preparedStatement.setString(2, product.getDescription());
             preparedStatement.setDouble(3, product.getPrice());
             preparedStatement.setInt(4, product.getQuantity());
-            preparedStatement.setString(5, product.getCategory());
+            preparedStatement.setString(5, product.getCategory().toString());
             preparedStatement.setInt(6, product.getProductId());
 
             preparedStatement.executeUpdate();

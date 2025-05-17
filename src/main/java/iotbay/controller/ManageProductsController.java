@@ -18,7 +18,7 @@ public class ManageProductsController extends HttpServlet {
         Connection connection = (Connection) session.getAttribute(ProjectConstants.SESSION_ATTRIBUTE_DBCONNECTION);
         ProductService productService = new ProductService(connection);
 
-        int productId = Integer.parseInt(request.getParameterNames().nextElement());
+        int productId = Integer.parseInt(request.getParameter(ProjectConstants.REQUEST_ATTRIBUTE_PRODUCT_ID));
         Product product = productService.getProduct(productId);
 
         session.setAttribute(ProjectConstants.SESSION_ATTRIBUTE_CURRENTLY_SELECTED_PRODUCT, product);

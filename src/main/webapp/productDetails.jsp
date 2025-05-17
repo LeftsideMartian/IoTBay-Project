@@ -27,7 +27,7 @@
                             <div class="formSection">
                                 <div class="inputSection">
                                     <label class="inputHeading" for="price">Price ($)</label>
-                                    <input class="inputField" value="<%=String.format(Double.toString(product.getPrice()), "%.2f")%>" type="number" name="price" id="price" required>
+                                    <input class="inputField" value="<%=String.format("%.2f", product.getPrice())%>" type="number" name="price" id="price" required>
                                 </div>
                                 <div class="inputSection">
                                     <label class="inputHeading" for="stock">Stock</label>
@@ -38,7 +38,7 @@
                             <label class="inputHeading">Category</label>
                             <select class="inputField" name="category">
                                 <% for (Category cat: Category.values()) { %>
-                                    <% if (product.getCategory().equals(cat.toString())) { %>
+                                    <% if (product.getCategory() == cat) { %>
                                         <option selected><%=cat.toString()%></option>
                                     <% } else { %>
                                         <option><%=cat.toString()%></option>

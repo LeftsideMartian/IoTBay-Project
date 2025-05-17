@@ -42,9 +42,9 @@
                                             <tr>
                                                 <td><%=product.getProductName()%></td>
                                                 <td><%=product.getCategory()%></td>
-                                                <td>$<%=String.format(Double.toString(product.getPrice()), "%.2f")%></td>
+                                                <td>$<%=String.format("%.2f", product.getPrice())%></td>
                                                 <td><%=product.getQuantity()%></td>
-                                                <td><button class="button smlBtn" name="<%=product.getProductId()%>">View</button></td>
+                                                <td><button class="button smlBtn" name="productId" value="<%=product.getProductId()%>">View</button></td>
                                             </tr>
                                         <% } %>
                                     </tbody>

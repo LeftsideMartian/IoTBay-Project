@@ -24,6 +24,7 @@ public class ProjectConstants {
     public static final String PRODUCT_COLUMN_PRICE = "Price";
     public static final String PRODUCT_COLUMN_STOCK_QUANTITY = "Stock_Quantity";
     public static final String PRODUCT_COLUMN_CATEGORY = "Category";
+    public static final String PRODUCT_QUERY_CREATE = "CreateProduct.sql";
     public static final String PRODUCT_QUERY_GET = "GetProduct.sql";
     public static final String PRODUCT_QUERY_GET_ALL = "GetAllProducts.sql";
     public static final String PRODUCT_QUERY_UPDATE = "UpdateProduct.sql";
@@ -44,7 +45,7 @@ public class ProjectConstants {
     public static final String SESSION_ATTRIBUTE_USER = "user";
     public static final String SESSION_ATTRIBUTE_DBCONNECTION = "dbConnection";
     public static final String SESSION_ATTRIBUTE_ERROR = "error";
-    public static final String SESSION_ATTRIBUTE_SUCCESS_MESSAGE = "registerError";
+    public static final String SESSION_ATTRIBUTE_SUCCESS_MESSAGE = "successMessage";
     public static final String SESSION_ATTRIBUTE_CURRENTLY_SELECTED_PRODUCT = "currentlySelectedProduct";
     public static final String SESSION_ATTRIBUTE_PRODUCT_LIST = "productList";
 
@@ -65,6 +66,7 @@ public class ProjectConstants {
     public static final String REQUEST_ATTRIBUTE_PRICE = "price";
     public static final String REQUEST_ATTRIBUTE_STOCK = "stock";
     public static final String REQUEST_ATTRIBUTE_CATEGORY = "category";
+    public static final String REQUEST_ATTRIBUTE_PRODUCT_ID = "productId";
 
 // Validator regex patterns
     public static final String VALIDATOR_EMAIL_PATTERN = ".*@.*";
