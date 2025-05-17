@@ -3,7 +3,6 @@ package iotbay.service;
 import iotbay.helper.ProjectConstants;
 import iotbay.model.Category;
 import iotbay.model.Product;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,11 +10,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+// Service class for performing CRUD operations on the Product table
 public class ProductService extends DBService {
+    // Constructor simply calls super()
     public ProductService (Connection connection) {
         super(connection);
     }
 
+    // CRUD - Create
     public void createProduct(Product product) {
         String query = getQueryFromFile(ProjectConstants.PRODUCT_QUERY_CREATE);
 
@@ -33,6 +35,7 @@ public class ProductService extends DBService {
         }
     }
 
+    // CRUD - Read (Single product)
     public Product getProduct(int productId) {
         String query = getQueryFromFile(ProjectConstants.PRODUCT_QUERY_GET);
 
@@ -52,6 +55,7 @@ public class ProductService extends DBService {
         }
     }
 
+    // CRUD - Read (All products)
     public List<Product> getAllProducts() {
         try {
             ResultSet results = connection.prepareStatement(getQueryFromFile(ProjectConstants.PRODUCT_QUERY_GET_ALL)).executeQuery();
@@ -68,6 +72,7 @@ public class ProductService extends DBService {
         }
     }
 
+    // CRUD - Update
     public void updateProduct(Product product) {
         String query = getQueryFromFile(ProjectConstants.PRODUCT_QUERY_UPDATE);
 
@@ -87,6 +92,7 @@ public class ProductService extends DBService {
         }
     }
 
+    // CRUD - Delete Service class for performing CRUD operations on the User table
     public void deleteProduct(Product product) {
         if (product != null) {
             String query = getQueryFromFile(ProjectConstants.PRODUCT_QUERY_DELETE);
@@ -102,6 +108,7 @@ public class ProductService extends DBService {
         }
     }
 
+    // Helper function to convert a ResultSet row into a Product object
     private Product getProductFromResultSet(ResultSet resultSet) throws SQLException {
         return new Product(
             resultSet.getInt(ProjectConstants.PRODUCT_COLUMN_PRODUCT_ID),

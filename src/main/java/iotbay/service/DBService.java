@@ -1,7 +1,6 @@
 package iotbay.service;
 
 import iotbay.helper.ProjectConstants;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.nio.file.Paths;
@@ -9,31 +8,35 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-/**
-* An abstract class for services to extend from
-* */
+/* 
+DBService is an abstract class for service classes to extend from.
+The service classes house the business logic for CRUD operations with a given table,
+e.g. UserService, ProductService, OrderService perform CRUD operations on the User, Product and Order tables respectively
+
+All of the CRUD operations follow the same pattern:
+1. Fetch the SQL query from a .sql file using the getQueryFromFile() method
+2. Create a PreparedStatement object
+3. Set the parameters of the PreparedStatement
+4. Execute the query
+*/
 abstract class DBService {
     protected Connection connection;
 
-    /**
-    * Constructor to establish a database connection using the DBConnector class
-    * */
+    // Constructor to store a connection object used for CRUD operations
     protected DBService(Connection connection) {
         this.connection = connection;
     }
 
-    /**
-     * Retrieve an SQL query from a .sql file and store it
-     * @param filename The filename of the .sql file to retrieve
-     * @return The query from the .sql file as a <i>newline</i> separated string
-     * */
+    // Helper function to retrieve an SQL query from a .sql file, and return it as a string
     public String getQueryFromFile(String filename) {
         String query = "";
 
+        // Construct the file path for the SQL query in queryFileLocation
         String projectFolder = Paths.get("").toAbsolutePath() + "\\";
         String queriesFolder = ProjectConstants.DB_QUERIES_FOLDER;
         String queryFileLocation = projectFolder + queriesFolder + filename;
 
+        // Read the SQL query from the file
         try {
             Scanner queryScanner = new Scanner(new File(queryFileLocation));
 
@@ -49,6 +52,7 @@ abstract class DBService {
         return query.trim();
     }
 
+    // Method to close the connection to the database
     public void closeConnection() {
         try {
             this.connection.close();

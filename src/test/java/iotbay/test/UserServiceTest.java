@@ -1,18 +1,17 @@
- package iotbay.test;
+package iotbay.test;
 
- import iotbay.dao.DBConnector;
- import iotbay.model.User;
- import iotbay.service.UserService;
-
+import iotbay.dao.DBConnector;
+import iotbay.model.User;
+import iotbay.service.UserService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
- import org.junit.jupiter.api.Test;
- import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+import java.sql.Connection;
 
- import java.sql.Connection;
-
- public class UserServiceTest {
+// Test class for UserService
+public class UserServiceTest {
     DBConnector dbConnector;
     Connection connection;
     UserService userService;
@@ -54,4 +53,4 @@ import org.junit.jupiter.api.DisplayName;
         User user = userService.getUser(testUser.getEmail(), testUser.getPassword());
         assertNull(user);
     }
- }
+}

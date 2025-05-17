@@ -1,5 +1,6 @@
 package iotbay.helper;
 
+// This class contains all the constants used in the project, in order to avoid hardcoding and typos
 public class ProjectConstants {
 // Database constants
     public static final String JDBC_SQLITE_PREFIX = "jdbc:sqlite:";

@@ -4,7 +4,6 @@ import iotbay.helper.ProjectConstants;
 import iotbay.model.DeliveryStatus;
 import iotbay.model.Order;
 import iotbay.model.Product;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,12 +11,20 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/* 
+Service class for performing CRUD operations on the Orders
+(Note this table is not called Order, as it conflicts with an SQL keyword)
+and OrderProduct tables
+*/
 public class OrderService extends DBService {
+    // Constructor simply calls super()
     public OrderService(Connection connection) {
         super(connection);
     }
 
+    // CRUD - Create method
     public void createOrder(Order order) {
+        // Fetch query from SQL file
         String query = getQueryFromFile(ProjectConstants.ORDERS_QUERY_CREATE_ORDER);
 
         try {
@@ -34,7 +41,7 @@ public class OrderService extends DBService {
 
             query = getQueryFromFile(ProjectConstants.ORDERPRODUCT_QUERY_CREATE_ORDER_PRODUCT);
 
-            // For each product, create row in orderProduct
+            // For each product, create row in the OrderProduct table
             for (Product product : order.getProducts()) {
                 preparedStatement = connection.prepareStatement(query);
 

@@ -2,7 +2,6 @@ package iotbay.service;
 
 import iotbay.helper.ProjectConstants;
 import iotbay.model.User;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,21 +9,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
-* A service for dealing with the User table
-* */
+// Service class for performing CRUD operations on the User table
 public class UserService extends DBService {
-    /**
-    * Public constructor calls super() to create a DB connection and get the Statement object used for executing queries
-    * */
+    // Constructor simply calls super()
     public UserService(Connection connection) {
         super(connection);
     }
 
-    /**
-    * Create a new user in the database
-     * @param user The user object to create in the database
-    * */
+    // CRUD - Create
     public void createUser(User user) {
         String query = getQueryFromFile(ProjectConstants.USER_QUERY_CREATE);
 
@@ -42,12 +34,7 @@ public class UserService extends DBService {
         }
     }
 
-    /**
-     * Find a user based on an email and password
-     * @param email An email to search for
-     * @param password A password to search for
-     * @return A user object from the database, or null if no data was found
-     * */
+    // CRUD - Read (Single user)
     public User getUser(String email, String password) {
         String query = getQueryFromFile(ProjectConstants.USER_QUERY_GET);
 
@@ -68,16 +55,14 @@ public class UserService extends DBService {
         }
     }
 
-    /**
-    * Retrieve a list of all users in the database
-    * @return A list of all users
-    * */
+    // CRUD - Read (All users)
     public List<User> getAllUsers() {
         try {
             ResultSet results = connection.prepareStatement(getQueryFromFile(ProjectConstants.USER_QUERY_GET_ALL)).executeQuery();
 
             List<User> allUsers = new ArrayList<>();
 
+            // Loop through the result set and add each user to the list
             while (results.next()) {
                 allUsers.add(getUserFromResultSet(results));
             }
@@ -88,10 +73,7 @@ public class UserService extends DBService {
         }
     }
 
-    /**
-    * Updates user at 'userId'
-    * @param newUser A user object containing the new data
-    * */
+    // CRUD - Update
     public void updateUser(User newUser) {
         String query = getQueryFromFile(ProjectConstants.USER_QUERY_UPDATE);
 
@@ -101,8 +83,8 @@ public class UserService extends DBService {
             preparedStatement.setString(2, newUser.getLastName());
             preparedStatement.setString(3, newUser.getEmail());
             preparedStatement.setString(4, newUser.getPassword());
-            preparedStatement.setBoolean(5, newUser.doesHaveAdminPermissions());
-            preparedStatement.setString(6, String.valueOf(newUser.getUserId()));
+            // Note: User ID is an integer, no need to convert to String
+            preparedStatement.setInt(5, newUser.getUserId());
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -110,9 +92,7 @@ public class UserService extends DBService {
         }
     }
 
-    /**
-    * Delete the user at 'userid'
-    * */
+    // CRUD - Delete
     public void deleteUser(User user) {
         if (user != null) {
             try {
@@ -127,6 +107,7 @@ public class UserService extends DBService {
         }
     }
 
+    // Helper function to convert a ResultSet row into a User object
     private User getUserFromResultSet(ResultSet resultSet) throws SQLException {
         return new User(
             resultSet.getInt(ProjectConstants.USER_COLUMN_USER_ID),
@@ -138,6 +119,7 @@ public class UserService extends DBService {
         );
     }
 
+    // Helper function to check if an email already exists in the database
     public boolean isEmailRegistered(String email) {
         List<User> userList = getAllUsers();
 

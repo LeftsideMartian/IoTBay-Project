@@ -32,4 +32,18 @@ public class Order {
     public void setLogData(String logData) { this.logData = logData; }
     public List<Product> getProducts() { return products; }
     public void setProducts(List<Product> products) { this.products = products; }
+
+    // toString method for debugging
+    @Override
+    public String toString() {
+        return
+            "Order{" +
+            "orderId=" + orderId +
+            ", userId=" + userId +
+            ", estimatedDeliveryDate=" + estimatedDeliveryDate +
+            ", deliveryStatus=" + deliveryStatus +
+            ", logData='" + logData + '\'' +
+            ", products=" + products +
+            '}';
+    }
 }
