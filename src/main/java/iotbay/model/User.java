@@ -2,9 +2,7 @@ package iotbay.model;
 
 import java.io.Serializable;
 
-/**
-* Model class for users
-* */
+// Model class for users
 public class User implements Serializable {
     private int userId;
     private String firstName;
@@ -13,8 +11,7 @@ public class User implements Serializable {
     private String password;
     private boolean hasAdminPermissions;
 
-    public User() {}
-
+    // All args constructor
     public User(int userId, String firstName, String lastName, String email, String password, boolean hasAdminPermissions) {
         this.userId = userId;
         this.firstName = firstName;
@@ -24,6 +21,7 @@ public class User implements Serializable {
         this.hasAdminPermissions = hasAdminPermissions;
     }
 
+    // Getter and setter methods
     public void setUserId(int userId) { this.userId = userId; }
     public int getUserId() { return this.userId; }
     public String getName() {return firstName + " " + lastName; }
@@ -38,6 +36,7 @@ public class User implements Serializable {
     public void setAdminPermissions(boolean hasAdminPermissions) { this.hasAdminPermissions = hasAdminPermissions; }
     public boolean doesHaveAdminPermissions() { return this.hasAdminPermissions; }
 
+    // toString method for debugging
     @Override
     public String toString() {
         return

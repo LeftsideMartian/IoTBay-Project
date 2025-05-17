@@ -16,6 +16,7 @@ import java.sql.Connection;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
+// Test class for ProductService
 public class ProductServiceTest {
     DBConnector dbConnector;
     Connection connection;

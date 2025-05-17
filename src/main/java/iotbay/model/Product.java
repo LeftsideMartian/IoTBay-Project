@@ -2,6 +2,7 @@ package iotbay.model;
 
 import java.io.Serializable;
 
+// Model class for products
 public class Product implements Serializable {
     private int productId;
     private String productName;
@@ -10,6 +11,7 @@ public class Product implements Serializable {
     private int quantity;
     private Category category;
 
+    // All args constructor
     public Product(int productId, String productName, String description, double price, int quantity, Category category) {
         this.productId = productId;
         this.productName = productName;
@@ -19,6 +21,7 @@ public class Product implements Serializable {
         this.category = category;
     }
 
+    // Getter and setter methods
     public int getProductId() { return productId; }
     public String getProductName() { return productName; }
     public void setProductName(String productName) { this.productName = productName; }
@@ -31,6 +34,7 @@ public class Product implements Serializable {
     public Category getCategory() { return category; }
     public void setCategory(Category category) { this.category = category; }
 
+    // toString method for debugging
     @Override
     public String toString() {
         return
