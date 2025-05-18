@@ -1,9 +1,11 @@
+<!DOCTYPE html>
 <html>
 <head>
     <title>Manage Your Account - IoTBay</title>
     <link rel="stylesheet" href="css/index.css">
     <link rel="shortcut icon" href="css/iotbayIcon.ico">
     <style>
+        /* ... your full CSS unchanged ... */
         body {
             margin: 0;
             font-family: 'Segoe UI', sans-serif;
@@ -149,55 +151,60 @@
         }
         
         .formHeading {
-        
             margin: 5px 0;
             font-size: 14px;
             color: #555;
-            }
-        
+        }
+
         .inputField {
             font-size: 12px;
             color: #555;
         }
-
     </style>
 </head>
 <body>
     <jsp:include page="header.jsp"/>
 
-        <div class="contentWrapper">
-            <h1>Manage Your Account</h1>
-            <hr>
-            <div class="accountContent">
-                <div class="sidebar">
-                    <button class="button medBtn active">Account</button>
-                    <button class="button medBtn">Orders</button>
-                </div>
-                <div class="account-section">
-                    <form action="updateAccount.jsp" method="POST" class="section-box">
-                        <h2>Personal Information</h2>
-						<label for = "firstName" class = "formHeading"><strong> First Name </strong></label> <br>
-                		<input type="text" name= "firstName" id="firstName" class = "inputField"requried><br><br>
-                        <label for = "lastName" class = "formHeading"><strong> Last Name </strong></label>
-                        <br>
-                        <input type="text" name= "lastName" id="lastName" class = "inputField" requried><br><br>
-                		<label for = "email" class = "formHeading"><strong>Email </strong></label><br>
-                		<input type="email" name= "email" id="email" class = "inputField" requried><br><br>
-                        <button type="submit" class="button med-btn button-blue">Update</a>
-                    </div>
-                    <hr>
-                    <form action="updateAccount.jsp" method="POST" class="section-box">
-                        <h2>Change Password</h2>
-                        <label for = "currentPassword" class = "formHeading"><strong>Current Password</strong></label><br>
-                <input type="password" name= "currentPassword" id="currentPassword" class = "inputField"><br><br>
+    <div class="contentWrapper">
+        <h1>Manage Your Account</h1>
+        <hr>
 
-                <label for = "newPassword" class = "formHeading"><strong>New Password</strong></label><br>
-                <input type="password" name= "newPassword" id="newPassword" class = "inputField"><br><br>
+        <div class="accountContent">
+            <div class="sidebar">
+                <button class="button lrgBtn">Account</button>
+                <button class="button lrgBtn">Orders</button>
+            </div>
 
-                        <button type="submit" class="button medBtn button-blue">Update Password</a>
-                        <a href="account.jsp" class="button medBtn">Cancel</a>
-                    </div>
-                </div>
+            <div class="account-section">
+                <form action="updateAccount.jsp" method="POST" class="section-box">
+                    <h2>Personal Information</h2>
+
+                    <label for="firstName" class="formHeading"><strong>First Name</strong></label><br>
+                    <input type="text" name="firstName" id="firstName" class="inputField" required><br><br>
+
+                    <label for="lastName" class="formHeading"><strong>Last Name</strong></label><br>
+                    <input type="text" name="lastName" id="lastName" class="inputField" required><br><br>
+
+                    <label for="email" class="formHeading"><strong>Email</strong></label><br>
+                    <input type="email" name="email" id="email" class="inputField" required><br><br>
+
+                    <button type="submit" class="button med-btn button-blue">Update</button>
+                </form>
+
+                <hr>
+
+                <form action="updateAccount.jsp" method="POST" class="section-box">
+                    <h2>Change Password</h2>
+
+                    <label for="currentPassword" class="formHeading"><strong>Current Password</strong></label><br>
+                    <input type="password" name="currentPassword" id="currentPassword" class="inputField"><br><br>
+
+                    <label for="newPassword" class="formHeading"><strong>New Password</strong></label><br>
+                    <input type="password" name="newPassword" id="newPassword" class="inputField"><br><br>
+
+                    <button type="submit" class="button medBtn button-blue">Update Password</button>
+                    <a href="account.jsp" class="button medBtn">Cancel</a>
+                </form>
             </div>
         </div>
     </div>
