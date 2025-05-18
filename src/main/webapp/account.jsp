@@ -171,8 +171,8 @@
 
         <div class="accountContent">
             <div class="sidebar">
-                <button class="button medBtn">Account</button>
-                <button class="button medBtn">Orders</button>
+                <button class="button lrgBtn">Account</button>
+                <button class="button lrgBtn">Orders</button>
             </div>
 
             <div class="account-section">
