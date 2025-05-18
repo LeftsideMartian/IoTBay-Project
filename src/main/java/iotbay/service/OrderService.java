@@ -56,6 +56,19 @@ public class OrderService extends DBService {
         }
     }
 
+    // CRUD - Read (Single order)
+    public Order getOrder(int orderId) {
+        List<Order> orders = getAllOrders();
+
+        for (Order order : orders) {
+            if (order.getOrderId() == orderId) {
+                return order;
+            }
+        }
+
+        return null;
+    }
+
     public List<Order> getAllOrders() {
         String query = getQueryFromFile(ProjectConstants.ORDERS_QUERY_GET_ALL_ORDERS);
 
