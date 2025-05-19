@@ -32,10 +32,9 @@ public class OrderService extends DBService {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, order.getOrderId());
             preparedStatement.setInt(2, order.getUserId());
-            preparedStatement.setString(3, order.getEstimatedDeliveryDate().toString());
-            // ESTIMATED DELIVERY DATE MAY BE FORMATTED WRONG
+            preparedStatement.setString(3, order.getDeliveryAddress());
             preparedStatement.setString(4, order.getDeliveryStatus());
-            preparedStatement.setString(5, order.getLogData());
+            preparedStatement.setString(5, order.getCardNumber());
 
             preparedStatement.executeUpdate();
 
@@ -80,9 +79,9 @@ public class OrderService extends DBService {
                 orders.add(new Order(
                     results.getInt(ProjectConstants.ORDERS_COLUMN_ORDER_ID),
                     results.getInt(ProjectConstants.USER_COLUMN_USER_ID),
-                    results.getDate(ProjectConstants.ORDERS_COLUMN_ESTIMATED_DELIVERY_DATE),
+                    results.getString(ProjectConstants.ORDERS_COLUMN_DELIVERY_ADDRESS),
                     DeliveryStatus.fromString(results.getString(ProjectConstants.ORDERS_COLUMN_DELIVERY_STATUS)),
-                    results.getString(ProjectConstants.ORDERS_COLUMN_LOG_DATA),
+                    results.getString(ProjectConstants.ORDERS_COLUMN_CARD_NUMBER),
                     getAllOrderProducts(results.getInt(ProjectConstants.ORDERS_COLUMN_ORDER_ID))
                 ));
             }
@@ -93,20 +92,19 @@ public class OrderService extends DBService {
         }
     }
 
+    // CRUD - Read (On OrderProduct table)
     private List<Product> getAllOrderProducts(int orderId) {
-        // Get a product service
-        // Create query using orderId
-        // For each resulting row, append a list with a Product object
-        // Return list of product
         ProductService productService = new ProductService(connection);
         String query = getQueryFromFile(ProjectConstants.ORDERPRODUCT_QUERY_GET_ALL_ORDER_PRODUCTS);
         List<Product> products = new ArrayList<>();
 
         try {
+            // Fetch all products for the order
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, orderId);
             ResultSet results = preparedStatement.executeQuery();
 
+            // For each product, create a Product object and add it to the list
             while (results.next()) {
                 int productId = results.getInt(ProjectConstants.PRODUCT_COLUMN_PRODUCT_ID);
                 Product product = productService.getProduct(productId);
@@ -119,5 +117,4 @@ public class OrderService extends DBService {
             throw new RuntimeException(e);
         }
     }
-
 }

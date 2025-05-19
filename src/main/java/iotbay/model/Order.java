@@ -1,22 +1,21 @@
 package iotbay.model;
 
-import java.sql.Date;
 import java.util.List;
 
 public class Order {
     private int orderId;
     private int userId;
-    private Date estimatedDeliveryDate;
+    private String deliveryAddress;
     private DeliveryStatus deliveryStatus;
-    private String logData;
+    private String cardNumber;
     private List<Product> products;
 
-    public Order(int orderId, int userId, Date estimatedDeliveryDate, DeliveryStatus deliveryStatus, String logData, List<Product> products) {
+    public Order(int orderId, int userId, String deliveryAddress, DeliveryStatus deliveryStatus, String cardNumber, List<Product> products) {
         this.orderId = orderId;
         this.userId = userId;
-        this.estimatedDeliveryDate = estimatedDeliveryDate;
+        this.deliveryAddress = deliveryAddress;
         this.deliveryStatus = deliveryStatus;
-        this.logData = logData;
+        this.cardNumber = cardNumber;
         this.products = products;
     }
 
@@ -24,12 +23,12 @@ public class Order {
     public void setOrderId(int orderId) { this.orderId = orderId; }
     public int getUserId() { return userId; }
     public void setUserId(int userId) { this.userId = userId; }
-    public Date getEstimatedDeliveryDate() { return estimatedDeliveryDate; }
-    public void setEstimatedDeliveryDate(Date estimatedDeliveryDate) { this.estimatedDeliveryDate = estimatedDeliveryDate; }
+    public String getDeliveryAddress() { return deliveryAddress; }
+    public void setDeliveryAddress(String deliveryAddress) { this.deliveryAddress = deliveryAddress; }
     public String getDeliveryStatus() { return deliveryStatus.toString(); }
     public void setDeliveryStatus(DeliveryStatus deliveryStatus) { this.deliveryStatus = deliveryStatus; }
-    public String getLogData() { return logData; }
-    public void setLogData(String logData) { this.logData = logData; }
+    public String getCardNumber() { return cardNumber; }
+    public void setCardNumber(String cardNumber) { this.cardNumber = cardNumber; }
     public List<Product> getProducts() { return products; }
     public void setProducts(List<Product> products) { this.products = products; }
 
@@ -40,9 +39,9 @@ public class Order {
             "Order{" +
             "orderId=" + orderId +
             ", userId=" + userId +
-            ", estimatedDeliveryDate=" + estimatedDeliveryDate +
+            ", deliveryAddress='" + deliveryAddress + '\'' +
             ", deliveryStatus=" + deliveryStatus +
-            ", logData='" + logData + '\'' +
+            ", cardNumber='" + cardNumber + '\'' +
             ", products=" + products +
             '}';
     }
