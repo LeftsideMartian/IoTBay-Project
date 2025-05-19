@@ -32,9 +32,9 @@ public class ProjectConstants {
     public static final String PRODUCT_QUERY_DELETE = "DeleteProduct.sql";
     // Orders table constants
     public static final String ORDERS_COLUMN_ORDER_ID = "Order_Id";
-    public static final String ORDERS_COLUMN_ESTIMATED_DELIVERY_DATE = "Estimated_Delivery_Date";
+    public static final String ORDERS_COLUMN_DELIVERY_ADDRESS = "Delivery_Address";
     public static final String ORDERS_COLUMN_DELIVERY_STATUS = "Delivery_Status";
-    public static final String ORDERS_COLUMN_LOG_DATA = "Log_Data";
+    public static final String ORDERS_COLUMN_CARD_NUMBER = "Card_Number";
     public static final String ORDERS_QUERY_CREATE_ORDER = "CreateOrder.sql";
     public static final String ORDERS_QUERY_GET_ALL_ORDERS = "GetAllOrders.sql";
     // OrderProduct table constants

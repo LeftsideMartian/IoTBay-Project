@@ -63,7 +63,7 @@
                     <form action="servlet/login" method="POST" class="profileMenu">
                         <h2 class="profileMenuUserName"><%= user.getFirstName() %></h2>
                         <hr>
-                        <a href="account.jsp">Edit account details</a>
+                        <a href="manageAccount.jsp">Edit account details</a>
                         <button type="submit">Logout</button>
                     </form>
                 </div>
