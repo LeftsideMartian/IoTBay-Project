@@ -1,308 +1,294 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="stylesheet" href="css/index.css">
-  <link rel="shortcut icon" href="css/iotbayIcon.ico">
-  <title>Checkout - lolBay</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap');
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" href="css/index.css">
+        <link rel="shortcut icon" href="css/iotbayIcon.ico">
+        <title>Checkout - IoTBay</title>
+        <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap');
 
-    /* * {
-      margin: 0;
-      padding: 0;
-      border: none;
-      font-family: "Poppins", sans-serif;
-      font-style: normal;
-    } */
+        /* * {
+            margin: 0;
+            padding: 0;
+            border: none;
+            font-family: "Poppins", sans-serif;
+            font-style: normal;
+        } */
 
-    body {
-      background-color: #f2f8fc;
-      padding: 0px;
-    }
+        body {
+            background-color: #f2f8fc;
+            padding: 0px;
+        }
 
-    body div.placeOrderFlexBox {
-      padding: 20px;
-    }
+        body div.placeOrderFlexBox {
+            padding: 20px;
+        }
 
-    .summary {
-      padding: 1em 1.5em;
-      border-radius: 25px;
-      filter: drop-shadow(
-        1px 2px 2px rgb(197, 197, 197)
-      );
-      background-color: #fff;
-      width: 40rem;
-    }
+        header {
+            position: sticky;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
 
-    .summaryHeading {
-      font-size: clamp(1rem, 3vw, 1.5rem);
-      font-weight: 700;
-      padding: 1rem;
-    }
+        .summary {
+            padding: 1em 1.5em;
+            border-radius: 25px;
+            filter: drop-shadow(
+            1px 2px 2px rgb(197, 197, 197)
+            );
+            background-color: #fff;
+            width: 40rem;
+        }
 
-    .placeOrderTable {
-      width: 100%;
-      margin-top: 10px;
-      border-spacing: 0rem 0rem;
-    }
+        .summaryHeading {
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            font-weight: 700;
+            padding: 1rem;
+        }
 
-    .formWrapper {
-      margin-top: 2rem;
-      background-color: #fff;
-      padding: 2rem;
-      border-radius: 25px;
-      filter: drop-shadow(1px 2px 2px rgb(197, 197, 197));
-      width: 42rem; 
-      box-sizing: border-box;
-    }
+        .placeOrderTable {
+            width: 100%;
+            border-spacing: 0rem 0rem;
+        }
 
-    .formSection {
-      display: flex;
-      gap: 1rem;
-      margin-bottom: 1rem;
-    }
+        .formWrapper {
+            margin-top: 2rem;
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 25px;
+            filter: drop-shadow(1px 2px 2px rgb(197, 197, 197));
+            width: 42rem; 
+            box-sizing: border-box;
+        }
 
-    .inputSection {
-      flex: 1;
-    }
+        .formSection {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
 
-    .inputField {
-      width: 100%;
-      padding: 0.75rem;
-      margin-bottom: 1rem;
-      border-radius: 10px;
-      border: 1px solid #ccc;
-      box-sizing: border-box;
-    }
+        .inputSection {
+            flex: 1;
+        }
 
-    .inputHeading, .formHeading {
-      display: block;
-      margin-top: 1rem;
-      margin-bottom: 0.5rem;
-      font-weight: 600;
-    }
+        .inputField {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
 
-
-    th, td {
-      padding: 1rem 1rem 1rem 0rem;
-      text-align: left;
-    }
-
-    td:last-child {
-      text-align: right;
-    }
-
-    .tableContainer {
-      max-height: 300px;
-      overflow-y: auto;
-      margin-top: 10px;
-    }
+        .inputHeading, .formHeading {
+            display: block;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
 
 
-    .buttons {
-      margin-top: 20px;
-      display: flex;
-      justify-content: space-evenly;
-    }
+        th, td {
+            padding: 1rem 1rem 1rem 0rem;
+            text-align: left;
+        }
 
-    strong {
-      font-size: 0.9rem;
-      font-weight: 700;
-      margin-bottom: 0.2rem;
-    }
+        th {
+            background-color: #fff;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+            padding-top: 0;
+            margin-top: 0;
+        }
 
-    .totalHeading {
-      text-align: right;
-    }
-  </style>
-</head>
+        td:last-child {
+            text-align: right;
+        }
 
-<body>
-  <jsp:include page="header.jsp"/>
+        .tableContainer {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-top: 10px;
+        }
 
-  
-  <div class="placeOrderFlexBox">
-    <div class="">
-      <h1>Checkout</h1>
 
-      <div class="summary">
-        <h3>Summary</h3>
-        <div class="tableContainer">
-        <table class="placeOrderTable">
-          <tr>
-            <th>Item</th>
-            <th>Price</th>
-            <th>Qty</th>
-            <th class="totalHeading">Total</th>
-          </tr>
-          <tr>
-            <td>Product Name</td>
-            <td>$100</td>
-            <td>2</td>
-            <td>$200</td>
-          </tr>
+        .buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-evenly;
+        }
 
-          <tr>
-            <td>Product Name</td>
-            <td>$100</td>
-            <td>2</td>
-            <td>$200</td>
-          </tr>
+        strong {
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 0.2rem;
+        }
 
-          <tr>
-            <td>Product Name</td>
-            <td>$100</td>
-            <td>2</td>
-            <td>$200</td>
-          </tr>
+        .totalHeading {
+            text-align: right;
+        }
+        </style>
+    </head>
 
-          <tr>
-            <td>Product Name</td>
-            <td>$100</td>
-            <td>2</td>
-            <td>$200</td>
-          </tr>
+    <body>
+        <jsp:include page="header.jsp"/>
 
-          <tr>
-            <td>Product Name</td>
-            <td>$100</td>
-            <td>2</td>
-            <td>$200</td>
-          </tr>
+        <div class="placeOrderFlexBox">
+            <div class="">
+                <h1>Checkout</h1>
 
-          <tr>
-            <td>Product Name</td>
-            <td>$100</td>
-            <td>2</td>
-            <td>$200</td>
-          </tr>
+                <div class="summary">
+                    <h3>Summary</h3>
 
-          <tr>
-            <td>Product Name</td>
-            <td>$100</td>
-            <td>2</td>
-            <td>$200</td>
-          </tr>
+                    <div class="tableContainer">
+                        <table class="placeOrderTable">
+                            <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Price</th>
+                                    <th>Qty</th>
+                                    <th class="totalHeading">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Product Name</td>
+                                    <td>$100</td>
+                                    <td>2</td>
+                                    <td>$200</td>
+                                </tr>
+                                <tr>
+                                    <td>Product Name</td>
+                                    <td>$100</td>
+                                    <td>2</td>
+                                    <td>$200</td>
+                                </tr>
+                                <tr>
+                                    <td>Product Name</td>
+                                    <td>$100</td>
+                                    <td>2</td>
+                                    <td>$200</td>
+                                </tr>
+                                <tr>
+                                    <td>Product Name</td>
+                                    <td>$100</td>
+                                    <td>2</td>
+                                    <td>$200</td>
+                                </tr>
+                                <tr>
+                                    <td>Product Name</td>
+                                    <td>$100</td>
+                                    <td>2</td>
+                                    <td>$200</td>
+                                </tr>
+                                <tr>
+                                    <td>Product Name</td>
+                                    <td>$100</td>
+                                    <td>2</td>
+                                    <td>$200</td>
+                                </tr>
+                                <tr>
+                                    <td>Product Name</td>
+                                    <td>$100</td>
+                                    <td>2</td>
+                                    <td>$200</td>
+                                </tr>
+                                <tr>
+                                    <td>Product Name</td>
+                                    <td>$100</td>
+                                    <td>2</td>
+                                    <td>$200</td>
+                                </tr>
+                                <tr>
+                                    <td>Product Name</td>
+                                    <td>$100</td>
+                                    <td>2</td>
+                                    <td>$200</td>
+                                </tr>
+                                <tr>
+                                    <td>Product Name</td>
+                                    <td>$100</td>
+                                    <td>2</td>
+                                    <td>$200</td>
+                                </tr>
+                                <tr>
+                                    <td>Product Name</td>
+                                    <td>$100</td>
+                                    <td>2</td>
+                                    <td>$200</td>
+                                </tr>
+                                <tr>
+                                    <td>Product Name</td>
+                                    <td>$100</td>
+                                    <td>2</td>
+                                    <td>$200</td>
+                                </tr>
+                                <tr>
+                                    <td>Product Name</td>
+                                    <td>$100</td>
+                                    <td>2</td>
+                                    <td>$200</td>
+                                </tr>
+                                <tr>
+                                    <td>Product Name</td>
+                                    <td>$100</td>
+                                    <td>2</td>
+                                    <td>$200</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <hr>
 
-          <tr>
-            <td>Product Name</td>
-            <td>$100</td>
-            <td>2</td>
-            <td>$200</td>
-          </tr>
-
-          <tr>
-            <td>Product Name</td>
-            <td>$100</td>
-            <td>2</td>
-            <td>$200</td>
-          </tr>
-
-          <tr>
-            <td>Product Name</td>
-            <td>$100</td>
-            <td>2</td>
-            <td>$200</td>
-          </tr>
-
-          <tr>
-            <td>Product Name</td>
-            <td>$100</td>
-            <td>2</td>
-            <td>$200</td>
-          </tr>
-
-          <tr>
-            <td>Product Name</td>
-            <td>$100</td>
-            <td>2</td>
-            <td>$200</td>
-          </tr>
-
-          <tr>
-            <td>Product Name</td>
-            <td>$100</td>
-            <td>2</td>
-            <td>$200</td>
-          </tr>
-
-          <tr>
-            <td>Product Name</td>
-            <td>$100</td>
-            <td>2</td>
-            <td>$200</td>
-          </tr>
-
-          <tr>
-            <td>Product Name</td>
-            <td>$100</td>
-            <td>2</td>
-            <td>$200</td>
-          </tr>
-
-          <tr>
-            <td>Product Name</td>
-            <td>$100</td>
-            <td>2</td>
-            <td>$200</td>
-          </tr>
-
-          <tr>
-            <td>Product Name</td>
-            <td>$100</td>
-            <td>2</td>
-            <td>$200</td>
-          </tr>
-
-        </table>
-        </div>
-        <hr>
-        <p><em>Subtotal</em>: $200</p>
-        <p><em>Shipping</em>: $20</p>
-        <p><strong>Total</strong>: $220</p>
-      </div>
-    </div>
-      <form id="checkout-form">
-        <div class="formWrapper">
-          <label class="formHeading">Personal Information</label>
-          <div class="formSection">
-            <div class="inputSection">
-              <input class="inputField" type="text" placeholder="First Name" name="firstName" required />
+                    <p><em>Subtotal</em>: $200</p>
+                    <p><em>Shipping</em>: $20</p>
+                    <p><strong>Total</strong>: $220</p>
+                </div>
             </div>
-            <div class="inputSection">
-              <input class="inputField" type="text" placeholder="Last Name" name="lastName" required />
+        </form>
+        
+        <form id="checkout-form">
+            <div class="formWrapper">
+                <label class="formHeading">Personal Information</label>
+                <div class="formSection">
+                    <div class="inputSection">
+                        <input class="inputField" type="text" placeholder="First Name" name="firstName" required />
+                    </div>
+                    <div class="inputSection">
+                        <input class="inputField" type="text" placeholder="Last Name" name="lastName" required />
+                    </div>
+                </div>
+
+                <label class="inputHeading"><strong>Delivery Address</strong></label>
+                <input class="inputField" type="text" placeholder="Address" name="address" required />
+
+                <label class="inputHeading"><strong>Credit Card Info</strong></label>
+                <input class="inputField" type="text" placeholder="Card Number" name="cardNumber" required />
+
+                <div class="buttons">
+                    <button type="button" class="button" onclick="cancelOrder()">Cancel Order</button>
+                    <button type="submit" class="button button-blue">Place Order</button>
+                </div>
             </div>
-          </div>
-  
-          <label class="inputHeading"><strong>Delivery Address</strong></label>
-          <input class="inputField" type="text" placeholder="Address" name="address" required />
+        </form>
 
-          <label class="inputHeading"><strong>Credit Card Info</strong></label>
-          <input class="inputField" type="text" placeholder="Card Number" name="cardNumber" required />
-  
-          <div class="buttons">
-            <button type="submit" class="button button-blue">Place Order</button>
-            <button type="button" class="button" onclick="cancelOrder()">Cancel Order</button>
-          </div>
-        </div>
-      </form>
-  </div>
+        <script>
+            document.getElementById("checkout-form").addEventListener("submit", function (e) {
+                e.preventDefault();
+                alert("Order placed successfully!");
+                this.reset();
+            });
 
-  <script>
-    document.getElementById("checkout-form").addEventListener("submit", function (e) {
-      e.preventDefault();
-      alert("Order placed successfully!");
-      this.reset();
-    });
-
-    function cancelOrder() {
-      if (confirm("Are you sure you want to cancel the order?")) {
-        document.getElementById("checkout-form").reset();
-      }
-    }
-  </script>
-
-</body>
+            function cancelOrder() {
+                if (confirm("Are you sure you want to cancel the order?")) {
+                  document.getElementById("checkout-form").reset();
+                }
+            }
+        </script>
+    </body>
 </html>

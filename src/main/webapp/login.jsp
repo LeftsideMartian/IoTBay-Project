@@ -4,7 +4,7 @@
     <head>
         <link rel="stylesheet" href="css/index.css">
         <link rel="shortcut icon" href="css/iotbayIcon.ico">
-        <title>Log in</title>
+        <title>Log in - IoTBay</title>
     </head>
     <body>
         <jsp:include page="/servlet/dbConnection" flush="true" />

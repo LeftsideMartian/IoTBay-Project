@@ -25,6 +25,7 @@ public class CartController extends HttpServlet {
             List<String> productIds = Arrays.stream(request.getParameterValues(ProjectConstants.REQUEST_ATTRIBUTE_PRODUCT_ID)).collect(Collectors.toCollection(ArrayList::new));
             List<Product> newCart = new ArrayList<>();
 
+            // Remove products from cart
             if (productIds != null) {
                 for (Product product : cart) {
                     for (String productId : productIds) {
