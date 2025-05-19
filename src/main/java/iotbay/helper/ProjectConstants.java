@@ -49,6 +49,7 @@ public class ProjectConstants {
     public static final String SESSION_ATTRIBUTE_SUCCESS_MESSAGE = "successMessage";
     public static final String SESSION_ATTRIBUTE_CURRENTLY_SELECTED_PRODUCT = "currentlySelectedProduct";
     public static final String SESSION_ATTRIBUTE_PRODUCT_LIST = "productList";
+    public static final String SESSION_ATTRIBUTE_CART = "cart";
 
 // Pages
     public static final String HOME_PAGE = "/";
@@ -68,6 +69,7 @@ public class ProjectConstants {
     public static final String REQUEST_ATTRIBUTE_STOCK = "stock";
     public static final String REQUEST_ATTRIBUTE_CATEGORY = "category";
     public static final String REQUEST_ATTRIBUTE_PRODUCT_ID = "productId";
+    public static final String REQUEST_ATTRIBUTE_PAGE = "page";
 
 // Validator regex patterns
     public static final String VALIDATOR_EMAIL_PATTERN = ".*@.*";

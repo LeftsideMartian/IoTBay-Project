@@ -33,5 +33,6 @@ public class ProductsListInitialiser extends HttpServlet {
 
         // Store the list in session
         session.setAttribute(ProjectConstants.SESSION_ATTRIBUTE_PRODUCT_LIST, productList);
+        session.setAttribute(ProjectConstants.SESSION_ATTRIBUTE_CART, new ArrayList<Product>());
     }
 }
