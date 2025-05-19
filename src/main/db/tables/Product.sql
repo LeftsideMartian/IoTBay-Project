@@ -31,4 +31,5 @@ INSERT INTO Product (Product_Name, Description, Price, Stock_Quantity, Category)
 ('Smart Security Camera', '1080p indoor/outdoor camera with night vision and cloud storage', 79.99, 35, 'Smart Home'),
 ('Smart Doorbell', 'Video doorbell with motion alerts and two-way audio', 99.50, 25, 'Smart Home'),
 ('Smart Speaker', 'Voice-controlled speaker with home automation integration', 59.99, 70, 'Smart Home'),
+('Smart Camera', 'Indoor security camera with motion detection and cloud storage', 89.99, 40, 'Smart Home'),
 ('Smart Display Hub', 'Touchscreen smart hub for controlling IoT devices', 129.99, 18, 'Smart Home');
