@@ -40,7 +40,7 @@
                                     <% for (Product product : cart) { %>
                                         <tr id="tableRow:<%= product.getProductId() %>">
                                             <td><%= product.getProductName() %></td>
-                                            <td><input class="cartQuantityInput" min="1" type="number" value="<%= product.getQuantity() %>"></td>
+                                            <td><input class="cartQuantityInput" min="1" type="number" name="<%= product.getProductId() %>:quantity" value="<%= product.getQuantity() %>"></td>
                                             <td><button type="button" class="cartRemoveButton" id="removeButton:<%= product.getProductId() %>">x</button></td>
                                             <input type="hidden" name="productId" value="<%= product.getProductId() %>">
                                         </tr>
