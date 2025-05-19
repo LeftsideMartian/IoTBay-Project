@@ -25,6 +25,15 @@
         <url-pattern>/servlet/productsListInitialiser</url-pattern>
     </servlet-mapping>
     <servlet>
+        <servlet-name>CartController</servlet-name>
+        <servlet-class>iotbay.controller.CartController</servlet-class>
+        <load-on-startup>0</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CartController</servlet-name>
+        <url-pattern>/servlet/cart</url-pattern>
+    </servlet-mapping>
+    <servlet>
         <servlet-name>LoginController</servlet-name>
         <servlet-class>iotbay.controller.LoginController</servlet-class>
         <load-on-startup>1</load-on-startup>

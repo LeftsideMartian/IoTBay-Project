@@ -22,6 +22,7 @@ public class ProductsListInitialiser extends HttpServlet {
 
     // Fetch list of products and store in session
     @Override
+    @SuppressWarnings("unchecked")
     public void doGet(HttpServletRequest request, HttpServletResponse response) {
         // Get connection from session
         HttpSession session = request.getSession();
@@ -33,5 +34,13 @@ public class ProductsListInitialiser extends HttpServlet {
 
         // Store the list in session
         session.setAttribute(ProjectConstants.SESSION_ATTRIBUTE_PRODUCT_LIST, productList);
+
+        // Fetch cart from session
+        List<Product> cart = (List<Product>) session.getAttribute(ProjectConstants.SESSION_ATTRIBUTE_CART);
+
+        // If it does not exist, create it
+        if (cart == null) {
+            session.setAttribute(ProjectConstants.SESSION_ATTRIBUTE_CART, productList);
+        }
     }
 }

@@ -98,17 +98,39 @@ header {
     font-size: 0.8rem;
 }
 
-.menuItems > .button {
-    margin-left: 1.2rem;
-}
-
 .button-blue {
     background-color: #70cbff;
 }
 
-.profileIcon {
+.menuIconButton {
+    width: 2.5rem;
+    height: 2.5rem;
+    position: relative;
+    top: 0;
+    transition: top ease 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 25px;
+    filter: drop-shadow(
+        1px 2px 2px rgb(197, 197, 197)
+    );
+    background-color: #fff;
+}
+
+.menuIconButton:hover {
+    top: -2px;
+}
+
+.iconButton {
     width: 2.5rem;
     cursor: pointer;
+    border-radius: 25px;
+}
+
+.cartIcon {
+    width: 2.3rem;
+    border-radius: 0;
 }
 
 .profileMenuWrapper {
@@ -116,6 +138,7 @@ header {
     top: 100%;
     right: 10%;
     width: 13rem;
+    z-index: 1;
     overflow: hidden;
     max-height: 0rem;
     transition: all 0.5s ease;
@@ -141,6 +164,93 @@ header {
     color: #040f11;
     font-size: 0.85rem;
     cursor: pointer;
+    background-color: #fff;
+}
+
+.cartMenuWrapper {
+    position: absolute;
+    top: 100%;
+    z-index: -1;
+    right: 13%;
+    width: 20rem;
+    overflow: hidden;
+    max-height: 0rem;
+}
+
+.cartMenuWrapperOpen {
+    max-height: 400rem;
+}
+
+.cartMenu {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    margin-top: 0.5rem;
+    padding: 1.2em 1.5em;
+    border-radius: 20px;
+}
+
+.cartTable {
+    width: 100%;
+    border-spacing: 0rem 0rem;
+    text-align: left;
+    overflow-y: auto;
+}
+
+.cartTable th,
+.cartTable td {
+    padding: 0.4rem;
+}
+
+.cartTable thead tr th {
+    background-color: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.cartTable th:nth-of-type(1),
+.cartTable td:nth-of-type(1) {
+    width: 50%;
+    max-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+.cartTable th:nth-of-type(2),
+.cartTable td:nth-of-type(2) {
+    text-align: right;
+    width: 10%;
+}
+
+.cartTable th:nth-of-type(3),
+.cartTable td:nth-of-type(3) {
+    margin-right: 0.5rem;
+    text-align: right;
+}
+
+.cartQuantityInput {
+    width: 3rem;
+    height: 1.7rem;
+    border-radius: 5px;
+    border: 1px solid #040f11;
+    padding: 0.3rem;
+    font-size: 0.7rem;
+}
+
+.cartButtonWrapper {
+    display: flex;
+    justify-content: end;
+    align-items: bottom;
+}
+
+.cartRemoveButton {
+    cursor: pointer;
+    color: #ef5350;
     background-color: #fff;
 }
 
@@ -316,6 +426,12 @@ hr {
 .scrollableTable {
     max-height: 25rem;
     overflow-y: auto;
+}
+
+.scrollableCartTable {
+    max-height: 10rem;
+    margin-bottom: 1rem;
+    overflow-y: auto
 }
 
 .manageStockTable {
