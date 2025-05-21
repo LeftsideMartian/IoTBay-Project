@@ -8,6 +8,9 @@ public class ProjectConstants {
     public static final String WINDOWS_DB_QUERIES_FOLDER = "src\\main\\db\\queries\\";
     public static final String MAC_DB_FILE_LOCATION = "src/main/db/iotbay.db";
     public static final String MAC_DB_QUERIES_FOLDER = "src/main/db/queries/";
+    public static final String OS = System.getProperty("os.name").split(" ")[0];
+    public static final String WINDOWS_SLASH = "\\";
+    public static final String MAC_SLASH = "/";
     // User table constants
     public static final String USER_COLUMN_USER_ID = "User_Id";
     public static final String USER_COLUMN_FIRST_NAME = "First_Name";

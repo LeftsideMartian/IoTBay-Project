@@ -29,21 +29,17 @@ abstract class DBService {
 
     // Helper function to retrieve an SQL query from a .sql file, and return it as a string
     public String getQueryFromFile(String filename) {
-        String windowsSlash = "\\";
-        String macSlash = "/";
         String query = "";
 
         // Construct the file path for the SQL query in queryFileLocation
         String projectFolder = Paths.get("").toAbsolutePath().toString();
         String queriesFolder = "";
 
-        String os = System.getProperty("os.name").split(" ")[0];
-
-        if (os.equals("Windows")) {
-            projectFolder = projectFolder + windowsSlash;
+        if (ProjectConstants.OS.equals("Windows")) {
+            projectFolder = projectFolder + ProjectConstants.WINDOWS_SLASH;
             queriesFolder = ProjectConstants.WINDOWS_DB_QUERIES_FOLDER;
-        } else if (os.equals("Mac")) {
-            projectFolder = projectFolder + macSlash;
+        } else {
+            projectFolder = projectFolder + ProjectConstants.MAC_SLASH;
             queriesFolder = ProjectConstants.MAC_DB_QUERIES_FOLDER;
         }
 

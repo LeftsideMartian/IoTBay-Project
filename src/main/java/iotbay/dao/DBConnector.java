@@ -26,18 +26,15 @@ public class DBConnector {
 
     // Get file location for the .db file
     private String getDbUrl() {
-        String windowsSlash = "\\";
-        String macSlash = "/";
         String projectFolder = "";
-        String os = System.getProperty("os.name").split(" ")[0];
         String dbFile = "";
-        
-        if (os.equals("Windows")) {
+
+        if (ProjectConstants.OS.equals("Windows")) {
             dbFile = ProjectConstants.WINDOWS_DB_FILE_LOCATION;
-            projectFolder = Paths.get("").toAbsolutePath() + windowsSlash;
-        } else if (os.equals("Mac")) {
+            projectFolder = Paths.get("").toAbsolutePath() + ProjectConstants.WINDOWS_SLASH;
+        } else if (ProjectConstants.OS.equals("Mac")) {
             dbFile = ProjectConstants.MAC_DB_FILE_LOCATION;
-            projectFolder = Paths.get("").toAbsolutePath() + macSlash;
+            projectFolder = Paths.get("").toAbsolutePath() + ProjectConstants.MAC_SLASH;
         }
 
         return projectFolder + dbFile;
