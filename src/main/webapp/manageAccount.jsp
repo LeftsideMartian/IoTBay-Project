@@ -85,7 +85,7 @@
 
                 <div class="account-section">
                     <%-- To be updated to servlet url --%>
-                    <form action="updateAccount.jsp" method="POST" class="section-box">
+                    <form action="ManageAccountController.java" method="POST" class="section-box">
                         <h2>Personal Information</h2>
 
                         <label for="firstName" class="inputHeading"><strong>First Name</strong></label><br>
