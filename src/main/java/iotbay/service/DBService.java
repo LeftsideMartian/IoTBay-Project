@@ -38,9 +38,9 @@ abstract class DBService {
 
         String os = System.getProperty("os.name").split(" ")[0];
 
-        if (os == "Windows") {
+        if (os.equals("Windows")) {
             projectFolder = projectFolder + windowsSlash;
-        } else if (os == "Mac") {
+        } else if (os.equals("Mac")) {
             projectFolder = projectFolder + macSlash;
         }
 
