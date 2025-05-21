@@ -1,206 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Search Products</title>
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lolBay - Category 1</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9fbfd;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: white;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        .logo img {
+            height: 40px;
+        }
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .nav-buttons button, .nav-buttons .icon {
+            background: none;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            padding: 5px 15px;
+            cursor: pointer;
+        }
+        .container {
+            display: flex;
+            padding: 20px;
+        }
+        .sidebar {
+            width: 200px;
+            background-color: white;
+            padding: 10px;
+            border-right: 1px solid #e0e0e0;
+        }
+        .sidebar h4 {
+            margin: 10px 0;
+            cursor: pointer;
+        }
+        .products {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 0 20px;
+        }
+        .product-card {
+            background-color: white;
+            padding: 10px;
+            border: 1px solid #e0e0e0;
+            text-align: center;
+        }
+        .product-card .image-placeholder {
+            background-color: #f0f4f8;
+            height: 150px;
+            margin-bottom: 10px;
+        }
+        .add-to-cart {
+            background-color: #f0f4f8;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .breadcrumb {
+            font-size: 12px;
+            margin-bottom: 20px;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
 
-    body {
-      font-family: 'Arial', sans-serif;
-      background-color: #f2f8fd;
-      margin: 0;
-      padding: 40px;
-    }
+        .search-bar-wrapper {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
 
-    h1 {
-      font-weight: 300;
-      letter-spacing: 1px;
-    }
+        .search-bar {
+            width: 60%;
+            display: flex;
+            align-items: center;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 30px;
+            padding: 10px 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
 
-    p {
-      color: #555;
-    }
+        .search-bar input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            padding: 10px;
+        }
 
-    .container {
-      display: flex;
-      margin-top: 30px;
-    }
-
-    /* Sidebar */
-    .sidebar {
-      width: 250px;
-      background-color: white;
-      border: 1px solid #ccc;
-      padding: 20px;
-      margin-right: 40px;
-    }
-
-    .filter-section {
-      margin-bottom: 30px;
-    }
-
-    .filter-section h3 {
-      font-size: 14px;
-      font-weight: bold;
-      text-transform: uppercase;
-      margin-bottom: 10px;
-      cursor: pointer;
-    }
-
-    .filter-section label {
-      display: block;
-      margin: 5px 0;
-    }
-
-    .price-range {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 14px;
-      margin-bottom: 10px;
-    }
-
-    .price-slider {
-      width: 100%;
-    }
-
-    /* Search Bar */
-    .main-content {
-      flex: 1;
-    }
-
-    .search-bar-wrapper {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 30px;
-    }
-
-    .search-bar {
-      position: relative;
-      width: 100%;
-      max-width: 600px;
-    }
-
-    .search-bar input[type="text"] {
-      width: 100%;
-      padding: 14px 50px 14px 50px;
-      border-radius: 50px;
-      border: 1px solid #000;
-      font-size: 16px;
-      outline: none;
-    }
-
-    .search-icon {
-      position: absolute;
-      left: 20px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 18px;
-      color: #555;
-    }
-
-    .search-icon::before {
-      content: '🔍';
-    }
-
-    /* Product Grid */
-    .product-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-      gap: 20px;
-    }
-
-    .product-card {
-      background-color: #eaf2fa;
-      padding: 10px;
-      text-align: center;
-      border-radius: 8px;
-    }
-
-    .product-name {
-      font-weight: bold;
-      margin-top: 10px;
-    }
-
-    .product-price {
-      margin: 5px 0;
-    }
-
-    .add-to-cart {
-      background-color: #f0f3f7;
-      border: none;
-      padding: 5px 10px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 14px;
-    }
-
-    .add-to-cart:hover {
-      background-color: #dce6ef;
-    }
-  </style>
+        .search-icon {
+            margin-right: 10px;
+            font-size: 18px;
+        }
+    </style>
 </head>
 <body>
-
-  <h1>SEARCH PRODUCTS</h1>
-
-  <div class="container">
-    <!-- Sidebar -->
-    <div class="sidebar">
-      <div class="filter-section">
-        <h3>Colour ▾</h3>
-        <!-- Color filter items here -->
-      </div>
-      <div class="filter-section">
-        <h3>Features ▾</h3>
-        <!-- Feature filter items here -->
-      </div>
-      <div class="filter-section">
-        <h3>Brand</h3>
-        <label><input type="checkbox"> Adobe</label>
-        <label><input type="checkbox"> Apple</label>
-        <label><input type="checkbox"> Dell</label>
-        <label><input type="checkbox"> Google</label>
-        <label><input type="checkbox"> Microsoft</label>
-        <label><input type="checkbox"> Samsung</label>
-      </div>
-      <div class="filter-section">
-        <h3>Price</h3>
-        <div class="price-range">
-          <span>$3</span>
-          <span>$1499</span>
+    <header>
+        <div class="logo">
+            <img src="https://via.placeholder.com/100x40?text=lolBay" alt="lolBay Logo">
         </div>
-        <input type="range" class="price-slider" min="3" max="1499" value="300">
-      </div>
-    </div>
+        <div class="nav-buttons">
+            <button>Browse products</button>
+            <div class="icon">🔍</div>
+            <div class="icon">👤</div>
+        </div>
+    </header>
 
-    <!-- Main Content -->
-    <div class="main-content">
-      <div class="search-bar-wrapper">
+    <h1>SEARCH PRODUCTS</h1>
+    <div class="search-bar-wrapper">
         <div class="search-bar">
-          <span class="search-icon"></span>
-          <input type="text" placeholder="Search for products...">
+            <span class="search-icon">🔍</span>
+            <input type="text" placeholder="Search for products...">
         </div>
-      </div>
-
-      <div class="product-grid">
-        <div class="product-card">
-          <div class="product-name">Product A</div>
-          <div class="product-price">$100.00</div>
-          <button class="add-to-cart">Add to Cart</button>
-        </div>
-        <div class="product-card">
-          <div class="product-name">Product B</div>
-          <div class="product-price">$100.00</div>
-          <button class="add-to-cart">Add to Cart</button>
-        </div>
-        <!-- Add more product cards as needed -->
-      </div>
     </div>
-  </div>
 
+    <div class="main-content">
+        <main class="products">
+            <div class="product-card">
+                <div class="image-placeholder"></div>
+                <strong>PRODUCT A</strong>
+                <div>$100.00</div>
+                <button class="add-to-cart">ADD TO CART</button>
+            </div>
+            <div class="product-card">
+                <div class="image-placeholder"></div>
+                <strong>PRODUCT B</strong>
+                <div>$600.00</div>
+                <button class="add-to-cart">ADD TO CART</button>
+            </div>
+            <div class="product-card">
+                <div class="image-placeholder"></div>
+                <strong>PRODUCT C</strong>
+                <div>$200.00</div>
+                <button class="add-to-cart">ADD TO CART</button>
+            </div>
+        </main>
+    </div>
 </body>
 </html>
