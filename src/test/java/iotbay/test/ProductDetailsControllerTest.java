@@ -5,6 +5,9 @@ import iotbay.dao.DBConnector;
 import iotbay.helper.ProjectConstants;
 import iotbay.model.Product;
 import iotbay.service.ProductService;
+
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,6 +22,7 @@ public class ProductDetailsControllerTest {
     private HttpServletRequest request;
     private HttpServletResponse response;
     private HttpSession session;
+    private DBConnector dbConnector;
     private Connection connection;
     private ProductDetailsController productDetailsController;
 
@@ -31,12 +35,17 @@ public class ProductDetailsControllerTest {
         when(request.getSession()).thenReturn(session);
 
         // Put connection object into session
-        DBConnector dbConnector = new DBConnector();
+        dbConnector = new DBConnector();
         connection = dbConnector.connect();
         when(session.getAttribute(ProjectConstants.SESSION_ATTRIBUTE_DBCONNECTION)).thenReturn(connection);
 
         // Create controller
         productDetailsController = new ProductDetailsController();
+    }
+
+    @AfterEach
+    public void closeConnection() {
+        dbConnector.closeConnection();
     }
 
     @Test

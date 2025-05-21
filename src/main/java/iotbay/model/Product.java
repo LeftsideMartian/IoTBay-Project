@@ -46,4 +46,9 @@ public class Product implements Serializable {
             ", category=" + category +
             '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        return o.toString().equals(this.toString());
+    }
 }

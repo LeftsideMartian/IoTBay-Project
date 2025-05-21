@@ -4,6 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import iotbay.model.Product;
+
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,6 +13,8 @@ import iotbay.controller.ManageProductsController;
 import iotbay.dao.DBConnector;
 import iotbay.helper.ProjectConstants;
 import iotbay.service.ProductService;
+
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 import java.sql.Connection;
 
@@ -18,6 +22,7 @@ public class ManageProductControllerTest {
     private HttpServletRequest request;
     private HttpServletResponse response;
     private HttpSession session;
+    DBConnector dbConnector;
     private Connection connection;
     private ManageProductsController manageProductsController;
 
@@ -30,12 +35,17 @@ public class ManageProductControllerTest {
         when(request.getSession()).thenReturn(session);
 
         // Put connection object into session
-        DBConnector dbConnector = new DBConnector();
+        dbConnector = new DBConnector();
         connection = dbConnector.connect();
         when(session.getAttribute(ProjectConstants.SESSION_ATTRIBUTE_DBCONNECTION)).thenReturn(connection);
 
         // Create controller
         manageProductsController = new ManageProductsController();
+    }
+
+    @AfterEach
+    public void closeConnection() {
+        dbConnector.closeConnection();
     }
 
     @Test
@@ -50,7 +60,7 @@ public class ManageProductControllerTest {
 
         manageProductsController.doGet(request, response);
 
-        verify(session).setAttribute(ProjectConstants.SESSION_ATTRIBUTE_CURRENTLY_SELECTED_PRODUCT, product);
+        verify(session).setAttribute(eq(ProjectConstants.SESSION_ATTRIBUTE_CURRENTLY_SELECTED_PRODUCT), eq(product));
     }
 
     @Test
