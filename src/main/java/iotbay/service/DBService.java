@@ -35,16 +35,18 @@ abstract class DBService {
 
         // Construct the file path for the SQL query in queryFileLocation
         String projectFolder = Paths.get("").toAbsolutePath().toString();
+        String queriesFolder = "";
 
         String os = System.getProperty("os.name").split(" ")[0];
 
         if (os.equals("Windows")) {
             projectFolder = projectFolder + windowsSlash;
+            queriesFolder = ProjectConstants.WINDOWS_DB_QUERIES_FOLDER;
         } else if (os.equals("Mac")) {
             projectFolder = projectFolder + macSlash;
+            queriesFolder = ProjectConstants.MAC_DB_QUERIES_FOLDER;
         }
 
-        String queriesFolder = ProjectConstants.DB_QUERIES_FOLDER;
         String queryFileLocation = projectFolder + queriesFolder + filename;
 
         // Read the SQL query from the file

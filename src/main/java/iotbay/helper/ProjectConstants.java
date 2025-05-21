@@ -4,8 +4,10 @@ package iotbay.helper;
 public class ProjectConstants {
 // Database constants
     public static final String JDBC_SQLITE_PREFIX = "jdbc:sqlite:";
-    public static final String DB_FILE_LOCATION = "src\\main\\db\\iotbay.db";
-    public static final String DB_QUERIES_FOLDER = "src\\main\\db\\queries\\";
+    public static final String WINDOWS_DB_FILE_LOCATION = "src\\main\\db\\iotbay.db";
+    public static final String WINDOWS_DB_QUERIES_FOLDER = "src\\main\\db\\queries\\";
+    public static final String MAC_DB_FILE_LOCATION = "src/main/db/iotbay.db";
+    public static final String MAC_DB_QUERIES_FOLDER = "src/main/db/queries/";
     // User table constants
     public static final String USER_COLUMN_USER_ID = "User_Id";
     public static final String USER_COLUMN_FIRST_NAME = "First_Name";
