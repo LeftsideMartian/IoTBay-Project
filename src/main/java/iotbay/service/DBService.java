@@ -34,7 +34,7 @@ abstract class DBService {
         String query = "";
 
         // Construct the file path for the SQL query in queryFileLocation
-        String projectFolder = Paths.get("").toAbsolutePath() + "\\";
+        String projectFolder = Paths.get("").toAbsolutePath().toString();
 
         String os = System.getProperty("os.name").split(" ")[0];
 
