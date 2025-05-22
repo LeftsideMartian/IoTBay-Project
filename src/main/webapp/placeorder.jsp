@@ -24,6 +24,10 @@
 
         body div.placeOrderFlexBox {
             padding: 20px;
+            display: flex;
+            gap: 2rem; 
+            flex-wrap: wrap; 
+            justify-content: center; 
         }
 
         header {
@@ -156,98 +160,42 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Product Name</td>
-                                    <td>$100</td>
-                                    <td>2</td>
-                                    <td>$200</td>
-                                </tr>
-                                <tr>
-                                    <td>Product Name</td>
-                                    <td>$100</td>
-                                    <td>2</td>
-                                    <td>$200</td>
-                                </tr>
-                                <tr>
-                                    <td>Product Name</td>
-                                    <td>$100</td>
-                                    <td>2</td>
-                                    <td>$200</td>
-                                </tr>
-                                <tr>
-                                    <td>Product Name</td>
-                                    <td>$100</td>
-                                    <td>2</td>
-                                    <td>$200</td>
-                                </tr>
-                                <tr>
-                                    <td>Product Name</td>
-                                    <td>$100</td>
-                                    <td>2</td>
-                                    <td>$200</td>
-                                </tr>
-                                <tr>
-                                    <td>Product Name</td>
-                                    <td>$100</td>
-                                    <td>2</td>
-                                    <td>$200</td>
-                                </tr>
-                                <tr>
-                                    <td>Product Name</td>
-                                    <td>$100</td>
-                                    <td>2</td>
-                                    <td>$200</td>
-                                </tr>
-                                <tr>
-                                    <td>Product Name</td>
-                                    <td>$100</td>
-                                    <td>2</td>
-                                    <td>$200</td>
-                                </tr>
-                                <tr>
-                                    <td>Product Name</td>
-                                    <td>$100</td>
-                                    <td>2</td>
-                                    <td>$200</td>
-                                </tr>
-                                <tr>
-                                    <td>Product Name</td>
-                                    <td>$100</td>
-                                    <td>2</td>
-                                    <td>$200</td>
-                                </tr>
-                                <tr>
-                                    <td>Product Name</td>
-                                    <td>$100</td>
-                                    <td>2</td>
-                                    <td>$200</td>
-                                </tr>
-                                <tr>
-                                    <td>Product Name</td>
-                                    <td>$100</td>
-                                    <td>2</td>
-                                    <td>$200</td>
-                                </tr>
-                                <tr>
-                                    <td>Product Name</td>
-                                    <td>$100</td>
-                                    <td>2</td>
-                                    <td>$200</td>
-                                </tr>
-                                <tr>
-                                    <td>Product Name</td>
-                                    <td>$100</td>
-                                    <td>2</td>
-                                    <td>$200</td>
-                                </tr>
+                                    <%
+                                        double subtotal = 0.0;
+                                        double shipping = 20.0; // You can change this as needed
+                                        if (cart != null && !cart.isEmpty()) {
+                                            for (Product product : cart) {
+                                                double itemTotal = product.getPrice() * product.getQuantity();
+                                                subtotal += itemTotal;
+                                    %>
+                                        <tr>
+                                            <td><%= product.getProductName() %></td>
+                                            <td>$<%= String.format("%.2f", product.getPrice()) %></td>
+                                            <td><%= product.getQuantity() %></td>
+                                            <td>$<%= String.format("%.2f", itemTotal) %></td>
+                                        </tr>
+                                    <%
+                                            }
+                                        } else {
+                                    %>
+                                        <tr>
+                                            <td colspan="4">Your cart is empty.</td>
+                                        </tr>
+                                    <%
+                                        }
+                                        double total = subtotal + shipping;
+                                    %>
+                                
                             </tbody>
                         </table>
                     </div>
                     <hr>
 
-                    <p><em>Subtotal</em>: $200</p>
-                    <p><em>Shipping</em>: $20</p>
-                    <p><strong>Total</strong>: $220</p>
+                    <hr>
+                    <p><em>Subtotal</em>: $<%= String.format("%.2f", subtotal) %></p>
+                    <p><em>Shipping</em>: $<%= String.format("%.2f", shipping) %></p>
+                    <p><strong>Total</strong>: $<%= String.format("%.2f", total) %></p>
+
                 </div>
             </div>
         </form>
