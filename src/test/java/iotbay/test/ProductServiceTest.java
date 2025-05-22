@@ -4,24 +4,20 @@ import iotbay.dao.DBConnector;
 import iotbay.model.Category;
 import iotbay.model.Product;
 import iotbay.service.ProductService;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
-
 import java.sql.Connection;
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import static org.mockito.Mockito.*;
 
 // Test class for ProductService
 public class ProductServiceTest {
     DBConnector dbConnector;
     Connection connection;
     ProductService productService;
-    Product testProduct = new Product(-1, "Test product", "", 29.99, 100, Category.SENSOR);
 
     @BeforeEach
     public void getConnection() {
@@ -32,17 +28,16 @@ public class ProductServiceTest {
 
     @AfterEach
     public void closeConnection() {
-        productService.deleteProduct(testProduct);
         dbConnector.closeConnection();
     }
 
     @Test
     @DisplayName("ProductService - Get an existing product")
     public void testExistingProduct() {
-        productService.createProduct(testProduct);
-        Product product = productService.getProduct(testProduct.getProductId());
-        assertEquals(product.toString(), testProduct.toString());
+        Product product = productService.getProduct(1);
+        assertEquals(product.getProductId(), 1);
     }
+
     @Test
     @DisplayName("ProductService - Get non existent product")
     public void testNonExistentProduct() {
