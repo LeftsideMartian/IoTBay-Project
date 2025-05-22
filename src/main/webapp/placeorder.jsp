@@ -1,3 +1,8 @@
+<%@ page import="iotbay.model.Product" %>
+        <%@ page import="java.util.List" %>
+        <%@ page import="iotbay.helper.ProjectConstants" %>
+        
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -8,6 +13,8 @@
         <title>Checkout - IoTBay</title>
         <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap');
+
+        
 
         /* * {
             margin: 0;
@@ -140,6 +147,9 @@
     </head>
 
     <body>
+        <%
+            List<Product> cart = (List<Product>) session.getAttribute(ProjectConstants.SESSION_ATTRIBUTE_CART);
+        %>
         <jsp:include page="header.jsp"/>
 
         <div class="placeOrderFlexBox">
@@ -148,7 +158,6 @@
 
                 <div class="summary">
                     <h3>Summary</h3>
-
                     <div class="tableContainer">
                         <table class="placeOrderTable">
                             <thead>
@@ -160,42 +169,40 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                    <%
-                                        double subtotal = 0.0;
-                                        double shipping = 20.0; // You can change this as needed
-                                        if (cart != null && !cart.isEmpty()) {
-                                            for (Product product : cart) {
-                                                double itemTotal = product.getPrice() * product.getQuantity();
-                                                subtotal += itemTotal;
-                                    %>
-                                        <tr>
-                                            <td><%= product.getProductName() %></td>
-                                            <td>$<%= String.format("%.2f", product.getPrice()) %></td>
-                                            <td><%= product.getQuantity() %></td>
-                                            <td>$<%= String.format("%.2f", itemTotal) %></td>
-                                        </tr>
-                                    <%
-                                            }
-                                        } else {
-                                    %>
-                                        <tr>
-                                            <td colspan="4">Your cart is empty.</td>
-                                        </tr>
-                                    <%
+                                <%
+                                    double subtotal = 0.0;
+                                    if (cart != null && !cart.isEmpty()) {
+                                        for (Product product : cart) {
+                                            double itemTotal = product.getPrice() * product.getQuantity();
+                                            subtotal += itemTotal;
+                                %>
+                                            <tr>
+                                                <td><%= product.getProductName() %></td>
+                                                <td>$<%= String.format("%.2f", product.getPrice()) %></td>
+                                                <td><%= product.getQuantity() %></td>
+                                                <td>$<%= String.format("%.2f", itemTotal) %></td>
+                                            </tr>
+                                <%
                                         }
-                                        double total = subtotal + shipping;
-                                    %>
-                                
+                                    } else {
+                                %>
+                                        <tr>
+                                            <td colspan="4">Cart is empty.</td>
+                                        </tr>
+                                <%
+                                    }
+                                %>
                             </tbody>
                         </table>
                     </div>
-                    <hr>
-
+                    <%
+                        double shipping = (subtotal > 0) ? 20.0 : 0.0;
+                        double total = subtotal + shipping;
+                    %>
                     <hr>
                     <p><em>Subtotal</em>: $<%= String.format("%.2f", subtotal) %></p>
                     <p><em>Shipping</em>: $<%= String.format("%.2f", shipping) %></p>
                     <p><strong>Total</strong>: $<%= String.format("%.2f", total) %></p>
-
                 </div>
             </div>
         </form>
