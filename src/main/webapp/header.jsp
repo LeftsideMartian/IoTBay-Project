@@ -24,7 +24,7 @@
                 <form action="servlet/cart" method="POST" class="cartMenu">
                     <h2 class="cartMenuHeading">Cart</h2>
                     <hr>
-                    <% if (cart.isEmpty()) { %>
+                    <% if (cart == null || cart.isEmpty()) { %>
                         Cart is empty.
                     <% } else { %>
                         <div class="scrollableCartTable">
