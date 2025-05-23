@@ -69,6 +69,60 @@
         <servlet-name>ProductDetailsController</servlet-name>
         <url-pattern>/servlet/productDetails</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>ManageAccountController</servlet-name>
+        <servlet-class>iotbay.controller.ManageAccountController</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ManageAccountController</servlet-name>
+        <url-pattern>/servlet/manageAccount</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>BrowseProductsController</servlet-name>
+        <servlet-class>iotbay.controller.BrowseProductsController</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BrowseProductsController</servlet-name>
+        <url-pattern>/servlet/browseProducts</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ManageOrdersController</servlet-name>
+        <servlet-class>iotbay.controller.ManageOrdersController</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ManageOrdersController</servlet-name>
+        <url-pattern>/servlet/manageOrders</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>OrderDetailsController</servlet-name>
+        <servlet-class>iotbay.controller.OrderDetailsController</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>OrderDetailsController</servlet-name>
+        <url-pattern>/servlet/orderDetails</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>PlaceOrderController</servlet-name>
+        <servlet-class>iotbay.controller.PlaceOrderController</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PlaceOrderController</servlet-name>
+        <url-pattern>/servlet/placeOrder</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>SearchProductsController</servlet-name>
+        <servlet-class>iotbay.controller.SearchProductsController</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SearchProductsController</servlet-name>
+        <url-pattern>/servlet/searchProducts</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>
     </session-config>
