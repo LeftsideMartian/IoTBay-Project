@@ -48,7 +48,7 @@ public class SearchProductsController extends HttpServlet {
                 .collect(Collectors.toList());
 
         // Store filtered list in session
-        session.setAttribute("productList", filteredProducts);
+        session.setAttribute(ProjectConstants.SESSION_ATTRIBUTE_PRODUCT_LIST, filteredProducts);
 
         // Forward to search.jsp for rendering
         request.getRequestDispatcher("search.jsp").forward(request, response);
