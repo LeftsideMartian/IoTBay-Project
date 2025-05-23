@@ -1,3 +1,8 @@
+<%@ page import="iotbay.model.Product" %>
+        <%@ page import="java.util.List" %>
+        <%@ page import="iotbay.helper.ProjectConstants" %>
+        
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -8,6 +13,8 @@
         <title>Checkout - IoTBay</title>
         <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap');
+
+        
 
         /* * {
             margin: 0;
@@ -24,6 +31,10 @@
 
         body div.placeOrderFlexBox {
             padding: 20px;
+            display: flex;
+            gap: 2rem; 
+            flex-wrap: wrap; 
+            justify-content: center; 
         }
 
         header {
@@ -136,6 +147,9 @@
     </head>
 
     <body>
+        <%
+            List<Product> cart = (List<Product>) session.getAttribute(ProjectConstants.SESSION_ATTRIBUTE_CART);
+        %>
         <jsp:include page="header.jsp"/>
 
         <div class="placeOrderFlexBox">
@@ -144,7 +158,6 @@
 
                 <div class="summary">
                     <h3>Summary</h3>
-
                     <div class="tableContainer">
                         <table class="placeOrderTable">
                             <thead>
@@ -156,98 +169,40 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Product Name</td>
-                                    <td>$100</td>
-                                    <td>2</td>
-                                    <td>$200</td>
-                                </tr>
-                                <tr>
-                                    <td>Product Name</td>
-                                    <td>$100</td>
-                                    <td>2</td>
-                                    <td>$200</td>
-                                </tr>
-                                <tr>
-                                    <td>Product Name</td>
-                                    <td>$100</td>
-                                    <td>2</td>
-                                    <td>$200</td>
-                                </tr>
-                                <tr>
-                                    <td>Product Name</td>
-                                    <td>$100</td>
-                                    <td>2</td>
-                                    <td>$200</td>
-                                </tr>
-                                <tr>
-                                    <td>Product Name</td>
-                                    <td>$100</td>
-                                    <td>2</td>
-                                    <td>$200</td>
-                                </tr>
-                                <tr>
-                                    <td>Product Name</td>
-                                    <td>$100</td>
-                                    <td>2</td>
-                                    <td>$200</td>
-                                </tr>
-                                <tr>
-                                    <td>Product Name</td>
-                                    <td>$100</td>
-                                    <td>2</td>
-                                    <td>$200</td>
-                                </tr>
-                                <tr>
-                                    <td>Product Name</td>
-                                    <td>$100</td>
-                                    <td>2</td>
-                                    <td>$200</td>
-                                </tr>
-                                <tr>
-                                    <td>Product Name</td>
-                                    <td>$100</td>
-                                    <td>2</td>
-                                    <td>$200</td>
-                                </tr>
-                                <tr>
-                                    <td>Product Name</td>
-                                    <td>$100</td>
-                                    <td>2</td>
-                                    <td>$200</td>
-                                </tr>
-                                <tr>
-                                    <td>Product Name</td>
-                                    <td>$100</td>
-                                    <td>2</td>
-                                    <td>$200</td>
-                                </tr>
-                                <tr>
-                                    <td>Product Name</td>
-                                    <td>$100</td>
-                                    <td>2</td>
-                                    <td>$200</td>
-                                </tr>
-                                <tr>
-                                    <td>Product Name</td>
-                                    <td>$100</td>
-                                    <td>2</td>
-                                    <td>$200</td>
-                                </tr>
-                                <tr>
-                                    <td>Product Name</td>
-                                    <td>$100</td>
-                                    <td>2</td>
-                                    <td>$200</td>
-                                </tr>
+                                <%
+                                    double subtotal = 0.0;
+                                    if (cart != null && !cart.isEmpty()) {
+                                        for (Product product : cart) {
+                                            double itemTotal = product.getPrice() * product.getQuantity();
+                                            subtotal += itemTotal;
+                                %>
+                                            <tr>
+                                                <td><%= product.getProductName() %></td>
+                                                <td>$<%= String.format("%.2f", product.getPrice()) %></td>
+                                                <td><%= product.getQuantity() %></td>
+                                                <td>$<%= String.format("%.2f", itemTotal) %></td>
+                                            </tr>
+                                <%
+                                        }
+                                    } else {
+                                %>
+                                        <tr>
+                                            <td colspan="4">Cart is empty.</td>
+                                        </tr>
+                                <%
+                                    }
+                                %>
                             </tbody>
                         </table>
                     </div>
+                    <%
+                        double shipping = (subtotal > 0) ? 20.0 : 0.0;
+                        double total = subtotal + shipping;
+                    %>
                     <hr>
-
-                    <p><em>Subtotal</em>: $200</p>
-                    <p><em>Shipping</em>: $20</p>
-                    <p><strong>Total</strong>: $220</p>
+                    <p><em>Subtotal</em>: $<%= String.format("%.2f", subtotal) %></p>
+                    <p><em>Shipping</em>: $<%= String.format("%.2f", shipping) %></p>
+                    <p><strong>Total</strong>: $<%= String.format("%.2f", total) %></p>
                 </div>
             </div>
         </form>
