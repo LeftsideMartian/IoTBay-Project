@@ -29,7 +29,7 @@ public class SearchProductsController extends HttpServlet {
 
         if (connection == null) {
             // If connection missing, redirect (could be login or error page)
-            response.sendRedirect("login.jsp");
+            response.sendRedirect(ProjectConstants.LOGIN_PAGE);
             return;
         }
 
