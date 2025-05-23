@@ -9,6 +9,13 @@
                 background-color: #ffffff;
             }
 
+            .gridContainer {
+                display: flex;
+                flex-direction: column;
+                min-height: 100vh;
+            }
+
+            
             .contentWrapper {
                 flex: 1;
                 padding: 40px;
@@ -72,6 +79,7 @@
         </style>
     </head>
     <body>
+        <div class = "gridContainer">
         <jsp:include page="header.jsp"/>
         <div class="contentWrapper">
             <h1>Manage Your Account</h1>
@@ -80,7 +88,7 @@
             <div class="accountContent">
                 <div class="sidebar">
                     <a href="manageAccount.jsp" class="button lrgBtn button-blue">Account</a>
-                    <a href="" class="button lrgBtn">Orders</a>
+                    <a href="vieworders.jsp" class="button lrgBtn">Orders</a>
                 </div>
 
                 <div class="account-section">
@@ -116,6 +124,7 @@
                     </form>
                 </div>
             </div>
+        </div>
         </div>
     </body>
 </html>
