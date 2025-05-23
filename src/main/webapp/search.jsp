@@ -1,10 +1,12 @@
+<%@ page import="java.util.List" %>
+<%@ page import="iotbay.model.Product" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
     <title>Search - IoTBay</title>
-    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/index.css" />
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -58,13 +60,11 @@
             text-align: center;
             margin-top: 20px;
         }
-
         .search-bar-wrapper {
             display: flex;
             justify-content: center;
             margin: 20px 0;
         }
-
         .search-bar {
             width: 60%;
             display: flex;
@@ -75,7 +75,6 @@
             padding: 10px 20px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-
         .search-bar input {
             flex: 1;
             border: none;
@@ -83,7 +82,6 @@
             font-size: 16px;
             padding: 10px;
         }
-
         .search-icon {
             margin-right: 10px;
             font-size: 18px;
@@ -91,36 +89,44 @@
     </style>
 </head>
 <body>
-    <jsp:include page="header.jsp"/>
+    <jsp:include page="header.jsp" />
 
     <h1>SEARCH PRODUCTS</h1>
+
     <div class="search-bar-wrapper">
-        <div class="search-bar">
+        <form action="SearchProducts" method="get" class="search-bar">
             <span class="search-icon">🔍</span>
-            <input type="text" placeholder="Search for products...">
-        </div>
+            <input 
+                type="text" 
+                name="searchTerm" 
+                placeholder="Search for products..." 
+                value="<%= request.getParameter("searchTerm") != null ? request.getParameter("searchTerm") : "" %>" 
+            />
+            <button type="submit" style="display:none;"></button>
+        </form>
     </div>
 
     <div class="main-content">
         <main class="products">
-            <div class="product-card">
-                <div class="image-placeholder"></div>
-                <strong>PRODUCT A</strong>
-                <div>$100.00</div>
-                <button class="add-to-cart">ADD TO CART</button>
-            </div>
-            <div class="product-card">
-                <div class="image-placeholder"></div>
-                <strong>PRODUCT B</strong>
-                <div>$600.00</div>
-                <button class="add-to-cart">ADD TO CART</button>
-            </div>
-            <div class="product-card">
-                <div class="image-placeholder"></div>
-                <strong>PRODUCT C</strong>
-                <div>$200.00</div>
-                <button class="add-to-cart">ADD TO CART</button>
-            </div>
+            <%
+                List<Product> productList = (List<Product>) session.getAttribute("productList");
+                if (productList == null || productList.isEmpty()) {
+            %>
+                <p style="padding: 20px;">No products found.</p>
+            <%
+                } else {
+                    for (Product product : productList) {
+                    %>
+                        <div class="product-card">
+                            <div class="image-placeholder"></div>
+                            <strong><%= product.getProductName() %></strong>
+                            <div>$<%= String.format("%.2f", product.getPrice()) %></div>
+                            <button class="add-to-cart">ADD TO CART</button>
+                        </div>
+                    <%
+                    }
+                }
+            %>
         </main>
     </div>
 </body>
