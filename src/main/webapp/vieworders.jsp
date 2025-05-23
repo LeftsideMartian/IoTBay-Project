@@ -110,8 +110,8 @@
             <hr>
             <div class="ordersContent">
                 <div class="sidebar">
-                    <a href= "manageAccount.jsp" class="button lrgBtn">Account</a>
-                    <a href= "vieworders.jsp" class="button lrgBtn button-blue">Orders</a>
+                    <a href="manageAccount.jsp" class="button lrgBtn">Account</a>
+                    <a href="vieworders.jsp" class="button lrgBtn button-blue">Orders</a>
                 </div>
                 <div class="orders-table">
                     <table>

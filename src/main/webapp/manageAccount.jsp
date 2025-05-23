@@ -80,7 +80,7 @@
             <div class="accountContent">
                 <div class="sidebar">
                     <a href="manageAccount.jsp" class="button lrgBtn button-blue">Account</a>
-                    <a href="" class="button lrgBtn">Orders</a>
+                    <a href="vieworders.jsp" class="button lrgBtn">Orders</a>
                 </div>
 
                 <div class="account-section">
