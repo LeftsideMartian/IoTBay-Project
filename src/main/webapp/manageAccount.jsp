@@ -9,6 +9,13 @@
                 background-color: #ffffff;
             }
 
+            .gridContainer {
+                display: flex;
+                flex-direction: column;
+                min-height: 100vh;
+            }
+
+            
             .contentWrapper {
                 flex: 1;
                 padding: 40px;
@@ -72,6 +79,7 @@
         </style>
     </head>
     <body>
+        <div class = "gridContainer">
         <jsp:include page="header.jsp"/>
         <div class="contentWrapper">
             <h1>Manage Your Account</h1>
@@ -80,12 +88,12 @@
             <div class="accountContent">
                 <div class="sidebar">
                     <a href="manageAccount.jsp" class="button lrgBtn button-blue">Account</a>
-                    <a href="" class="button lrgBtn">Orders</a>
+                    <a href="vieworders.jsp" class="button lrgBtn">Orders</a>
                 </div>
 
                 <div class="account-section">
                     <%-- To be updated to servlet url --%>
-                    <form action="updateAccount.jsp" method="POST" class="section-box">
+                    <form action="ManageAccountController.java" method="POST" class="section-box">
                         <h2>Personal Information</h2>
 
                         <label for="firstName" class="inputHeading"><strong>First Name</strong></label><br>
@@ -116,6 +124,7 @@
                     </form>
                 </div>
             </div>
+        </div>
         </div>
     </body>
 </html>
