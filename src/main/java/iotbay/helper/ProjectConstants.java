@@ -62,6 +62,7 @@ public class ProjectConstants {
     public static final String REGISTER_PAGE = "/register.jsp";
     public static final String MANAGE_PRODUCTS_PAGE = "/manageProducts.jsp";
     public static final String PRODUCT_DETAILS_PAGE = "/productDetails.jsp";
+    public static final String MANAGE_ACCOUNT_PAGE = "/manageAccount.jsp";
     public static final String PLACE_ORDER_PAGE = "/placeorder.jsp";
 
 // Request attribute names
