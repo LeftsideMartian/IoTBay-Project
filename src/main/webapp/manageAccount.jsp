@@ -93,9 +93,9 @@
 
                 <div class="account-section">
                     <%-- To be updated to servlet url --%>
-                    <form action="ManageAccountController.java" method="POST" class="section-box">
+                    <form action="manageAccount" method="POST" class="section-box">
                         <h2>Personal Information</h2>
-
+                        
                         <label for="firstName" class="inputHeading"><strong>First Name</strong></label><br>
                         <input type="text" name="firstName" id="firstName" class="inputField" required><br><br>
 
@@ -110,7 +110,7 @@
 
                     <hr>
 
-                    <form action="updateAccount.jsp" method="POST" class="section-box">
+                    <form action="manageAccount" method="POST" class="section-box">
                         <h2>Change Password</h2>
 
                         <label for="currentPassword" class="inputHeading"><strong>Current Password</strong></label><br>

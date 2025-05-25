@@ -38,16 +38,12 @@ public class ManageAccountController extends HttpServlet {
         user.setLastName(newLastName);
         user.setEmail(newEmail);
 
-        // Call your existing method (e.g., editUser)
+        // Call your existing method (e.g., updateUser)
         UserService userService = new UserService(connection);
-        boolean updated = userService.editUser(user); // <- reuse existing method here
+        userService.updateUser(user); // <- reuse existing method here
 
-        if (updated) {
             session.setAttribute(ProjectConstants.SESSION_ATTRIBUTE_USER, user);
-            response.sendRedirect("updateAccount.jsp");
-        } else {
-            request.setAttribute("error", "Account update failed.");
-            request.getRequestDispatcher("manageAccount.jsp").forward(request, response);
-        }
+            response.sendRedirect("manageAccount.jsp");
+        
     }
 }

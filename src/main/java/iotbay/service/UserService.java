@@ -129,9 +129,4 @@ public class UserService extends DBService {
 
         return false;
     }
-
-    public boolean editUser(User user) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'editUser'");
-    }
 }
