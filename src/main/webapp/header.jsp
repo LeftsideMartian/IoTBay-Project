@@ -17,7 +17,7 @@
 
         <div class="menuItems">
             <a class="button" href="SearchProducts">Search products</a>
-            <a class="button" href="browseProducts.jsp">Browse products</a>
+            <a class="button" href="BrowseProducts">Browse products</a>
 
             <img class="iconButton cartIcon" id="cartIcon" src="css/cartIcon.svg">
             <div class="cartMenuWrapper" id="cartMenu">
