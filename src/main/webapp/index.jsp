@@ -1,4 +1,5 @@
 <%@page import="iotbay.model.User"%>
+<%@page import="iotbay.helper.ProjectConstants"%>
 <html>
     <head>
         <link rel="stylesheet" href="css/index.css">
@@ -9,7 +10,7 @@
     <body>
         <jsp:include page="/servlet/dbConnection" flush="true" />
         <jsp:include page="/servlet/productsListInitialiser" flush="true" />
-        <% User user = (User) session.getAttribute("user"); %>
+        <% User user = (User) session.getAttribute(ProjectConstants.SESSION_ATTRIBUTE_USER); %>
 
         <div class="gridContainer">
             <jsp:include page="header.jsp"/>
