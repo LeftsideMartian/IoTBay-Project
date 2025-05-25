@@ -136,25 +136,25 @@
 
     <body>
         <%
+            String successMessage = (String) session.getAttribute(ProjectConstants.SESSION_ATTRIBUTE_SUCCESS_MESSAGE);
+            String errorMessage = (String) session.getAttribute(ProjectConstants.SESSION_ATTRIBUTE_ERROR);
+            if (successMessage != null) {
+                session.removeAttribute(ProjectConstants.SESSION_ATTRIBUTE_SUCCESS_MESSAGE);
+        %>
+            <div class="popup"><%= successMessage %></div>
+        <% } else if (errorMessage != null) {
+            session.removeAttribute(ProjectConstants.SESSION_ATTRIBUTE_ERROR);
+        %>
+            <div class="popup errorMessage"><%= errorMessage %></div>
+        <% } %>
+
+        <%
             User user = (User) session.getAttribute(ProjectConstants.SESSION_ATTRIBUTE_USER);
             List<Product> cart = (List<Product>) session.getAttribute(ProjectConstants.SESSION_ATTRIBUTE_CART);
         %>
         <jsp:include page="header.jsp"/>
 
         <div class="placeOrderFlexBox">
-            <%
-                String successMessage = (String) session.getAttribute(ProjectConstants.SESSION_ATTRIBUTE_SUCCESS_MESSAGE);
-                String errorMessage = (String) session.getAttribute(ProjectConstants.SESSION_ATTRIBUTE_ERROR);
-                if (successMessage != null) {
-                    session.removeAttribute(ProjectConstants.SESSION_ATTRIBUTE_SUCCESS_MESSAGE);
-            %>
-                <div class="popup"><%= successMessage %></div>
-            <% } else if (errorMessage != null) {
-                session.removeAttribute(ProjectConstants.SESSION_ATTRIBUTE_ERROR);
-            %>
-                <div class="popup errorMessage"><%= errorMessage %></div>
-            <% } %>
-
             <div class="">
                 <h1>Checkout</h1>
                 <div class="summary">

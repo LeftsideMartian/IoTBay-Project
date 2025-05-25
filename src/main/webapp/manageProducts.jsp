@@ -68,6 +68,19 @@
     </head>
     <body>
         <%
+            String successMessage = (String) session.getAttribute(ProjectConstants.SESSION_ATTRIBUTE_SUCCESS_MESSAGE);
+            String errorMessage = (String) session.getAttribute(ProjectConstants.SESSION_ATTRIBUTE_ERROR);
+            if (successMessage != null) {
+                session.removeAttribute(ProjectConstants.SESSION_ATTRIBUTE_SUCCESS_MESSAGE);
+        %>
+            <div class="popup"><%= successMessage %></div>
+        <% } else if (errorMessage != null) {
+            session.removeAttribute(ProjectConstants.SESSION_ATTRIBUTE_ERROR);
+        %>
+            <div class="popup errorMessage"><%= errorMessage %></div>
+        <% } %>
+
+        <%
             List<Product> products = (List<Product>) session.getAttribute(ProjectConstants.SESSION_ATTRIBUTE_PRODUCT_LIST);
         %>
         <div class="gridContainer">
