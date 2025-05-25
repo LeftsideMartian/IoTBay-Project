@@ -93,7 +93,7 @@
                     <a href="manageAccount.jsp" class="button lrgBtn button-blue">Account</a>
                     <a href="vieworders.jsp" class="button lrgBtn">Orders</a>
                     <% if (user.doesHaveAdminPermissions()) { %>
-                        <a href="manageProducts.jsp" class="button lrgBtn">Products</a>
+                        <a href="/servlet/manageProducts" class="button lrgBtn">Products</a>
                     <% } %>
                 </div>
 
