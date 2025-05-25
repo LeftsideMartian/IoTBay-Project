@@ -30,13 +30,15 @@ public class OrderService extends DBService {
         try {
             // Create row in order table
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, order.getOrderId());
-            preparedStatement.setInt(2, order.getUserId());
-            preparedStatement.setString(3, order.getDeliveryAddress());
-            preparedStatement.setString(4, order.getDeliveryStatus());
-            preparedStatement.setString(5, order.getCardNumber());
+            preparedStatement.setInt(1, order.getUserId());
+            preparedStatement.setString(2, order.getDeliveryAddress());
+            preparedStatement.setString(3, order.getDeliveryStatus());
+            preparedStatement.setString(4, order.getCardNumber());
 
             preparedStatement.executeUpdate();
+
+            List<Order> orders = getAllOrders();
+            int orderId = orders.get(orders.size() - 1).getOrderId();
 
             query = getQueryFromFile(ProjectConstants.ORDERPRODUCT_QUERY_CREATE_ORDER_PRODUCT);
 
@@ -44,7 +46,7 @@ public class OrderService extends DBService {
             for (Product product : order.getProducts()) {
                 preparedStatement = connection.prepareStatement(query);
 
-                preparedStatement.setInt(1, order.getOrderId());
+                preparedStatement.setInt(1, orderId);
                 preparedStatement.setInt(2, product.getProductId());
                 preparedStatement.setInt(3, product.getQuantity());
 

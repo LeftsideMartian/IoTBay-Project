@@ -16,15 +16,15 @@
         </div>
 
         <div class="menuItems">
-            <a class="button" href="">Browse products</a>
-            <a href=""><img class="iconButton" id="searchIcon" src="css/searchIcon.svg"></a>
+            <a class="button" href="SearchProducts">Search products</a>
+            <a class="button" href="browseProducts.jsp">Browse products</a>
 
             <img class="iconButton cartIcon" id="cartIcon" src="css/cartIcon.svg">
             <div class="cartMenuWrapper" id="cartMenu">
                 <form action="servlet/cart" method="POST" class="cartMenu">
                     <h2 class="cartMenuHeading">Cart</h2>
                     <hr>
-                    <% if (cart.isEmpty()) { %>
+                    <% if (cart == null || cart.isEmpty()) { %>
                         Cart is empty.
                     <% } else { %>
                         <div class="scrollableCartTable">
@@ -50,6 +50,7 @@
                         </div>
                         <input type="hidden" name="page" value="<%= request.getRequestURI() %>">
                         <div class="cartButtonWrapper">
+                            <a class="button smlBtn" href="/placeOrder">Place order</a>
                             <button class="button smlBtn button-blue" type="submit">Save</button>
                         </div>
                     <% } %>
