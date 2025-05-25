@@ -3,7 +3,6 @@ package iotbay.controller;
 import iotbay.helper.ProjectConstants;
 import iotbay.model.Product;
 import iotbay.service.ProductService;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,7 +18,6 @@ public class BrowseProductsController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         HttpSession session = request.getSession();
 
         // Retrieve DB connection object from session using constant key
@@ -38,10 +36,10 @@ public class BrowseProductsController extends HttpServlet {
         List<Product> productList = productService.getAllProducts();
 
         // Store product list in session
-        session.setAttribute("productList", productList);
+        session.setAttribute(ProjectConstants.SESSION_ATTRIBUTE_PRODUCT_LIST, productList);
 
         // Forward to browseProducts.jsp for rendering the product list
-        request.getRequestDispatcher("browseProducts.jsp").forward(request, response);
+        response.sendRedirect(ProjectConstants.BROWSE_PAGE);
     }
 }
 

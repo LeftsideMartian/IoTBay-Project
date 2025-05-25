@@ -63,33 +63,33 @@
         }
     </style>
 </head>
-<body>
-    <jsp:include page="header.jsp" />
+    <body>
+        <jsp:include page="header.jsp" />
 
-    <h1>BROWSE PRODUCTS</h1>
-    
-    <div class="main-content">
-        <main class="products">
-            <%
-                List<Product> productList = (List<Product>) session.getAttribute("productList");
-                if (productList == null || productList.isEmpty()) {
-            %>
-                <p style="padding: 20px;">No products found.</p>
-            <%
-                } else {
-                    for (Product product : productList) {
-            %>
-                        <div class="product-card">
-                            <div class="image-placeholder"></div>
-                            <strong><%= product.getProductName() %></strong>
-                            <div>$<%= String.format("%.2f", product.getPrice()) %></div>
-                            <button class="add-to-cart">ADD TO CART</button>
-                        </div>
-            <%
+        <h1>BROWSE PRODUCTS</h1>
+        
+        <div class="main-content">
+            <main class="products">
+                <%
+                    List<Product> productList = (List<Product>) session.getAttribute("productList");
+                    if (productList == null || productList.isEmpty()) {
+                %>
+                    <p style="padding: 20px;">No products found.</p>
+                <%
+                    } else {
+                        for (Product product : productList) {
+                %>
+                            <div class="product-card">
+                                <div class="image-placeholder"></div>
+                                <strong><%= product.getProductName() %></strong>
+                                <div>$<%= String.format("%.2f", product.getPrice()) %></div>
+                                <button class="add-to-cart">ADD TO CART</button>
+                            </div>
+                <%
+                        }
                     }
-                }
-            %>
-        </main>
-    </div>
-</body>
+                %>
+            </main>
+        </div>
+    </body>
 </html>
