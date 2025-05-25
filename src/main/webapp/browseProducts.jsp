@@ -59,14 +59,15 @@
         h1 {
             text-align: center;
             margin-top: 20px;
+            margin-bottom: 30px;
         }
     </style>
 </head>
 <body>
     <jsp:include page="header.jsp" />
 
-    <h1>SEARCH PRODUCTS</h1>
-
+    <h1>BROWSE PRODUCTS</h1>
+    
     <div class="main-content">
         <main class="products">
             <%
@@ -92,4 +93,3 @@
     </div>
 </body>
 </html>
-

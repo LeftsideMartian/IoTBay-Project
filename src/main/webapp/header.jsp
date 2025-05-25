@@ -17,7 +17,7 @@
 
         <div class="menuItems">
             <a class="button" href="SearchProducts">Search products</a>
-            <a class="button" href="">Browse products</a>
+            <a class="button" href="BrowseProducts">Browse products</a>
             <a href=""><img class="iconButton" id="searchIcon" src="css/searchIcon.svg"></a>
 
             <img class="iconButton cartIcon" id="cartIcon" src="css/cartIcon.svg">
