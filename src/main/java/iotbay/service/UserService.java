@@ -83,7 +83,6 @@ public class UserService extends DBService {
             preparedStatement.setString(2, newUser.getLastName());
             preparedStatement.setString(3, newUser.getEmail());
             preparedStatement.setString(4, newUser.getPassword());
-            // Note: User ID is an integer, no need to convert to String
             preparedStatement.setInt(5, newUser.getUserId());
 
             preparedStatement.executeUpdate();

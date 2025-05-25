@@ -20,7 +20,6 @@ public class SearchProductsController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         // Get current session
         HttpSession session = request.getSession();
 
@@ -51,6 +50,6 @@ public class SearchProductsController extends HttpServlet {
         session.setAttribute(ProjectConstants.SESSION_ATTRIBUTE_PRODUCT_LIST, filteredProducts);
 
         // Forward to search.jsp for rendering
-        request.getRequestDispatcher("search.jsp").forward(request, response);
+        response.sendRedirect(ProjectConstants.SEARCH_PAGE);
     }
 }

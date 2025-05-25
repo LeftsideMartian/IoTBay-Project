@@ -81,59 +81,72 @@
         </style>
     </head>
     <body>
+        <%
+            String successMessage = (String) session.getAttribute(ProjectConstants.SESSION_ATTRIBUTE_SUCCESS_MESSAGE);
+            String errorMessage = (String) session.getAttribute(ProjectConstants.SESSION_ATTRIBUTE_ERROR);
+            if (successMessage != null) {
+                session.removeAttribute(ProjectConstants.SESSION_ATTRIBUTE_SUCCESS_MESSAGE);
+        %>
+            <div class="popup"><%= successMessage %></div>
+        <% } else if (errorMessage != null) {
+            session.removeAttribute(ProjectConstants.SESSION_ATTRIBUTE_ERROR);
+        %>
+            <div class="popup errorMessage"><%= errorMessage %></div>
+        <% } %>
+
         <% User user = (User) session.getAttribute(ProjectConstants.SESSION_ATTRIBUTE_USER); %>
         <div class = "gridContainer">
-        <jsp:include page="header.jsp"/>
-        <div class="contentWrapper">
-            <h1>Manage Your Account</h1>
-            <hr>
+            <jsp:include page="header.jsp"/>
+            <div class="contentWrapper">
+                <h1>Manage Your Account</h1>
+                <hr>
 
-            <div class="accountContent">
-                <div class="sidebar">
-                    <a href="manageAccount.jsp" class="button lrgBtn button-blue">Account</a>
-                    <a href="vieworders.jsp" class="button lrgBtn">Orders</a>
-                    <% if (user.doesHaveAdminPermissions()) { %>
-                        <a href="manageProducts.jsp" class="button lrgBtn">Products</a>
-                    <% } %>
-                </div>
+                <div class="accountContent">
+                    <div class="sidebar">
+                        <a href="manageAccount.jsp" class="button lrgBtn button-blue">Account</a>
+                        <a href="vieworders.jsp" class="button lrgBtn">Orders</a>
+                        <% if (user.doesHaveAdminPermissions()) { %>
+                            <a href="/servlet/manageProducts" class="button lrgBtn">Products</a>
+                        <% } %>
+                    </div>
 
-                <div class="account-section">
-                    <form action="manageAccount" method="POST" class="section-box">
-                        <h2>Personal Information</h2>
+                    <div class="account-section">
+                        <form action="manageAccount" method="POST" class="section-box">
+                            <h2>Personal Information</h2>
 
-                        <label for="firstName" class="inputHeading"><strong>First Name</strong></label><br>
-                        <input type="text" name="firstName" id="firstName" class="inputField" value="<%= user.getFirstName() %>" required><br><br>
+                            <label for="firstName" class="inputHeading"><strong>First Name</strong></label><br>
+                            <input type="text" name="firstName" id="firstName" class="inputField" value="<%= user.getFirstName() %>" required><br><br>
 
-                        <label for="lastName" class="inputHeading"><strong>Last Name</strong></label><br>
-                        <input type="text" name="lastName" id="lastName" class="inputField" value="<%= user.getLastName() %>" required><br><br>
+                            <label for="lastName" class="inputHeading"><strong>Last Name</strong></label><br>
+                            <input type="text" name="lastName" id="lastName" class="inputField" value="<%= user.getLastName() %>" required><br><br>
 
-                        <label for="email" class="inputHeading"><strong>Email</strong></label><br>
-                        <input type="email" name="email" id="email" class="inputField" value="<%= user.getEmail() %>" required><br><br>
+                            <label for="email" class="inputHeading"><strong>Email</strong></label><br>
+                            <input type="email" name="email" id="email" class="inputField" value="<%= user.getEmail() %>" required><br><br>
 
-                        <input type="hidden" name="typeOfUpdate" value="updateDetails">
+                            <input type="hidden" name="typeOfUpdate" value="updateDetails">
 
-                        <button type="submit" class="button med-btn button-blue">Update</button>
-                    </form>
+                            <button type="submit" class="button med-btn button-blue">Update</button>
+                        </form>
 
-                    <hr>
+                        <hr>
 
-                    <form action="manageAccount" method="POST" class="section-box">
-                        <h2>Change Password</h2>
+                        <form action="manageAccount" method="POST" class="section-box">
+                            <h2>Change Password</h2>
 
-                        <label for="currentPassword" class="inputHeading"><strong>Current Password</strong></label><br>
-                        <input type="password" name="currentPassword" id="currentPassword" class="inputField"><br><br>
+                            <label for="currentPassword" class="inputHeading"><strong>Current Password</strong></label><br>
+                            <input type="password" name="currentPassword" id="currentPassword" class="inputField"><br><br>
 
-                        <label for="newPassword" class="inputHeading"><strong>New Password</strong></label><br>
-                        <input type="password" name="newPassword" id="newPassword" class="inputField"><br><br>
+                            <label for="newPassword" class="inputHeading"><strong>New Password</strong></label><br>
+                            <input type="password" name="newPassword" id="newPassword" class="inputField"><br><br>
 
-                        <input type="hidden" name="typeOfUpdate" value="updatePassword">
+                            <input type="hidden" name="typeOfUpdate" value="updatePassword">
 
-                        <button type="submit" class="button medBtn button-blue">Update Password</button>
-                        <a href="manageAccount.jsp" class="button medBtn">Cancel</a>
-                    </form>
+                            <button type="submit" class="button medBtn button-blue">Update Password</button>
+                            <a href="manageAccount.jsp" class="button medBtn">Cancel</a>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
         </div>
     </body>
 </html>

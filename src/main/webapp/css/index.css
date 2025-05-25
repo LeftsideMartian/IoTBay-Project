@@ -417,10 +417,10 @@ hr {
 }
 
 .manageStockTableWrapper {
-    padding: 1em 2em;
+    padding: 1em 0em;
     border-radius: 25px;
     background-color: #fff;
-    width: 63rem;
+    width: 50rem;
 }
 
 .scrollableTable {
