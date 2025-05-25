@@ -2,7 +2,7 @@ package iotbay.model;
 
 // Enum class representing the different statuses of an order delivery
 public enum DeliveryStatus {
-    IN_PROCESSING("In Progress"),
+    IN_PROGRESS("In Progress"),
     ON_THE_WAY("On The Way"),
     DELIVERED("Delivered");
 
