@@ -50,7 +50,7 @@
                         </div>
                         <input type="hidden" name="page" value="<%= request.getRequestURI() %>">
                         <div class="cartButtonWrapper">
-                            <a class="button smlBtn" href="placeorder.jsp">Place order</a>
+                            <a class="button smlBtn" href="/placeOrder">Place order</a>
                             <button class="button smlBtn button-blue" type="submit">Save</button>
                         </div>
                     <% } %>

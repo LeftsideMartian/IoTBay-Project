@@ -142,9 +142,21 @@
         <jsp:include page="header.jsp"/>
 
         <div class="placeOrderFlexBox">
+            <%
+                String successMessage = (String) session.getAttribute(ProjectConstants.SESSION_ATTRIBUTE_SUCCESS_MESSAGE);
+                String errorMessage = (String) session.getAttribute(ProjectConstants.SESSION_ATTRIBUTE_ERROR);
+                if (successMessage != null) {
+                    session.removeAttribute(ProjectConstants.SESSION_ATTRIBUTE_SUCCESS_MESSAGE);
+            %>
+                <div class="popup"><%= successMessage %></div>
+            <% } else if (errorMessage != null) {
+                session.removeAttribute(ProjectConstants.SESSION_ATTRIBUTE_ERROR);
+            %>
+                <div class="popup errorMessage"><%= errorMessage %></div>
+            <% } %>
+
             <div class="">
                 <h1>Checkout</h1>
-
                 <div class="summary">
                     <h3>Summary</h3>
                     <div class="tableContainer">
@@ -194,55 +206,55 @@
                     <p><strong>Total</strong>: $<%= String.format("%.2f", total) %></p>
                 </div>
             </div>
-        </form>
         
-        <form id="checkout-form">
-            <div class="formWrapper">
-                <label class="formHeading">Personal Information</label>
-                <div class="formSection">
-                    <% if (user != null) { %>
-                        <div class="inputSection">
-                            <input class="inputField" type="text" placeholder="First Name" name="firstName" value="<%= user.getFirstName() %>" disabled />
-                        </div>
-                        <div class="inputSection">
-                            <input class="inputField" type="text" placeholder="Last Name" name="lastName" value="<%= user.getLastName() %>" disabled />
-                        </div>
-                    <% } else { %>
-                        <div class="inputSection">
-                            <input class="inputField" type="text" placeholder="First Name" name="firstName" required />
-                        </div>
-                        <div class="inputSection">
-                            <input class="inputField" type="text" placeholder="Last Name" name="lastName" required />
-                        </div>
-                    <% } %>
+
+            <form id="checkout-form" method="POST" action="/placeOrder">
+                <div class="formWrapper">
+                    <label class="formHeading">Personal Information</label>
+                    <div class="formSection">
+                        <% if (user != null) { %>
+                            <div class="inputSection">
+                                <input class="inputField" type="text" placeholder="First Name" name="firstName" value="<%= user.getFirstName() %>" disabled />
+                            </div>
+                            <div class="inputSection">
+                                <input class="inputField" type="text" placeholder="Last Name" name="lastName" value="<%= user.getLastName() %>" disabled />
+                            </div>
+                        <% } else { %>
+                            <div class="inputSection">
+                                <input class="inputField" type="text" placeholder="First Name" name="firstName" required />
+                            </div>
+                            <div class="inputSection">
+                                <input class="inputField" type="text" placeholder="Last Name" name="lastName" required />
+                            </div>
+                        <% } %>
+                    </div>
+
+                    <label class="inputHeading"><strong>Delivery Address</strong></label>
+                    <input class="inputField" type="text" placeholder="Address" name="address" required />
+
+                    <label class="inputHeading"><strong>Credit Card Info</strong></label>
+                    <input class="inputField" type="text" placeholder="Card Number" name="cardNumber" required />
+
+                    <div class="buttons">
+                        <button type="button" class="button" onclick="cancelOrder()">Cancel Order</button>
+                        <button type="submit" class="button button-blue">Place Order</button>
+                    </div>
                 </div>
+            </form>
+        </div>
 
-                <label class="inputHeading"><strong>Delivery Address</strong></label>
-                <input class="inputField" type="text" placeholder="Address" name="address" required />
-
-                <label class="inputHeading"><strong>Credit Card Info</strong></label>
-                <input class="inputField" type="text" placeholder="Card Number" name="cardNumber" required />
-
-                <div class="buttons">
-                    <button type="button" class="button" onclick="cancelOrder()">Cancel Order</button>
-                    <button type="submit" class="button button-blue">Place Order</button>
-                </div>
-            </div>
-        </form>
-
-        <script>
+        <%-- <script>
             document.getElementById("checkout-form").addEventListener("submit", function (e) {
                 e.preventDefault();
                 alert("Order placed successfully!");
-                this.reset();
             });
 
             function cancelOrder() {
                 if (confirm("Are you sure you want to cancel the order?")) {
-                  document.getElementById("checkout-form").reset();
-                  location.href = "index.jsp"
+                    document.getElementById("checkout-form").reset();
+                    location.href = "index.jsp"
                 }
             }
-        </script>
+        </script> --%>
     </body>
 </html>
