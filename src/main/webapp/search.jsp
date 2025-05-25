@@ -18,6 +18,7 @@
 
             header {
                 position: sticky;
+                top: 0;
             }
 
             .container {
