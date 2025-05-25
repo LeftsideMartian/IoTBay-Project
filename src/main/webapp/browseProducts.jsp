@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <title>Search - IoTBay</title>
+    <title>Browse Products - IoTBay</title>
     <link rel="stylesheet" href="css/index.css" />
     <style>
         body {
@@ -13,6 +13,10 @@
             margin: 0;
             padding: 0;
             background-color: #f9fbfd;
+        }
+        .header {
+            position: sticky;
+            top: 0;
         }
         .container {
             display: flex;

@@ -7,7 +7,7 @@
     <head>
         <link rel="stylesheet" href="css/index.css">
         <link rel="shortcut icon" href="css/iotbayIcon.ico">
-        <title>Manage products</title>
+        <title>Manage Products - IoTBay</title>
 
         <style>
             body {
