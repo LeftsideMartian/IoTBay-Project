@@ -1,5 +1,8 @@
 <%@ page import="java.util.List" %>
 <%@ page import="iotbay.model.Product" %>
+<%@ page import="iotbay.helper.ProjectConstants" %>
+<%@ page import="iotbay.service.ProductService" %>
+<%@page import="java.sql.Connection"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,7 +17,7 @@
             padding: 0;
             background-color: #f9fbfd;
         }
-        .header {
+        header {
             position: sticky;
             top: 0;
         }
@@ -68,6 +71,19 @@
     </style>
 </head>
     <body>
+        <%
+            String successMessage = (String) session.getAttribute(ProjectConstants.SESSION_ATTRIBUTE_SUCCESS_MESSAGE);
+            String errorMessage = (String) session.getAttribute(ProjectConstants.SESSION_ATTRIBUTE_ERROR);
+            if (successMessage != null) {
+                session.removeAttribute(ProjectConstants.SESSION_ATTRIBUTE_SUCCESS_MESSAGE);
+        %>
+            <div class="popup"><%= successMessage %></div>
+        <% } else if (errorMessage != null) {
+            session.removeAttribute(ProjectConstants.SESSION_ATTRIBUTE_ERROR);
+        %>
+            <div class="popup errorMessage"><%= errorMessage %></div>
+        <% } %>
+
         <jsp:include page="header.jsp" />
 
         <h1>BROWSE PRODUCTS</h1>
@@ -75,20 +91,31 @@
         <div class="main-content">
             <main class="products">
                 <%
-                    List<Product> productList = (List<Product>) session.getAttribute("productList");
-                    if (productList == null || productList.isEmpty()) {
+                    Connection connection = (Connection) session.getAttribute(ProjectConstants.SESSION_ATTRIBUTE_DBCONNECTION);
+
+                    if (connection == null) {
+                        response.sendRedirect(ProjectConstants.HOME_PAGE);
+                    }
+
+                    ProductService productService = new ProductService(connection);
+                    List<Product> productList = productService.getAllInStockProducts();
+
+                    if (productList == null) {
+                        response.sendRedirect(ProjectConstants.HOME_PAGE);
+                    } else if (productList.isEmpty()) {
                 %>
                     <p style="padding: 20px;">No products found.</p>
                 <%
                     } else {
                         for (Product product : productList) {
                 %>
-                            <div class="product-card">
+                            <form class="product-card" action="BrowseProducts" method="POST">
                                 <div class="image-placeholder"></div>
                                 <strong><%= product.getProductName() %></strong>
                                 <div>$<%= String.format("%.2f", product.getPrice()) %></div>
-                                <button class="add-to-cart">ADD TO CART</button>
-                            </div>
+                                <input type="hidden" name="productId" value="<%= product.getProductId() %>"/>
+                                <button class="add-to-cart" type="submit">ADD TO CART</button>
+                            </form>
                 <%
                         }
                     }

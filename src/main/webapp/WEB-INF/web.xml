@@ -16,13 +16,13 @@
         <url-pattern>/servlet/dbConnection</url-pattern>
     </servlet-mapping>
     <servlet>
-        <servlet-name>ProductsListInitialiser</servlet-name>
-        <servlet-class>iotbay.helper.ProductsListInitialiser</servlet-class>
+        <servlet-name>CartInitialiser</servlet-name>
+        <servlet-class>iotbay.helper.CartInitialiser</servlet-class>
         <load-on-startup>0</load-on-startup>
     </servlet>
     <servlet-mapping>
-        <servlet-name>ProductsListInitialiser</servlet-name>
-        <url-pattern>/servlet/productsListInitialiser</url-pattern>
+        <servlet-name>CartInitialiser</servlet-name>
+        <url-pattern>/servlet/CartInitialiser</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>CartController</servlet-name>

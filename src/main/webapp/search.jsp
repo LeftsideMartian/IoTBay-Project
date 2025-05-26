@@ -129,19 +129,22 @@
             <main class="products">
                 <%
                     List<Product> productList = (List<Product>) session.getAttribute("productList");
-                    if (productList == null || productList.isEmpty()) {
+                    if (productList == null) {
+                        response.sendRedirect(ProjectConstants.HOME_PAGE);
+                    } else if (productList.isEmpty()) {
                 %>
                     <p style="padding: 20px;">No products found.</p>
                 <%
                     } else {
                         for (Product product : productList) {
                         %>
-                            <div class="product-card">
+                            <form class="product-card" action="SearchProducts" method="POST">
                                 <div class="image-placeholder"></div>
                                 <strong><%= product.getProductName() %></strong>
                                 <div>$<%= String.format("%.2f", product.getPrice()) %></div>
+                                <input type="hidden" name="productId" value="<%= product.getProductId() %>"/>
                                 <button class="add-to-cart">ADD TO CART</button>
-                            </div>
+                            </form>
                         <%
                         }
                     }

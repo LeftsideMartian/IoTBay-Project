@@ -22,7 +22,7 @@
         <% } %>
 
         <jsp:include page="/servlet/dbConnection" flush="true" />
-        <jsp:include page="/servlet/productsListInitialiser" flush="true" />
+        <jsp:include page="/servlet/CartInitialiser" flush="true" />
         <% User user = (User) session.getAttribute(ProjectConstants.SESSION_ATTRIBUTE_USER); %>
 
         <div class="gridContainer">
