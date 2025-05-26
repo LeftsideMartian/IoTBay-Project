@@ -305,6 +305,7 @@ header {
     border-radius: 36px;
     font-weight: 400;
     padding: 1em 1.3em;
+    z-index: 1000;
 
     text-align: center;
     align-content: center;

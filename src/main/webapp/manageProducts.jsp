@@ -7,7 +7,7 @@
     <head>
         <link rel="stylesheet" href="css/index.css">
         <link rel="shortcut icon" href="css/iotbayIcon.ico">
-        <title>Manage products</title>
+        <title>Manage Products - IoTBay</title>
 
         <style>
             body {
@@ -81,8 +81,20 @@
         <% } %>
 
         <%
-            List<Product> products = (List<Product>) session.getAttribute(ProjectConstants.SESSION_ATTRIBUTE_PRODUCT_LIST);
+            Connection connection = (Connection) session.getAttribute(ProjectConstants.SESSION_ATTRIBUTE_DBCONNECTION);
+
+            if (connection == null) {
+                response.sendRedirect(ProjectConstants.HOME_PAGE);
+            }
+
+            ProductService productService = new ProductService(connection);
+            List<Product> products = productService.getAllInStockProducts();
+
+            if (products == null) {
+                response.sendRedirect(ProjectConstants.HOME_PAGE);
+            }
         %>
+
         <div class="gridContainer">
             <jsp:include page="header.jsp"/>
             

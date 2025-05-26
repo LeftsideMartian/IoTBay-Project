@@ -26,8 +26,10 @@ public class ManageProductsController extends HttpServlet {
             if (connection == null || user == null) {
                 // If so, redirect home
                 response.sendRedirect(ProjectConstants.HOME_PAGE);
+                return;
             } else {
                 response.sendRedirect(ProjectConstants.MANAGE_PRODUCTS_PAGE);
+                return;
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -53,6 +55,7 @@ public class ManageProductsController extends HttpServlet {
             // Try to redirect to the product details page
             try {
                 response.sendRedirect(ProjectConstants.PRODUCT_DETAILS_PAGE);
+                return;
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -61,6 +64,7 @@ public class ManageProductsController extends HttpServlet {
             try {
                 session.setAttribute(ProjectConstants.SESSION_ATTRIBUTE_ERROR, "Product not found.");
                 response.sendRedirect(ProjectConstants.MANAGE_PRODUCTS_PAGE);
+                return;
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

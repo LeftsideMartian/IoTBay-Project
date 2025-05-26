@@ -47,6 +47,7 @@ public class ManageAccountController extends HttpServlet {
             } else {
                 session.setAttribute(ProjectConstants.SESSION_ATTRIBUTE_ERROR, "Current password is incorrect.");
                 response.sendRedirect(ProjectConstants.MANAGE_ACCOUNT_PAGE);
+                return;
             }
         }
 
@@ -55,5 +56,6 @@ public class ManageAccountController extends HttpServlet {
 
         session.setAttribute(ProjectConstants.SESSION_ATTRIBUTE_USER, user);
         response.sendRedirect(ProjectConstants.MANAGE_ACCOUNT_PAGE);
+        return;
     }
 }

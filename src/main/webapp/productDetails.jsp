@@ -8,7 +8,7 @@
     <head>
         <link rel="stylesheet" href="css/index.css">
         <link rel="shortcut icon" href="css/iotbayIcon.ico">
-        <title>Product: <%=product.getProductName()%> details</title>
+        <title>Product: <%=product.getProductName()%> details - IoTBay</title>
     </head>
     <body>
         <%

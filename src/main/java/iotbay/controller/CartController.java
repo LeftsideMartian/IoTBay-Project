@@ -21,9 +21,20 @@ public class CartController extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) {
         try {
             HttpSession session = request.getSession();
+            String currentPage = request.getParameter(ProjectConstants.REQUEST_ATTRIBUTE_PAGE);
+
             List<Product> cart = (List<Product>) session.getAttribute(ProjectConstants.SESSION_ATTRIBUTE_CART);
-            List<String> productIds = Arrays.stream(request.getParameterValues(ProjectConstants.REQUEST_ATTRIBUTE_PRODUCT_ID)).collect(Collectors.toCollection(ArrayList::new));
             List<Product> newCart = new ArrayList<>();
+
+            String[] params = request.getParameterValues(ProjectConstants.REQUEST_ATTRIBUTE_PRODUCT_ID);
+
+            if (params == null) {
+                session.setAttribute(ProjectConstants.SESSION_ATTRIBUTE_CART, newCart);
+                response.sendRedirect(currentPage);
+                return;
+            }
+
+            List<String> productIds = Arrays.stream(params).collect(Collectors.toCollection(ArrayList::new));
 
             // Remove products from cart
             if (productIds != null) {
@@ -47,7 +58,9 @@ public class CartController extends HttpServlet {
             }
 
             session.setAttribute(ProjectConstants.SESSION_ATTRIBUTE_CART, newCart);
-            response.sendRedirect(request.getParameter(ProjectConstants.REQUEST_ATTRIBUTE_PAGE));
+            session.setAttribute(ProjectConstants.SESSION_ATTRIBUTE_SUCCESS_MESSAGE, "Cart updated successfully.");
+            response.sendRedirect(currentPage);
+            return;
         } catch (IOException e) {
             System.out.println("Could not send redirect from CartController");
             System.out.println(Arrays.toString(e.getStackTrace()));

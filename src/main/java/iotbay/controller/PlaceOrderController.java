@@ -25,8 +25,10 @@ public class PlaceOrderController extends HttpServlet {
         try {
             if (user == null) {
                 response.sendRedirect(ProjectConstants.LOGIN_PAGE);
+                return;
             } else {
                 response.sendRedirect(ProjectConstants.PLACE_ORDER_PAGE);
+                return;
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -76,6 +78,7 @@ public class PlaceOrderController extends HttpServlet {
         session.setAttribute(ProjectConstants.SESSION_ATTRIBUTE_SUCCESS_MESSAGE, "Order placed successfully!");
 
         // Redirect to confirmation page
-        response.sendRedirect("index.jsp");
+        response.sendRedirect(ProjectConstants.HOME_PAGE);
+        return;
     }
 }
