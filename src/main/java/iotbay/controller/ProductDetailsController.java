@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class ProductDetailsController extends HttpServlet {
@@ -33,11 +34,15 @@ public class ProductDetailsController extends HttpServlet {
         // Update product in the database
         productService.updateProduct(currentlySelectedProduct);
 
+        // Clear cart
+        session.setAttribute(ProjectConstants.SESSION_ATTRIBUTE_CART, new ArrayList<Product>());
+
         // Send success message and try to redirect to manage products page
         session.setAttribute(ProjectConstants.SESSION_ATTRIBUTE_SUCCESS_MESSAGE, "Updated product details successfully!");
 
         try {
             response.sendRedirect(ProjectConstants.MANAGE_PRODUCTS_PAGE);
+            return;
         } catch (IOException e) {
             System.out.println("Could not send redirect from Controller");
             System.out.println(Arrays.toString(e.getStackTrace()));
