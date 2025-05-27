@@ -9,6 +9,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 // Service class for performing CRUD operations on the Product table
 public class ProductService extends DBService {
@@ -70,6 +72,12 @@ public class ProductService extends DBService {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public List<Product> getAllInStockProducts() {
+        List<Product> allProducts = getAllProducts();
+
+        return allProducts.stream().filter(p -> p.getQuantity() > 0).collect(Collectors.toList());
     }
 
     // CRUD - Update

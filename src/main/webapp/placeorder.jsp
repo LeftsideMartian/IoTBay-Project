@@ -1,7 +1,7 @@
 <%@ page import="iotbay.model.Product" %>
-        <%@ page import="java.util.List" %>
-        <%@ page import="iotbay.helper.ProjectConstants" %>
-        
+<%@ page import="java.util.List" %>
+<%@ page import="iotbay.helper.ProjectConstants" %>
+<%@ page import="iotbay.model.User" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,142 +12,144 @@
         <link rel="shortcut icon" href="css/iotbayIcon.ico">
         <title>Checkout - IoTBay</title>
         <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap');
+            @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap');
 
-        
+            body {
+                background-color: #f2f8fc;
+                padding: 0px;
+            }
 
-        /* * {
-            margin: 0;
-            padding: 0;
-            border: none;
-            font-family: "Poppins", sans-serif;
-            font-style: normal;
-        } */
+            body div.placeOrderFlexBox {
+                padding: 20px;
+                display: flex;
+                gap: 2rem; 
+                flex-wrap: wrap; 
+                justify-content: center; 
+            }
 
-        body {
-            background-color: #f2f8fc;
-            padding: 0px;
-        }
+            header {
+                position: sticky;
+                top: 0;
+                left: 0;
+                right: 0;
+                z-index: 1000;
+            }
 
-        body div.placeOrderFlexBox {
-            padding: 20px;
-            display: flex;
-            gap: 2rem; 
-            flex-wrap: wrap; 
-            justify-content: center; 
-        }
+            .summary {
+                padding: 1em 1.5em;
+                border-radius: 25px;
+                filter: drop-shadow(
+                1px 2px 2px rgb(197, 197, 197)
+                );
+                background-color: #fff;
+                width: 40rem;
+            }
 
-        header {
-            position: sticky;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-        }
+            .summaryHeading {
+                font-size: clamp(1rem, 3vw, 1.5rem);
+                font-weight: 700;
+                padding: 1rem;
+            }
 
-        .summary {
-            padding: 1em 1.5em;
-            border-radius: 25px;
-            filter: drop-shadow(
-            1px 2px 2px rgb(197, 197, 197)
-            );
-            background-color: #fff;
-            width: 40rem;
-        }
+            .placeOrderTable {
+                width: 100%;
+                border-spacing: 0rem 0rem;
+            }
 
-        .summaryHeading {
-            font-size: clamp(1rem, 3vw, 1.5rem);
-            font-weight: 700;
-            padding: 1rem;
-        }
+            .formWrapper {
+                margin-top: 2rem;
+                background-color: #fff;
+                padding: 2rem;
+                border-radius: 25px;
+                filter: drop-shadow(1px 2px 2px rgb(197, 197, 197));
+                width: 42rem; 
+                box-sizing: border-box;
+            }
 
-        .placeOrderTable {
-            width: 100%;
-            border-spacing: 0rem 0rem;
-        }
+            .formSection {
+                display: flex;
+                gap: 1rem;
+                margin-bottom: 1rem;
+            }
 
-        .formWrapper {
-            margin-top: 2rem;
-            background-color: #fff;
-            padding: 2rem;
-            border-radius: 25px;
-            filter: drop-shadow(1px 2px 2px rgb(197, 197, 197));
-            width: 42rem; 
-            box-sizing: border-box;
-        }
+            .inputSection {
+                flex: 1;
+            }
 
-        .formSection {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
+            .inputField {
+                width: 100%;
+                padding: 0.75rem;
+                margin-bottom: 1rem;
+                border-radius: 10px;
+                border: 1px solid #ccc;
+                box-sizing: border-box;
+            }
 
-        .inputSection {
-            flex: 1;
-        }
+            .inputHeading, .formHeading {
+                display: block;
+                margin-top: 1rem;
+                margin-bottom: 0.5rem;
+                font-weight: 600;
+            }
 
-        .inputField {
-            width: 100%;
-            padding: 0.75rem;
-            margin-bottom: 1rem;
-            border-radius: 10px;
-            border: 1px solid #ccc;
-            box-sizing: border-box;
-        }
+            th, td {
+                padding: 1rem 1rem 1rem 0rem;
+                text-align: left;
+            }
 
-        .inputHeading, .formHeading {
-            display: block;
-            margin-top: 1rem;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-        }
+            th {
+                background-color: #fff;
+                position: sticky;
+                top: 0;
+                z-index: 1;
+                padding-top: 0;
+                margin-top: 0;
+            }
 
+            td:last-child {
+                text-align: right;
+            }
 
-        th, td {
-            padding: 1rem 1rem 1rem 0rem;
-            text-align: left;
-        }
+            .tableContainer {
+                max-height: 300px;
+                overflow-y: auto;
+                margin-top: 10px;
+            }
 
-        th {
-            background-color: #fff;
-            position: sticky;
-            top: 0;
-            z-index: 1;
-            padding-top: 0;
-            margin-top: 0;
-        }
+            .buttons {
+                margin-top: 20px;
+                display: flex;
+                justify-content: space-evenly;
+            }
 
-        td:last-child {
-            text-align: right;
-        }
+            strong {
+                font-size: 0.9rem;
+                font-weight: 700;
+                margin-bottom: 0.2rem;
+            }
 
-        .tableContainer {
-            max-height: 300px;
-            overflow-y: auto;
-            margin-top: 10px;
-        }
-
-
-        .buttons {
-            margin-top: 20px;
-            display: flex;
-            justify-content: space-evenly;
-        }
-
-        strong {
-            font-size: 0.9rem;
-            font-weight: 700;
-            margin-bottom: 0.2rem;
-        }
-
-        .totalHeading {
-            text-align: right;
-        }
+            .totalHeading {
+                text-align: right;
+            }
         </style>
     </head>
 
     <body>
         <%
+            String successMessage = (String) session.getAttribute(ProjectConstants.SESSION_ATTRIBUTE_SUCCESS_MESSAGE);
+            String errorMessage = (String) session.getAttribute(ProjectConstants.SESSION_ATTRIBUTE_ERROR);
+            if (successMessage != null) {
+                session.removeAttribute(ProjectConstants.SESSION_ATTRIBUTE_SUCCESS_MESSAGE);
+        %>
+            <div class="popup"><%= successMessage %></div>
+        <% } else if (errorMessage != null) {
+            session.removeAttribute(ProjectConstants.SESSION_ATTRIBUTE_ERROR);
+        %>
+            <div class="popup errorMessage"><%= errorMessage %></div>
+        <% } %>
+
+        <%
+            User user = (User) session.getAttribute(ProjectConstants.SESSION_ATTRIBUTE_USER);
             List<Product> cart = (List<Product>) session.getAttribute(ProjectConstants.SESSION_ATTRIBUTE_CART);
         %>
         <jsp:include page="header.jsp"/>
@@ -155,7 +157,6 @@
         <div class="placeOrderFlexBox">
             <div class="">
                 <h1>Checkout</h1>
-
                 <div class="summary">
                     <h3>Summary</h3>
                     <div class="tableContainer">
@@ -205,45 +206,55 @@
                     <p><strong>Total</strong>: $<%= String.format("%.2f", total) %></p>
                 </div>
             </div>
-        </form>
         
-        <form id="checkout-form">
-            <div class="formWrapper">
-                <label class="formHeading">Personal Information</label>
-                <div class="formSection">
-                    <div class="inputSection">
-                        <input class="inputField" type="text" placeholder="First Name" name="firstName" required />
+
+            <form id="checkout-form" method="POST" action="/placeOrder">
+                <div class="formWrapper">
+                    <label class="formHeading">Personal Information</label>
+                    <div class="formSection">
+                        <% if (user != null) { %>
+                            <div class="inputSection">
+                                <input class="inputField" type="text" placeholder="First Name" name="firstName" value="<%= user.getFirstName() %>" disabled />
+                            </div>
+                            <div class="inputSection">
+                                <input class="inputField" type="text" placeholder="Last Name" name="lastName" value="<%= user.getLastName() %>" disabled />
+                            </div>
+                        <% } else { %>
+                            <div class="inputSection">
+                                <input class="inputField" type="text" placeholder="First Name" name="firstName" required />
+                            </div>
+                            <div class="inputSection">
+                                <input class="inputField" type="text" placeholder="Last Name" name="lastName" required />
+                            </div>
+                        <% } %>
                     </div>
-                    <div class="inputSection">
-                        <input class="inputField" type="text" placeholder="Last Name" name="lastName" required />
+
+                    <label class="inputHeading"><strong>Delivery Address</strong></label>
+                    <input class="inputField" type="text" placeholder="Address" name="address" required />
+
+                    <label class="inputHeading"><strong>Credit Card Info</strong></label>
+                    <input class="inputField" type="text" placeholder="Card Number" name="cardNumber" required />
+
+                    <div class="buttons">
+                        <button type="button" class="button" onclick="cancelOrder()">Cancel Order</button>
+                        <button type="submit" class="button button-blue">Place Order</button>
                     </div>
                 </div>
+            </form>
+        </div>
 
-                <label class="inputHeading"><strong>Delivery Address</strong></label>
-                <input class="inputField" type="text" placeholder="Address" name="address" required />
-
-                <label class="inputHeading"><strong>Credit Card Info</strong></label>
-                <input class="inputField" type="text" placeholder="Card Number" name="cardNumber" required />
-
-                <div class="buttons">
-                    <button type="button" class="button" onclick="cancelOrder()">Cancel Order</button>
-                    <button type="submit" class="button button-blue">Place Order</button>
-                </div>
-            </div>
-        </form>
-
-        <script>
+        <%-- <script>
             document.getElementById("checkout-form").addEventListener("submit", function (e) {
                 e.preventDefault();
                 alert("Order placed successfully!");
-                this.reset();
             });
 
             function cancelOrder() {
                 if (confirm("Are you sure you want to cancel the order?")) {
-                  document.getElementById("checkout-form").reset();
+                    document.getElementById("checkout-form").reset();
+                    location.href = "index.jsp"
                 }
             }
-        </script>
+        </script> --%>
     </body>
 </html>

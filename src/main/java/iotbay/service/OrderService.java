@@ -4,6 +4,7 @@ import iotbay.helper.ProjectConstants;
 import iotbay.model.DeliveryStatus;
 import iotbay.model.Order;
 import iotbay.model.Product;
+import iotbay.model.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,19 +25,20 @@ public class OrderService extends DBService {
 
     // CRUD - Create method
     public void createOrder(Order order) {
-        // Fetch query from SQL file
         String query = getQueryFromFile(ProjectConstants.ORDERS_QUERY_CREATE_ORDER);
 
         try {
             // Create row in order table
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, order.getOrderId());
-            preparedStatement.setInt(2, order.getUserId());
-            preparedStatement.setString(3, order.getDeliveryAddress());
-            preparedStatement.setString(4, order.getDeliveryStatus());
-            preparedStatement.setString(5, order.getCardNumber());
+            preparedStatement.setInt(1, order.getUserId());
+            preparedStatement.setString(2, order.getDeliveryAddress());
+            preparedStatement.setString(3, order.getDeliveryStatus());
+            preparedStatement.setString(4, order.getCardNumber());
 
             preparedStatement.executeUpdate();
+
+            List<Order> orders = getAllOrders();
+            int orderId = orders.get(orders.size() - 1).getOrderId();
 
             query = getQueryFromFile(ProjectConstants.ORDERPRODUCT_QUERY_CREATE_ORDER_PRODUCT);
 
@@ -44,7 +46,7 @@ public class OrderService extends DBService {
             for (Product product : order.getProducts()) {
                 preparedStatement = connection.prepareStatement(query);
 
-                preparedStatement.setInt(1, order.getOrderId());
+                preparedStatement.setInt(1, orderId);
                 preparedStatement.setInt(2, product.getProductId());
                 preparedStatement.setInt(3, product.getQuantity());
 
@@ -55,19 +57,7 @@ public class OrderService extends DBService {
         }
     }
 
-    // CRUD - Read (Single order)
-    public Order getOrder(int orderId) {
-        List<Order> orders = getAllOrders();
-
-        for (Order order : orders) {
-            if (order.getOrderId() == orderId) {
-                return order;
-            }
-        }
-
-        return null;
-    }
-
+    // CRUD - Read (All)
     public List<Order> getAllOrders() {
         String query = getQueryFromFile(ProjectConstants.ORDERS_QUERY_GET_ALL_ORDERS);
 
@@ -116,5 +106,32 @@ public class OrderService extends DBService {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    // CRUD - Read (Single order)
+    public Order getOrder(int orderId) {
+        List<Order> orders = getAllOrders();
+
+        for (Order order : orders) {
+            if (order.getOrderId() == orderId) {
+                return order;
+            }
+        }
+
+        return null;
+    }
+
+    // CRUD - Read (Rows for a specific user)
+    public List<Order> getUserOrders(User user) {
+        List<Order> allOrders = getAllOrders();
+        List<Order> orders = new ArrayList<>();
+
+        for (Order order : allOrders) {
+            if (order.getUserId() == user.getUserId()) {
+                orders.add(order);
+            }
+        }
+
+        return orders;
     }
 }

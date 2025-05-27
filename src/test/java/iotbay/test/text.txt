@@ -1,8 +1,0 @@
-httpSession.setAttribute(
-    "currentlySelectedProduct",
-    Product {productName='Temperature Sensor', description='High-precision temperature sensor with digital output', price=29.99, quantity=100, category=Sensor}
-);
-httpSession.setAttribute(
-    "currentlySelectedProduct",
-    Product {productName='Temperature Sensor', description='High-precision temperature sensor with digital output', price=29.99, quantity=100, category=Sensor}
-);

@@ -1,22 +1,61 @@
 package iotbay.controller;
 
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import iotbay.model.User;
+import iotbay.service.UserService;
+import iotbay.helper.ProjectConstants;
 
-// Controller class for the manageAccount.jsp page
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.*;
+import java.io.IOException;
+import java.sql.Connection;
+import java.util.Objects;
+
+@WebServlet("/manageAccount")
 public class ManageAccountController extends HttpServlet {
-    // Using the POST method for updating account details
+
     @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response) {
-        // Fetch session object from request
-        // Fetch connection object from session
-        // Create an instance of the UserService class
-        // Fetch user from session
-        // Fetch user details from the request object (use registercontroller as reference)
-        // Update user object with new details
-        // call .updateUser() method from UserService
-        // redirect to manageAccount.jsp page
-    }
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+
+        // Get connection and user from session
+        Connection connection = (Connection) session.getAttribute(ProjectConstants.SESSION_ATTRIBUTE_DBCONNECTION);
+        User user = (User) session.getAttribute(ProjectConstants.SESSION_ATTRIBUTE_USER);
+
+        if (connection == null || user == null) {
+            response.sendRedirect(ProjectConstants.HOME_PAGE); // if not logged in
+            return;
+        }
+
+        String typeOfUpdate = request.getParameter("typeOfUpdate");
+
+        if (Objects.equals(typeOfUpdate, "updateDetails")) {
+            // Retrieve updated values from form
+            String newFirstName = request.getParameter(ProjectConstants.REQUEST_ATTRIBUTE_USER_FIRST_NAME);
+            String newLastName = request.getParameter(ProjectConstants.REQUEST_ATTRIBUTE_USER_LAST_NAME);
+            String newEmail = request.getParameter(ProjectConstants.REQUEST_ATTRIBUTE_USER_EMAIL);
     
+            // Update user object in session
+            user.setFirstName(newFirstName);
+            user.setLastName(newLastName);
+            user.setEmail(newEmail);
+        } else if (Objects.equals(typeOfUpdate, "updatePassword")) {
+            String currentPassword = request.getParameter("currentPassword");
+            if (Objects.equals(currentPassword, user.getPassword())) {
+                String newPassword = request.getParameter("newPassword");
+                user.setPassword(newPassword);
+            } else {
+                session.setAttribute(ProjectConstants.SESSION_ATTRIBUTE_ERROR, "Current password is incorrect.");
+                response.sendRedirect(ProjectConstants.MANAGE_ACCOUNT_PAGE);
+                return;
+            }
+        }
+
+        UserService userService = new UserService(connection);
+        userService.updateUser(user);
+
+        session.setAttribute(ProjectConstants.SESSION_ATTRIBUTE_USER, user);
+        response.sendRedirect(ProjectConstants.MANAGE_ACCOUNT_PAGE);
+        return;
+    }
 }

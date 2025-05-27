@@ -17,10 +17,26 @@ import java.util.List;
 
 @WebServlet("/placeOrder")
 public class PlaceOrderController extends HttpServlet {
+    @Override
+    public void doGet(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute(ProjectConstants.SESSION_ATTRIBUTE_USER);
+
+        try {
+            if (user == null) {
+                response.sendRedirect(ProjectConstants.LOGIN_PAGE);
+                return;
+            } else {
+                response.sendRedirect(ProjectConstants.PLACE_ORDER_PAGE);
+                return;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Get session and required attributes
         HttpSession session = request.getSession();
         Connection connection = (Connection) session.getAttribute(ProjectConstants.SESSION_ATTRIBUTE_DBCONNECTION);
@@ -31,35 +47,38 @@ public class PlaceOrderController extends HttpServlet {
         // Validate user and cart
         if (user == null || cart == null || cart.isEmpty()) {
             session.setAttribute(ProjectConstants.SESSION_ATTRIBUTE_ERROR, "Cart is empty or user not logged in.");
-            response.sendRedirect("checkout.jsp?error=empty");
+            response.sendRedirect(ProjectConstants.PLACE_ORDER_PAGE);
             return;
         }
 
         // Get form parameters
-        String firstName = request.getParameter("firstName");
-        String lastName = request.getParameter("lastName");
         String address = request.getParameter("address");
         String cardNumber = request.getParameter("cardNumber");
 
+        System.out.println(address);
+        System.out.println(cardNumber);
+
         // Validate required fields
-        if (firstName == null || lastName == null || address == null || cardNumber == null ||
-            firstName.isEmpty() || lastName.isEmpty() || address.isEmpty() || cardNumber.isEmpty()) {
+        if (address == null || cardNumber == null || address.isEmpty() || cardNumber.isEmpty()) {
             session.setAttribute(ProjectConstants.SESSION_ATTRIBUTE_ERROR, "Please fill in all required fields.");
-            response.sendRedirect("checkout.jsp?error=incomplete");
+            response.sendRedirect(ProjectConstants.PLACE_ORDER_PAGE);
             return;
         }
 
         // Create Order object
-        Order order = new Order(-1, user.getUserId(), address, DeliveryStatus.IN_PROCESSING, cardNumber, cart);
+        Order order = new Order(-1, user.getUserId(), address, DeliveryStatus.IN_PROGRESS, cardNumber, cart);
 
         // Save order to database
         OrderService orderService = new OrderService(connection);
+        System.out.println(order);
         orderService.createOrder(order);
 
         // Clear cart from session
         session.setAttribute(ProjectConstants.SESSION_ATTRIBUTE_CART, new ArrayList<Product>());
+        session.setAttribute(ProjectConstants.SESSION_ATTRIBUTE_SUCCESS_MESSAGE, "Order placed successfully!");
 
         // Redirect to confirmation page
-        response.sendRedirect("index.jsp" );
+        response.sendRedirect(ProjectConstants.HOME_PAGE);
+        return;
     }
 }

@@ -47,8 +47,8 @@ public class Product implements Serializable {
             '}';
     }
 
-    @Override
-    public boolean equals(Object o) {
-        return o.toString().equals(this.toString());
-    }
+    // @Override
+    // public boolean equals(Object o) {
+    //     return o.toString().equals(this.toString());
+    // }
 }
