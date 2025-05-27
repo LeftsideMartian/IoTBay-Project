@@ -1,3 +1,5 @@
+<%@page import="iotbay.helper.ProjectConstants"%>
+<%@page import="iotbay.model.User"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -9,6 +11,13 @@
                 background-color: #ffffff;
             }
 
+            .gridContainer {
+                display: flex;
+                flex-direction: column;
+                min-height: 100vh;
+            }
+
+            
             .contentWrapper {
                 flex: 1;
                 padding: 40px;
@@ -72,48 +81,70 @@
         </style>
     </head>
     <body>
-        <jsp:include page="header.jsp"/>
-        <div class="contentWrapper">
-            <h1>Manage Your Account</h1>
-            <hr>
+        <%
+            String successMessage = (String) session.getAttribute(ProjectConstants.SESSION_ATTRIBUTE_SUCCESS_MESSAGE);
+            String errorMessage = (String) session.getAttribute(ProjectConstants.SESSION_ATTRIBUTE_ERROR);
+            if (successMessage != null) {
+                session.removeAttribute(ProjectConstants.SESSION_ATTRIBUTE_SUCCESS_MESSAGE);
+        %>
+            <div class="popup"><%= successMessage %></div>
+        <% } else if (errorMessage != null) {
+            session.removeAttribute(ProjectConstants.SESSION_ATTRIBUTE_ERROR);
+        %>
+            <div class="popup errorMessage"><%= errorMessage %></div>
+        <% } %>
 
-            <div class="accountContent">
-                <div class="sidebar">
-                    <a href="manageAccount.jsp" class="button lrgBtn button-blue">Account</a>
-                    <a href="" class="button lrgBtn">Orders</a>
-                </div>
+        <% User user = (User) session.getAttribute(ProjectConstants.SESSION_ATTRIBUTE_USER); %>
+        <div class = "gridContainer">
+            <jsp:include page="header.jsp"/>
+            <div class="contentWrapper">
+                <h1>Manage Your Account</h1>
+                <hr>
 
-                <div class="account-section">
-                    <%-- To be updated to servlet url --%>
-                    <form action="updateAccount.jsp" method="POST" class="section-box">
-                        <h2>Personal Information</h2>
+                <div class="accountContent">
+                    <div class="sidebar">
+                        <a href="manageAccount.jsp" class="button lrgBtn button-blue">Account</a>
+                        <a href="vieworders.jsp" class="button lrgBtn">Orders</a>
+                        <% if (user.doesHaveAdminPermissions()) { %>
+                            <a href="/servlet/manageProducts" class="button lrgBtn">Products</a>
+                        <% } %>
+                    </div>
 
-                        <label for="firstName" class="inputHeading"><strong>First Name</strong></label><br>
-                        <input type="text" name="firstName" id="firstName" class="inputField" required><br><br>
+                    <div class="account-section">
+                        <form action="manageAccount" method="POST" class="section-box">
+                            <h2>Personal Information</h2>
 
-                        <label for="lastName" class="inputHeading"><strong>Last Name</strong></label><br>
-                        <input type="text" name="lastName" id="lastName" class="inputField" required><br><br>
+                            <label for="firstName" class="inputHeading"><strong>First Name</strong></label><br>
+                            <input type="text" name="firstName" id="firstName" class="inputField" value="<%= user.getFirstName() %>" required><br><br>
 
-                        <label for="email" class="inputHeading"><strong>Email</strong></label><br>
-                        <input type="email" name="email" id="email" class="inputField" required><br><br>
+                            <label for="lastName" class="inputHeading"><strong>Last Name</strong></label><br>
+                            <input type="text" name="lastName" id="lastName" class="inputField" value="<%= user.getLastName() %>" required><br><br>
 
-                        <button type="submit" class="button med-btn button-blue">Update</button>
-                    </form>
+                            <label for="email" class="inputHeading"><strong>Email</strong></label><br>
+                            <input type="email" name="email" id="email" class="inputField" value="<%= user.getEmail() %>" required><br><br>
 
-                    <hr>
+                            <input type="hidden" name="typeOfUpdate" value="updateDetails">
 
-                    <form action="updateAccount.jsp" method="POST" class="section-box">
-                        <h2>Change Password</h2>
+                            <button type="submit" class="button med-btn button-blue">Update</button>
+                        </form>
 
-                        <label for="currentPassword" class="inputHeading"><strong>Current Password</strong></label><br>
-                        <input type="password" name="currentPassword" id="currentPassword" class="inputField"><br><br>
+                        <hr>
 
-                        <label for="newPassword" class="inputHeading"><strong>New Password</strong></label><br>
-                        <input type="password" name="newPassword" id="newPassword" class="inputField"><br><br>
+                        <form action="manageAccount" method="POST" class="section-box">
+                            <h2>Change Password</h2>
 
-                        <button type="submit" class="button medBtn button-blue">Update Password</button>
-                        <a href="account.jsp" class="button medBtn">Cancel</a>
-                    </form>
+                            <label for="currentPassword" class="inputHeading"><strong>Current Password</strong></label><br>
+                            <input type="password" name="currentPassword" id="currentPassword" class="inputField"><br><br>
+
+                            <label for="newPassword" class="inputHeading"><strong>New Password</strong></label><br>
+                            <input type="password" name="newPassword" id="newPassword" class="inputField"><br><br>
+
+                            <input type="hidden" name="typeOfUpdate" value="updatePassword">
+
+                            <button type="submit" class="button medBtn button-blue">Update Password</button>
+                            <a href="manageAccount.jsp" class="button medBtn">Cancel</a>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

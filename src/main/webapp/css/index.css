@@ -244,7 +244,7 @@ header {
 
 .cartButtonWrapper {
     display: flex;
-    justify-content: end;
+    justify-content: space-between;
     align-items: bottom;
 }
 
@@ -305,6 +305,7 @@ header {
     border-radius: 36px;
     font-weight: 400;
     padding: 1em 1.3em;
+    z-index: 1000;
 
     text-align: center;
     align-content: center;
@@ -417,10 +418,10 @@ hr {
 }
 
 .manageStockTableWrapper {
-    padding: 1em 2em;
+    padding: 1em 0em;
     border-radius: 25px;
     background-color: #fff;
-    width: 63rem;
+    width: 50rem;
 }
 
 .scrollableTable {
