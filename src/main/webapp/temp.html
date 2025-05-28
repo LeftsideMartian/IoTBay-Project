@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <title>Search - IoTBay</title>
+    <title>Browse Products - IoTBay</title>
     <link rel="stylesheet" href="css/index.css" />
     <style>
         body {
@@ -14,26 +14,13 @@
             padding: 0;
             background-color: #f9fbfd;
         }
-        .container {
-            display: flex;
+        .main-content {
             padding: 20px;
         }
-        .sidebar {
-            width: 200px;
-            background-color: white;
-            padding: 10px;
-            border-right: 1px solid #e0e0e0;
-        }
-        .sidebar h4 {
-            margin: 10px 0;
-            cursor: pointer;
-        }
         .products {
-            flex: 1;
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             gap: 20px;
-            padding: 0 20px;
         }
         .product-card {
             background-color: white;
@@ -47,26 +34,28 @@
             margin-bottom: 10px;
         }
         .add-to-cart {
-            background-color: #f0f4f8;
+            background-color: #007BFF;
+            color: white;
             border: none;
             padding: 5px 10px;
             cursor: pointer;
+            margin-top: 10px;
         }
-        .breadcrumb {
-            font-size: 12px;
-            margin-bottom: 20px;
+        .add-to-cart:hover {
+            background-color: #0056b3;
         }
         h1 {
             text-align: center;
             margin-top: 20px;
+            margin-bottom: 30px;
         }
     </style>
 </head>
 <body>
     <jsp:include page="header.jsp" />
 
-    <h1>SEARCH PRODUCTS</h1>
-
+    <h1>BROWSE PRODUCTS</h1>
+    
     <div class="main-content">
         <main class="products">
             <%
@@ -78,12 +67,17 @@
                 } else {
                     for (Product product : productList) {
             %>
-                        <div class="product-card">
-                            <div class="image-placeholder"></div>
-                            <strong><%= product.getProductName() %></strong>
-                            <div>$<%= String.format("%.2f", product.getPrice()) %></div>
-                            <button class="add-to-cart">ADD TO CART</button>
-                        </div>
+                <form action="CartController" method="post">
+                    <input type="hidden" name="productId" value="<%= product.getProductId() %>" />
+                    <input type="hidden" name="quantity" value="1" />
+                    <input type="hidden" name="page" value="BrowseProducts" />
+                    <div class="product-card">
+                        <div class="image-placeholder"></div>
+                        <strong><%= product.getProductName() %></strong>
+                        <div>$<%= String.format("%.2f", product.getPrice()) %></div>
+                        <button type="submit" class="add-to-cart">ADD TO CART</button>
+                    </div>
+                </form>
             <%
                     }
                 }
@@ -92,4 +86,3 @@
     </div>
 </body>
 </html>
-
