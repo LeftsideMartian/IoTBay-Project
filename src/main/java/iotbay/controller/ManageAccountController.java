@@ -15,7 +15,7 @@ import java.util.Objects;
 public class ManageAccountController extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
 
         // Get connection and user from session
@@ -47,6 +47,7 @@ public class ManageAccountController extends HttpServlet {
             } else {
                 session.setAttribute(ProjectConstants.SESSION_ATTRIBUTE_ERROR, "Current password is incorrect.");
                 response.sendRedirect(ProjectConstants.MANAGE_ACCOUNT_PAGE);
+                return;
             }
         }
 
