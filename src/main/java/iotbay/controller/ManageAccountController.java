@@ -13,9 +13,9 @@ import java.util.Objects;
 
 @WebServlet("/manageAccount")
 public class ManageAccountController extends HttpServlet {
-
+    // Using the POST method for updating account details
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
 
         // Get connection and user from session
