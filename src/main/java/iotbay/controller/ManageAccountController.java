@@ -13,7 +13,7 @@ import java.util.Objects;
 
 @WebServlet("/manageAccount")
 public class ManageAccountController extends HttpServlet {
-
+    // Using the POST method for updating account details
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
@@ -56,5 +56,6 @@ public class ManageAccountController extends HttpServlet {
 
         session.setAttribute(ProjectConstants.SESSION_ATTRIBUTE_USER, user);
         response.sendRedirect(ProjectConstants.MANAGE_ACCOUNT_PAGE);
+        return;
     }
 }

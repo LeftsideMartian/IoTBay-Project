@@ -1,2 +1,2 @@
-INSERT INTO Orders (Order_Id, User_Id, Delivery_Address, Delivery_Status, Card_Number) VALUES
-(?, ?, ?, ?, ?);
+INSERT INTO Orders (User_Id, Delivery_Address, Delivery_Status, Card_Number) VALUES
+(?, ?, ?, ?);

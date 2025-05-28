@@ -33,6 +33,7 @@ public class LoginController extends HttpServlet {
                 // Send error message for invalid email
                 session.setAttribute(ProjectConstants.SESSION_ATTRIBUTE_ERROR, "Invalid email.");
                 response.sendRedirect(ProjectConstants.LOGIN_PAGE);
+                return;
             } else {
                 // Try to log in
                 handleLogin(session, email, password, response);
@@ -57,10 +58,12 @@ public class LoginController extends HttpServlet {
             // Store in session and redirect to home page
             session.setAttribute(ProjectConstants.SESSION_ATTRIBUTE_USER, user);
             response.sendRedirect(ProjectConstants.HOME_PAGE);
+            return;
         } else {
             // Send error message for non-existent user
             session.setAttribute(ProjectConstants.SESSION_ATTRIBUTE_ERROR, "User does not exist in the database.");
             response.sendRedirect(ProjectConstants.LOGIN_PAGE);
+            return;
         }
     }
 
@@ -72,6 +75,7 @@ public class LoginController extends HttpServlet {
             HttpSession session = request.getSession();
             session.removeAttribute(ProjectConstants.SESSION_ATTRIBUTE_USER);
             response.sendRedirect(ProjectConstants.HOME_PAGE);
+            return;
         } catch (IOException e) {
             System.out.println("Could not send redirect from LoginController");
             System.out.println(Arrays.toString(e.getStackTrace()));
