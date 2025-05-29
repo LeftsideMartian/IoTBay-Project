@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Orders - IoBay</title>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="shortcut icon" href="css/iotbayIcon.ico">
+    <style>
+        body {
+            background-color: #ffffff;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .gridContainer {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .contentWrapper {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: #ccc;
+            margin-bottom: 30px;
+            width: 100%;
+        }
+
+        .ordersContent {
+            display: flex;
+            gap: 40px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            min-width: 150px;
+            border-right: 1px solid #ccc;
+            padding-right: 30px;
+        }
+
+        .orders-table {
+            flex-grow: 1;
+            padding-left: 40px;
+        }
+
+        #orderSearch {
+            margin-bottom: 20px;
+            padding: 8px 14px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            width: 300px;
+            font-size: 14px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        thead {
+            background-color: #f5fafd;
+        }
+
+        th, td {
+            padding: 14px 16px;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .view-btn {
+            padding: 5px 15px;
+            border: 1px solid #008cba;
+            border-radius: 20px;
+            background-color: #fff;
+            cursor: pointer;
+            font-size: 14px;
+            color: #008cba;
+        }
+
+        .view-btn:hover {
+            background-color: #f0fbff;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.6);
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 8% auto;
+            padding: 30px 40px;
+            border-radius: 15px;
+            width: 80%;
+            max-width: 650px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.25);
+            position: relative;
+            animation: slideIn 0.4s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-40px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .close {
+            color: #444;
+            position: absolute;
+            top: 18px;
+            right: 25px;
+            font-size: 28px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 25px;
+        }
+
+        .modal-header img {
+            width: 40px;
+            height: 40px;
+        }
+
+        .modal-header-text span {
+            display: block;
+        }
+
+        #modal-order-number {
+            font-weight: 700;
+            font-size: 22px;
+        }
+
+        #modal-email, #modal-order-date {
+            font-size: 14px;
+            color: #555;
+        }
+
+        .order-info-box {
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            padding: 20px 25px;
+            background: #fafafa;
+            margin-bottom: 25px;
+        }
+
+        .receipt-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 10px;
+        }
+
+        .receipt-table th {
+            text-align: left;
+            font-weight: 700;
+            font-size: 16px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #008cba;
+            color: #008cba;
+        }
+
+        .receipt-table td {
+            background: white;
+            padding: 14px 18px;
+            font-size: 15px;
+            border-radius: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            vertical-align: middle;
+        }
+
+        .receipt-table td.qty,
+        .receipt-table td.price,
+        .receipt-table td.subtotal {
+            text-align: right;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .receipt-total-row td {
+            border-top: 2px solid #008cba;
+            font-weight: 700;
+            font-size: 17px;
+            background: #f0fcff;
+        }
+
+        .modal-buttons {
+            margin-top: 28px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .modal-action-btn {
+            padding: 10px 26px;
+            border: none;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .cancel-btn {
+            background-color: #fff4e5;
+            color: #ff9900;
+        }
+
+        .cancel-btn:hover {
+            background-color: #ffe7b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="gridContainer">
+        <jsp:include page="header.jsp"/>
+
+        <div class="contentWrapper">
+            <h1>View Orders</h1>
+            <hr>
+            <div class="ordersContent">
+                <div class="sidebar">
+                    <a href="manageAccount.jsp" class="button lrgBtn">Account</a>
+                    <a href="vieworders.jsp" class="button lrgBtn button-blue">Orders</a>
+                </div>
+                <div class="orders-table">
+                    <input type="text" id="orderSearch" placeholder="Search by Order #" onkeyup="filterOrders()">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Order #</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>2025-05-21</td>
+                                <td>ORD1001</td>
+                                <td>$150</td>
+                                <td>Processing</td>
+                                <td><button class="view-btn" onclick="openModal('ORD1001', 'alice@example.com', '2025-05-21', order1Products)">View</button></td>
+                            </tr>
+                            <tr>
+                                <td>2025-05-22</td>
+                                <td>ORD1002</td>
+                                <td>$85</td>
+                                <td>Shipped</td>
+                                <td><button class="view-btn" onclick="openModal('ORD1002', 'bob@example.com', '2025-05-22', order2Products)">View</button></td>
+                            </tr>
+                            <tr>
+                                <td>2025-05-23</td>
+                                <td>ORD1003</td>
+                                <td>$230</td>
+                                <td>Delivered</td>
+                                <td><button class="view-btn" onclick="openModal('ORD1003', 'carol@example.com', '2025-05-23', order3Products)">View</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="orderModal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="modal-order-number" aria-modal="true">
+        <div class="modal-content">
+            <span class="close" role="button" aria-label="Close modal" tabindex="0">&times;</span>
+            <div class="modal-header">
+                <img src="images/iotBayIconBlack.png" alt="IoBay logo" />
+                <div class="modal-header-text">
+                    <span id="modal-order-number">Order Number</span>
+                    <span id="modal-email">Email</span>
+                    <span id="modal-order-date">Order Date</span>
+                </div>
+            </div>
+
+            <div class="order-info-box">
+                <table class="receipt-table">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Qty</th>
+                            <th>Price</th>
+                            <th>Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody id="receipt-body">
+                        <!-- Dynamically filled -->
+                    </tbody>
+                    <tfoot>
+                        <tr class="receipt-total-row">
+                            <td colspan="3">Total</td>
+                            <td id="modal-total-price"></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+            <div class="modal-buttons">
+                <button class="modal-action-btn cancel-btn" onclick="confirmCancel()">Cancel Order</button>
+            </div>
+        </div>
+    </div>
+
+<script>
+    // Product data for orders
+    const order1Products = [
+        { name: 'Wireless Mouse', qty: 2, price: 25 },
+        { name: 'Mechanical Keyboard', qty: 1, price: 100 }
+    ];
+
+    const order2Products = [
+        { name: 'USB-C Cable', qty: 3, price: 10 },
+        { name: 'Laptop Stand', qty: 1, price: 55 }
+    ];
+
+    const order3Products = [
+        { name: 'Gaming Headset', qty: 1, price: 70 },
+        { name: 'Webcam', qty: 1, price: 160 }
+    ];
+
+    const modal = document.getElementById('orderModal');
+    const closeBtn = modal.querySelector('.close');
+    const orderNumberEl = document.getElementById('modal-order-number');
+    const emailEl = document.getElementById('modal-email');
+    const orderDateEl = document.getElementById('modal-order-date');
+    const receiptBody = document.getElementById('receipt-body');
+    const totalPriceEl = document.getElementById('modal-total-price');
+
+    let currentOrderNumber = null;
+
+    // Open modal and populate details
+    function openModal(orderNumber, email, orderDate, products) {
+        currentOrderNumber = orderNumber;
+        orderNumberEl.textContent = orderNumber;
+        emailEl.textContent = email;
+        orderDateEl.textContent = orderDate;
+
+        // Clear previous products
+        receiptBody.innerHTML = '';
+
+        // Render product rows and calculate total
+        let total = 0;
+        products.forEach(product => {
+            const subtotal = product.qty * product.price;
+            total += subtotal;
+
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${product.name}</td>
+                <td class="qty">${product.qty}</td>
+                <td class="price">$${product.price.toFixed(2)}</td>
+                <td class="subtotal">$${subtotal.toFixed(2)}</td>
+            `;
+            receiptBody.appendChild(row);
+        });
+
+        totalPriceEl.textContent = `$${total.toFixed(2)}`;
+
+        modal.style.display = 'block';
+        modal.setAttribute('aria-hidden', 'false');
+
+        // Trap focus inside modal (optional)
+        // Focus on close button
+        closeBtn.focus();
+    }
+
+    // Close modal function
+    function closeModal() {
+        modal.style.display = 'none';
+        modal.setAttribute('aria-hidden', 'true');
+        currentOrderNumber = null;
+    }
+
+    // Click close button or ESC to close modal
+    closeBtn.addEventListener('click', closeModal);
+    closeBtn.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            closeModal();
+        }
+    });
+
+    window.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modal.style.display === 'block') {
+            closeModal();
+        }
+    });
+
+    // Click outside modal content closes modal
+    window.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            closeModal();
+        }
+    });
+
+    // Filter orders in table based on search input
+    function filterOrders() {
+        const input = document.getElementById('orderSearch');
+        const filter = input.value.toUpperCase();
+        const table = input.nextElementSibling; // The table after the input
+        const trs = table.getElementsByTagName('tr');
+
+        // Skip the header row at index 0
+        for (let i = 1; i < trs.length; i++) {
+            const td = trs[i].getElementsByTagName('td')[1]; // Order # column
+            if (td) {
+                const txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    trs[i].style.display = '';
+                } else {
+                    trs[i].style.display = 'none';
+                }
+            }
+        }
+    }
+
+    // Confirm cancel order - show a confirm dialog before canceling
+    function confirmCancel() {
+        if (!currentOrderNumber) return;
+
+        const confirmResult = window.confirm(`Are you sure you want to cancel order ${currentOrderNumber}?`);
+        if (confirmResult) {
+            cancelOrder(currentOrderNumber);
+            closeModal();
+        }
+    }
+
+    // Cancel order (frontend only demo: update status cell in the table to 'Cancelled')
+    function cancelOrder(orderNumber) {
+        // Find the table row with this orderNumber
+        const table = document.querySelector('.orders-table table tbody');
+        const rows = table.getElementsByTagName('tr');
+
+        for (let row of rows) {
+            const orderCell = row.cells[1];
+            if (orderCell && orderCell.textContent === orderNumber) {
+                // Update status cell (4th index = 3)
+                row.cells[3].textContent = 'Cancelled';
+                // Optionally disable the view button
+                const btn = row.cells[4].querySelector('button.view-btn');
+                if (btn) {
+                    btn.disabled = true;
+                    btn.style.opacity = '0.5';
+                    btn.style.cursor = 'default';
+                    btn.textContent = 'Cancelled';
+                }
+                break;
+            }
+        }
+
+        alert(`Order ${orderNumber} has been cancelled.`);
+    }
+</script>
+</body>
+</html>
