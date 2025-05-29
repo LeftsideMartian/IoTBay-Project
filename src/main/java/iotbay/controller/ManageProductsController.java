@@ -2,6 +2,7 @@ package iotbay.controller;
 
 import iotbay.helper.ProjectConstants;
 import iotbay.model.Product;
+import iotbay.model.User;
 import iotbay.service.ProductService;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,9 +16,32 @@ public class ManageProductsController extends HttpServlet {
     // Using the GET method for managing products
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) {
+        // Fetch session, fetch connection and user objects from session
+        HttpSession session = request.getSession();
+        Connection connection = (Connection) session.getAttribute(ProjectConstants.SESSION_ATTRIBUTE_DBCONNECTION);
+        User user = (User) session.getAttribute(ProjectConstants.SESSION_ATTRIBUTE_USER);
+
+        try {
+            // Check if connection doesn't exist, or if the user is not logged in yet
+            if (connection == null || user == null) {
+                // If so, redirect home
+                response.sendRedirect(ProjectConstants.HOME_PAGE);
+                return;
+            } else {
+                response.sendRedirect(ProjectConstants.MANAGE_PRODUCTS_PAGE);
+                return;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void doPost(HttpServletRequest request, HttpServletResponse response) {
         // Fetch session, fetch connection object from session and create a ProductService instance
         HttpSession session = request.getSession();
         Connection connection = (Connection) session.getAttribute(ProjectConstants.SESSION_ATTRIBUTE_DBCONNECTION);
+
         ProductService productService = new ProductService(connection);
 
         // Get productId from request data
@@ -31,6 +55,7 @@ public class ManageProductsController extends HttpServlet {
             // Try to redirect to the product details page
             try {
                 response.sendRedirect(ProjectConstants.PRODUCT_DETAILS_PAGE);
+                return;
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -39,6 +64,7 @@ public class ManageProductsController extends HttpServlet {
             try {
                 session.setAttribute(ProjectConstants.SESSION_ATTRIBUTE_ERROR, "Product not found.");
                 response.sendRedirect(ProjectConstants.MANAGE_PRODUCTS_PAGE);
+                return;
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

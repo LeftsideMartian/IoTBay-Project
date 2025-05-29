@@ -16,9 +16,8 @@
         </div>
 
         <div class="menuItems">
-            <a class="button" href="SearchProducts">Search products</a>
             <a class="button" href="BrowseProducts">Browse products</a>
-            <a href=""><img class="iconButton" id="searchIcon" src="css/searchIcon.svg"></a>
+            <a class="button" href="SearchProducts">Search products</a>
 
             <img class="iconButton cartIcon" id="cartIcon" src="css/cartIcon.svg">
             <div class="cartMenuWrapper" id="cartMenu">
@@ -51,6 +50,7 @@
                         </div>
                         <input type="hidden" name="page" value="<%= request.getRequestURI() %>">
                         <div class="cartButtonWrapper">
+                            <a class="button smlBtn" href="/placeOrder">Place order</a>
                             <button class="button smlBtn button-blue" type="submit">Save</button>
                         </div>
                     <% } %>

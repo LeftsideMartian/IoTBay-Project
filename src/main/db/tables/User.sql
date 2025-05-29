@@ -18,6 +18,7 @@ INSERT INTO User (First_Name, Last_Name, Email, Password, Has_Admin_Permissions)
 ('Erin', 'Blanchard', 'erin@b.com', 'A12345#abcde', 0),
 ('Ambar', 'Sembhi', 'ambar@s.com', 'A12345#abcde', 0),
 ('Alysha', 'Desai', 'alysha@d.com', 'A12345#abcde', 0),
+('Daniel', 'Keith', 'daniel@k.com', 'A12345#abcde', 0),
 ('Annabelle', 'Mansour', 'annabelle@m.com', 'A12345#abcde', 0),
 ('Alice', 'Smith', 'alice.smith@example.com', 'Password123!@#', 0),
 ('Bob', 'Johnson', 'bob.johnson@example.com', 'SecurePass1$', 0),
@@ -31,5 +32,5 @@ INSERT INTO User (First_Name, Last_Name, Email, Password, Has_Admin_Permissions)
 ('Jack', 'Miller', 'jack.miller@example.com', 'JackAttack56!', 0),
 ('Karen', 'Baker', 'karen.baker@example.com', 'KarenBakes12$', 0),
 ('Liam', 'Turner', 'liam.turner@example.com', 'LiamTravels34!', 0),
-('Admin', 'User', 'system@admin.iotbay', '', 0),
+('Admin', 'User', 'system@admin.iotbay', '', 1),
 ('Test', 'User', '1@2', '1', 1);

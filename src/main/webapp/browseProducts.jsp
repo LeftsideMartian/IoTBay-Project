@@ -1,5 +1,8 @@
 <%@ page import="java.util.List" %>
 <%@ page import="iotbay.model.Product" %>
+<%@ page import="iotbay.helper.ProjectConstants" %>
+<%@ page import="iotbay.service.ProductService" %>
+<%@page import="java.sql.Connection"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -7,63 +10,43 @@
     <meta charset="UTF-8" />
     <title>Browse Products - IoTBay</title>
     <link rel="stylesheet" href="css/index.css" />
-    <script>
-        function addToCart(productId) {
-            const body = new URLSearchParams();
-            body.append('productId', productId);
-            body.append('quantity', 1);
-
-            fetch('<%= request.getContextPath() %>/CartController', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: body.toString()
-            })
-            .then(response => response.text())
-            .then(text => {
-                console.log("Server response:", text);
-                try {
-                    const data = JSON.parse(text);
-                    if (data.status === 'success') {
-                        alert("Product added to cart!");
-                    } else {
-                        alert("Failed to add product to cart: " + (data.message || ""));
-                    }
-                } catch (e) {
-                    alert("Unexpected response: " + text);
-                }
-            })
-            .catch(error => {
-                console.error("Error adding product to cart:", error);
-                alert("An error occurred. Please try again.");
-            });
-        }
-    </script>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f9fbfd;
             margin: 0;
             padding: 0;
+            background-color: #f9fbfd;
         }
-        .main-content {
+        header {
+            position: sticky;
+            top: 0;
+        }
+        .container {
+            display: flex;
             padding: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
+        }
+        .sidebar {
+            width: 200px;
+            background-color: white;
+            padding: 10px;
+            border-right: 1px solid #e0e0e0;
+        }
+        .sidebar h4 {
+            margin: 10px 0;
+            cursor: pointer;
         }
         .products {
+            flex: 1;
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             gap: 20px;
+            padding: 0 20px;
         }
         .product-card {
             background-color: white;
             padding: 10px;
             border: 1px solid #e0e0e0;
             text-align: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            border-radius: 8px;
         }
         .product-card .image-placeholder {
             background-color: #f0f4f8;
@@ -71,54 +54,73 @@
             margin-bottom: 10px;
         }
         .add-to-cart {
-            background-color: #007BFF;
-            color: white;
+            background-color: #f0f4f8;
             border: none;
-            padding: 8px 12px;
+            padding: 5px 10px;
             cursor: pointer;
-            margin-top: 10px;
-            border-radius: 4px;
         }
-        .add-to-cart:hover {
-            background-color: #0056b3;
+        .breadcrumb {
+            font-size: 12px;
+            margin-bottom: 20px;
         }
         h1 {
             text-align: center;
             margin-top: 20px;
+            margin-bottom: 30px;
         }
     </style>
 </head>
-<body>
-<jsp:include page="header.jsp" />
-
-<h1>Browse Products</h1>
-
-<div class="main-content">
-    <main class="products">
+    <body>
         <%
-            List<Product> productList = (List<Product>) session.getAttribute("productList");
-            if (productList == null || productList.isEmpty()) {
+            String successMessage = (String) session.getAttribute(ProjectConstants.SESSION_ATTRIBUTE_SUCCESS_MESSAGE);
+            String errorMessage = (String) session.getAttribute(ProjectConstants.SESSION_ATTRIBUTE_ERROR);
+            if (successMessage != null) {
+                session.removeAttribute(ProjectConstants.SESSION_ATTRIBUTE_SUCCESS_MESSAGE);
         %>
-            <p style="grid-column: 1 / -1; text-align: center;">No products found.</p>
-        <%
-            } else {
-                for (Product product : productList) {
+            <div class="popup"><%= successMessage %></div>
+        <% } else if (errorMessage != null) {
+            session.removeAttribute(ProjectConstants.SESSION_ATTRIBUTE_ERROR);
         %>
-            <div class="product-card">
-                <div class="image-placeholder">
-                    <span>Image</span>
-                </div>
-                <strong><%= product.getProductName() %></strong>
-                <div>$<%= String.format("%.2f", product.getPrice()) %></div>
-                <p><%= product.getDescription() %></p>
-                <button type="button" class="add-to-cart" onclick="addToCart(<%= product.getProductId() %>)">Add to Cart</button>
-            </div>
-        <%
-                }
-            }
-        %>
-    </main>
-</div>
+            <div class="popup errorMessage"><%= errorMessage %></div>
+        <% } %>
 
-</body>
+        <jsp:include page="header.jsp" />
+
+        <h1>BROWSE PRODUCTS</h1>
+        
+        <div class="main-content">
+            <main class="products">
+                <%
+                    Connection connection = (Connection) session.getAttribute(ProjectConstants.SESSION_ATTRIBUTE_DBCONNECTION);
+
+                    if (connection == null) {
+                        response.sendRedirect(ProjectConstants.HOME_PAGE);
+                    }
+
+                    ProductService productService = new ProductService(connection);
+                    List<Product> productList = productService.getAllInStockProducts();
+
+                    if (productList == null) {
+                        response.sendRedirect(ProjectConstants.HOME_PAGE);
+                    } else if (productList.isEmpty()) {
+                %>
+                    <p style="padding: 20px;">No products found.</p>
+                <%
+                    } else {
+                        for (Product product : productList) {
+                %>
+                            <form class="product-card" action="BrowseProducts" method="POST">
+                                <div class="image-placeholder"></div>
+                                <strong><%= product.getProductName() %></strong>
+                                <div>$<%= String.format("%.2f", product.getPrice()) %></div>
+                                <input type="hidden" name="productId" value="<%= product.getProductId() %>"/>
+                                <button class="add-to-cart" type="submit">ADD TO CART</button>
+                            </form>
+                <%
+                        }
+                    }
+                %>
+            </main>
+        </div>
+    </body>
 </html>

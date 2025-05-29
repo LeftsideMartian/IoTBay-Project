@@ -7,20 +7,25 @@
         <title>Register - IoTBay</title>
     </head>
     <body>
+        <%
+            String successMessage = (String) session.getAttribute(ProjectConstants.SESSION_ATTRIBUTE_SUCCESS_MESSAGE);
+            String errorMessage = (String) session.getAttribute(ProjectConstants.SESSION_ATTRIBUTE_ERROR);
+            if (successMessage != null) {
+                session.removeAttribute(ProjectConstants.SESSION_ATTRIBUTE_SUCCESS_MESSAGE);
+        %>
+            <div class="popup"><%= successMessage %></div>
+        <% } else if (errorMessage != null) {
+            session.removeAttribute(ProjectConstants.SESSION_ATTRIBUTE_ERROR);
+        %>
+            <div class="popup errorMessage"><%= errorMessage %></div>
+        <% } %>
+
         <jsp:include page="/servlet/dbConnection" flush="true" />
         <div class="gridContainer">
             <jsp:include page="header.jsp"/>
 
             <div class="contentWrapper">
                 <div class="centerContent">
-                    <%
-                        String errorMessage = (String) session.getAttribute(ProjectConstants.SESSION_ATTRIBUTE_ERROR);
-                        if (errorMessage != null) {
-                            session.removeAttribute(ProjectConstants.SESSION_ATTRIBUTE_ERROR); 
-                    %>
-                        <div class="popup errorMessage"><%= errorMessage %></div>
-                    <% } %>
-
                     <form action="/servlet/register" method="POST">
                         <div class="formWrapper">
                             <h1>Create an account</h1>

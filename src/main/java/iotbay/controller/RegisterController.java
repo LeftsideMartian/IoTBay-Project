@@ -40,18 +40,22 @@ public class RegisterController extends HttpServlet {
                 // Send error message for already registered email
                 session.setAttribute(ProjectConstants.SESSION_ATTRIBUTE_ERROR, "Email is already registered.");
                 response.sendRedirect(ProjectConstants.REGISTER_PAGE);
+                return;
             } else if (Validator.isEmpty(firstName) || Validator.isEmpty(lastName)) {
                 // Send error message for missing names
                 session.setAttribute(ProjectConstants.SESSION_ATTRIBUTE_ERROR, "First or last name is missing.");
                 response.sendRedirect(ProjectConstants.REGISTER_PAGE);
+                return;
             } else if (!Validator.validateEmail(email)) {
                 // Send error message for invalid email
                 session.setAttribute(ProjectConstants.SESSION_ATTRIBUTE_ERROR, "Invalid email.");
                 response.sendRedirect(ProjectConstants.REGISTER_PAGE);
+                return;
             } else if (!Validator.validatePassword(password)) {
                 // Send error message for invalid password
                 session.setAttribute(ProjectConstants.SESSION_ATTRIBUTE_ERROR, "Invalid password.");
                 response.sendRedirect(ProjectConstants.REGISTER_PAGE);
+                return;
             } else {
                 handleRegistration(newUser, userService, session, response);
             }
@@ -67,6 +71,7 @@ public class RegisterController extends HttpServlet {
             userService.createUser(newUser);
             session.setAttribute(ProjectConstants.SESSION_ATTRIBUTE_USER, newUser);
             response.sendRedirect(ProjectConstants.HOME_PAGE);
+            return;
         } catch (IOException e) {
             System.out.println("Could not send redirect from RegisterController");
             System.out.println(Arrays.toString(e.getStackTrace()));

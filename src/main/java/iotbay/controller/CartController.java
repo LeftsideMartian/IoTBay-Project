@@ -26,21 +26,20 @@ public class CartController extends HttpServlet {
 
         try {
             HttpSession session = request.getSession();
+            String currentPage = request.getParameter(ProjectConstants.REQUEST_ATTRIBUTE_PAGE);
 
-            // Retrieve DB connection from session
-            Connection connection = (Connection) session.getAttribute(ProjectConstants.SESSION_ATTRIBUTE_DBCONNECTION);
-            if (connection == null) {
-                // Send JSON error if no connection
-                out.print("{\"status\":\"error\", \"message\":\"Database connection not found. Please login.\"}");
-                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED); // 401 Unauthorized
+            List<Product> cart = (List<Product>) session.getAttribute(ProjectConstants.SESSION_ATTRIBUTE_CART);
+            List<Product> newCart = new ArrayList<>();
+
+            String[] params = request.getParameterValues(ProjectConstants.REQUEST_ATTRIBUTE_PRODUCT_ID);
+
+            if (params == null) {
+                session.setAttribute(ProjectConstants.SESSION_ATTRIBUTE_CART, newCart);
+                response.sendRedirect(currentPage);
                 return;
             }
 
-            // Retrieve or initialize cart
-            List<Product> cart = (List<Product>) session.getAttribute(ProjectConstants.SESSION_ATTRIBUTE_CART);
-            if (cart == null) {
-                cart = new ArrayList<>();
-            }
+            List<String> productIds = Arrays.stream(params).collect(Collectors.toCollection(ArrayList::new));
 
             // Retrieve product info from request
             int productId = Integer.parseInt(request.getParameter("productId"));
@@ -61,30 +60,16 @@ public class CartController extends HttpServlet {
                 }
                 if (!foundInCart) {
                     product.setQuantity(quantity);
-                    cart.add(product);
                 }
-                // Update cart in session
-                session.setAttribute(ProjectConstants.SESSION_ATTRIBUTE_CART, cart);
-                // Send JSON success response
-                out.print("{\"status\":\"success\", \"message\":\"Product added to cart!\"}");
-            } else {
-                // Send JSON error if product not found
-                out.print("{\"status\":\"error\", \"message\":\"Product not found.\"}");
-                response.setStatus(HttpServletResponse.SC_NOT_FOUND); // 404 Not Found
             }
 
-        } catch (NumberFormatException e) {
-            // Handle invalid product ID or quantity
-            out.print("{\"status\":\"error\", \"message\":\"Invalid product ID or quantity provided.\"}");
-            response.setStatus(HttpServletResponse.SC_BAD_REQUEST); // 400 Bad Request
-            e.printStackTrace();
-        } catch (Exception e) {
-            // Catch any other exceptions
-            out.print("{\"status\":\"error\", \"message\":\"An unexpected error occurred: " + e.getMessage().replace("\"", "\\\"") + "\"}");
-            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR); // 500 Internal Server Error
-            e.printStackTrace();
-        } finally {
-            out.flush(); // Ensure response is sent
+            session.setAttribute(ProjectConstants.SESSION_ATTRIBUTE_CART, newCart);
+            session.setAttribute(ProjectConstants.SESSION_ATTRIBUTE_SUCCESS_MESSAGE, "Cart updated successfully.");
+            response.sendRedirect(currentPage);
+            return;
+        } catch (IOException e) {
+            System.out.println("Could not send redirect from CartController");
+            System.out.println(Arrays.toString(e.getStackTrace()));
         }
     }
 }
