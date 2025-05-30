@@ -81,7 +81,6 @@
         </style>
     </head>
     <body>
-<<<<<<< HEAD
         <%
             String successMessage = (String) session.getAttribute(ProjectConstants.SESSION_ATTRIBUTE_SUCCESS_MESSAGE);
             String errorMessage = (String) session.getAttribute(ProjectConstants.SESSION_ATTRIBUTE_ERROR);
@@ -101,17 +100,6 @@
             <div class="contentWrapper">
                 <h1>Manage Your Account</h1>
                 <hr>
-=======
-        <div class="contentWrapper">
-            <h1>Manage Your Account</h1>
-            <hr>
-
-            <div class="accountContent">
-                <div class="sidebar">
-                    <a href="manageAccount.jsp" class="button lrgBtn button-blue">Account</a>
-                    <a href="vieworders.jsp" class="button lrgBtn">Orders</a>
-                </div>
->>>>>>> a65cf6d (FINAL orderdetails page)
 
                 <div class="accountContent">
                     <div class="sidebar">
