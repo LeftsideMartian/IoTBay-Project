@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 public class SearchProductsController extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Get current session
         HttpSession session = request.getSession();
 
