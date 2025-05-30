@@ -11,6 +11,8 @@ public class User implements Serializable {
     private String password;
     private boolean hasAdminPermissions;
 
+    public User() {}
+
     // All args constructor
     public User(int userId, String firstName, String lastName, String email, String password, boolean hasAdminPermissions) {
         this.userId = userId;

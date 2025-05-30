@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import iotbay.model.Product;
+import iotbay.model.User;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -37,7 +38,9 @@ public class ManageProductControllerTest {
         // Put connection object into session
         dbConnector = new DBConnector();
         connection = dbConnector.connect();
+        User user = new User();
         when(session.getAttribute(ProjectConstants.SESSION_ATTRIBUTE_DBCONNECTION)).thenReturn(connection);
+        when(session.getAttribute(ProjectConstants.SESSION_ATTRIBUTE_USER)).thenReturn(user);
 
         // Create controller
         manageProductsController = new ManageProductsController();
@@ -58,9 +61,9 @@ public class ManageProductControllerTest {
         // Mock productId attribute
         when(request.getParameter(ProjectConstants.REQUEST_ATTRIBUTE_PRODUCT_ID)).thenReturn(String.valueOf(productId));
 
-        manageProductsController.doGet(request, response);
+        manageProductsController.doPost(request, response);
 
-        verify(session).setAttribute(eq(ProjectConstants.SESSION_ATTRIBUTE_CURRENTLY_SELECTED_PRODUCT), eq(product));
+        verify(session).setAttribute(ProjectConstants.SESSION_ATTRIBUTE_CURRENTLY_SELECTED_PRODUCT, product);
     }
 
     @Test
@@ -72,7 +75,7 @@ public class ManageProductControllerTest {
         // Mock productId attribute
         when(request.getParameter(ProjectConstants.REQUEST_ATTRIBUTE_PRODUCT_ID)).thenReturn(String.valueOf(productId));
 
-        manageProductsController.doGet(request, response);
+        manageProductsController.doPost(request, response);
 
         verify(session).setAttribute(ProjectConstants.SESSION_ATTRIBUTE_ERROR, "Product not found.");
     }

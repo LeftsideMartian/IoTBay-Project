@@ -1,29 +1,24 @@
 package iotbay.controller;
 
-import iotbay.helper.ProjectConstants;
-import iotbay.model.Product;
-import iotbay.service.ProductService;
-
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
-import java.io.PrintWriter; // Import PrintWriter
-import java.sql.Connection;
-import java.util.ArrayList;
-import java.util.List;
 
-@WebServlet("/CartController")
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.io.IOException;
+import iotbay.helper.ProjectConstants;
+import iotbay.model.Product;
+
+// Controller class to manage products in the cart
 public class CartController extends HttpServlet {
+    // Using POST method for cart updates from the header menu
     @Override
     @SuppressWarnings("unchecked")
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("application/json"); // Set content type to JSON
-        PrintWriter out = response.getWriter(); // Get writer to send response
-
+    public void doPost(HttpServletRequest request, HttpServletResponse response) {
         try {
             HttpSession session = request.getSession();
             String currentPage = request.getParameter(ProjectConstants.REQUEST_ATTRIBUTE_PAGE);
@@ -41,24 +36,23 @@ public class CartController extends HttpServlet {
 
             List<String> productIds = Arrays.stream(params).collect(Collectors.toCollection(ArrayList::new));
 
-            // Retrieve product info from request
-            int productId = Integer.parseInt(request.getParameter("productId"));
-            int quantity = Integer.parseInt(request.getParameter("quantity"));
-
-            // Fetch product from DB
-            ProductService productService = new ProductService(connection);
-            Product product = productService.getProduct(productId);
-
-            if (product != null) {
-                boolean foundInCart = false;
-                for (Product p : cart) {
-                    if (p.getProductId() == productId) {
-                        p.setQuantity(p.getQuantity() + quantity);
-                        foundInCart = true;
-                        break;
+            // Remove products from cart
+            if (productIds != null) {
+                for (Product product : cart) {
+                    for (String productId : productIds) {
+                        int parsedProductId = Integer.parseInt(productId);
+                        if (product.getProductId() == parsedProductId) {
+                            newCart.add(product);
+                        }
                     }
                 }
-                if (!foundInCart) {
+            }
+
+            // Update quantities in cart
+            for (Product product : newCart) {
+                String quantityString = request.getParameter(String.valueOf(product.getProductId()) + ":quantity");
+                if (quantityString != null) {
+                    int quantity = Integer.valueOf(quantityString);
                     product.setQuantity(quantity);
                 }
             }

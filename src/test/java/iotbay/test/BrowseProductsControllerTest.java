@@ -1,4 +1,4 @@
-package iotbay.controller;
+package iotbay.test;
 
 import iotbay.helper.ProjectConstants;
 import iotbay.model.Product;
@@ -15,7 +15,7 @@ import java.sql.Connection;
 import java.util.List;
 
 @WebServlet("/BrowseProducts")
-public class BrowseProductsController extends HttpServlet {
+public class BrowseProductsControllerTest extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
